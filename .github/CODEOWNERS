@@ -1,0 +1,10 @@
+# Every PR needs a review from someone other than its author.
+# TODO: add the second maintainer's GitHub handle before the first outside PR.
+
+*                       @Junhui20
+
+# Schema is the source of truth for both languages — extra care here.
+/packages/schema/       @Junhui20
+
+# Private-by-gitignore, but guard the path anyway.
+/docs/                  @Junhui20

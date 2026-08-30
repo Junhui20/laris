@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Calendar or public-holiday data issue
+    url: https://github.com/Junhui20/malaysia-calendar-api/issues
+    about: Holiday, school-term and state data lives upstream in mycal. Report it there.
