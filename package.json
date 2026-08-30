@@ -3,14 +3,17 @@
   "private": true,
   "type": "module",
   "packageManager": "pnpm@9.12.0",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "check": "biome check .",
     "check:fix": "biome check --write .",
     "typecheck": "pnpm -r exec tsc --noEmit",
     "test": "vitest run",
     "dev:api": "pnpm --filter @laris/api dev",
-    "dev:web": "pnpm --filter @laris/web dev"
+    "dev:web": "pnpm --filter @laris/web dev",
+    "sync:styles": "node scripts/extract-site-styles.mjs"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",

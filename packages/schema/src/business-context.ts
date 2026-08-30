@@ -131,9 +131,7 @@ export const Merchant = z.object({
   accountId: z.string().uuid(),
   vertical: Vertical,
   /** Subdomain label for the Merchant Site: `<slug>.laris.my`. */
-  slug: z
-    .string()
-    .regex(/^[a-z0-9]+(-[a-z0-9]+)*$/, "lowercase words joined by hyphens"),
+  slug: z.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/, "lowercase words joined by hyphens"),
   /** Custom domain, once the Merchant points a CNAME at us. */
   customDomain: z.string().optional(),
   createdAt: z.string().datetime(),

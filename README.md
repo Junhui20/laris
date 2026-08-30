@@ -99,24 +99,56 @@ laris/
 
 ## Getting started
 
-> Early development. Phase 00 (business profile + channel sync) is the current focus; there is not much to run yet.
+**A fresh clone runs with no credentials.** With Supabase unconfigured the API
+serves a built-in fixture merchant, so you can see a finished Merchant Site
+within a minute of cloning.
 
 ```bash
 git clone https://github.com/Junhui20/laris.git
 cd laris
 pnpm install
 
-# API, local
-pnpm --filter @laris/api dev
-
-# Web, local
-pnpm --filter @laris/web dev
-
-# Perception CLI (Python 3.11+)
-cd perception && uv sync && uv run laris-perceive --url "<video url>"
+pnpm dev:api      # Worker on :8787
+pnpm dev:web      # dashboard on :5173 (proxies /v1 and /site to the Worker)
 ```
 
-Copy `.env.example` to `.env` and fill in your own keys. **Never commit credentials.**
+Then open:
+
+| | |
+|---|---|
+| http://localhost:8787/site/rumah-ombak | a complete Merchant Site, rendered from the fixture |
+| http://localhost:8787/v1/merchants/rumah-ombak | the Business Profile behind it |
+| http://localhost:5173 | the merchant dashboard |
+| http://localhost:8787/health | says `fixture` or `supabase`, so nobody demos the fixture by accident |
+
+Everything on that page is derived, not written into the template — including
+the direct-booking saving, which is the OTA rate minus the direct rate. Change
+a price in `packages/api/src/fixtures/rumah-ombak.ts` and the page follows.
+
+### Checks
+
+```bash
+pnpm check        # biome lint + format
+pnpm typecheck    # all packages
+pnpm test         # vitest
+```
+
+### Working on the site design
+
+`design/stay-gallery-first.html` is the source of truth for how a Merchant Site
+looks. Edit it, then:
+
+```bash
+pnpm sync:styles  # lifts its <style> block into the renderer
+```
+
+Never edit `packages/api/src/site/styles.ts` — it is generated.
+
+### Connecting Supabase
+
+Copy `.env.example` to `.env` and fill it in. Once `SUPABASE_URL` is set the
+fixture is refused rather than silently used, so a misconfigured deployment
+fails loudly instead of serving someone else's homestay.
 
 ---
 

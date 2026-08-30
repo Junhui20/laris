@@ -1,0 +1,19 @@
+name = "laris-api"
+main = "src/index.tsx"
+compatibility_date = "2026-08-01"
+
+# Secrets are set with `wrangler secret put`, never written here.
+#   SUPABASE_URL
+#   SUPABASE_SERVICE_ROLE_KEY
+#
+# With neither set, the API serves the built-in fixture merchant so a fresh
+# clone runs with no credentials at all.
+
+[observability]
+enabled = true
+
+# Merchant Sites are served on their own hostnames. Until Cloudflare for SaaS
+# custom hostnames are configured, a site is reachable at /site/<slug>.
+# [[routes]]
+# pattern = "*.laris.my/*"
+# zone_name = "laris.my"
