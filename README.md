@@ -92,15 +92,26 @@ Schemas are defined **once**, in `packages/schema` as Zod, and generated into Py
 
 ```
 laris/
+├── CONTEXT.md       # the ubiquitous language — read this first
 ├── packages/
-│   ├── schema/      # Zod schemas — the single source of truth for all three tables
-│   ├── api/         # Hono on Cloudflare Workers
-│   ├── web/         # React + Vite — merchant dashboard
-│   ├── render/      # Remotion compositions
-│   └── bot/         # Telegram (grammY)
-├── perception/      # Python CLI — transcribe, scene-cut, OCR, VLM
+│   ├── schema/      # Zod — the single source of truth for every domain shape
+│   ├── api/         # Hono on Workers: JSON API + Merchant Site rendering
+│   └── web/         # React + Vite — merchant dashboard
+├── design/          # site template prototypes; source of truth for how sites look
+├── scripts/         # sync:styles lifts the prototype's CSS into the renderer
 └── docs/
+    ├── STACK.md     # every dependency, and what it replaced
+    └── adr/         # why the hard-to-reverse decisions went the way they did
 ```
+
+**Not built yet, on purpose.** These arrive when the phase that needs them
+does — an empty package is clutter, not a head start:
+
+| | Arrives in | For |
+|---|---|---|
+| `perception/` | Phase 01 | Python CLI: transcribe, scene-cut, OCR, VLM → Content DNA |
+| `packages/render/` | Phase 02 | Remotion compositions |
+| `packages/bot/` | Phase 02 | Telegram, and the plan-approve-execute flow |
 
 ## Getting started
 
