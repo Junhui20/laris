@@ -10,7 +10,9 @@ Social media is one module inside it, not the product.
 
 ## What it does
 
-Change your opening hours once. Your Google Business Profile, your website, your schema markup and your social bios all follow. That is the first thing Laris does, and it works without trusting any AI.
+Change your opening hours once. Google Maps and your website update themselves. For the places nobody can write to — your TikTok profile, your Xiaohongshu page, the website you built years ago — Laris tells you exactly where they still disagree.
+
+That is the first thing Laris does, and it works without trusting any AI.
 
 On top of that, it understands content well enough to make more of it: it reads what's working (yours and your competitors'), turns real customer questions into FAQ markup, and proposes posts drawn from what you actually sell, what's on this week, and what brought in enquiries last month.
 
