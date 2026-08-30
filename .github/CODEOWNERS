@@ -1,10 +1,15 @@
-# Every PR needs a review from someone other than its author.
-# TODO: add the second maintainer's GitHub handle before the first outside PR.
+# Both maintainers own everything.
+#
+# GitHub excludes a PR's author from its own review request, so listing both
+# here means every PR automatically requests the other person. With a
+# two-person team, that review is the only thing standing between a bad idea
+# and main — so there is no path that skips it.
 
-*                       @Junhui20
+*                       @Junhui20 @OSSWT
 
-# Schema is the source of truth for both languages — extra care here.
-/packages/schema/       @Junhui20
+# Schema is the single source of truth for both languages. A change here
+# ripples into generated Pydantic models and every stored row.
+/packages/schema/       @Junhui20 @OSSWT
 
-# Private-by-gitignore, but guard the path anyway.
-/docs/                  @Junhui20
+# Gitignored in practice, but guard the path so nothing private slips in.
+/docs/                  @Junhui20 @OSSWT
