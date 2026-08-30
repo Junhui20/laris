@@ -63,13 +63,14 @@ Templates are the easiest and most valuable thing to contribute — see [CONTRIB
 
 ## Stack
 
-Two languages, roughly eighteen libraries, no servers until phase 02. Full reasoning and the complete dependency list with justifications: **[docs/STACK.md](docs/STACK.md)**.
+Two languages, around nineteen libraries, no servers until phase 02. Full reasoning and the complete dependency list with justifications: **[docs/STACK.md](docs/STACK.md)**.
 
 | | |
 |---|---|
 | **Languages** | TypeScript (app, API, web, channels) · Python (perception pipeline only) |
 | **API** | Hono on Cloudflare Workers |
-| **Web** | Astro on Cloudflare Pages |
+| **Dashboard** | React + Vite on Cloudflare Pages |
+| **Merchant sites** | Edge-rendered by the API Worker (`hono/jsx`) — never stale |
 | **Data** | Supabase (Postgres) |
 | **Video** | Remotion |
 | **Audio** | ElevenLabs (voice, music, SFX) |
@@ -87,7 +88,7 @@ laris/
 ├── packages/
 │   ├── schema/      # Zod schemas — the single source of truth for all three tables
 │   ├── api/         # Hono on Cloudflare Workers
-│   ├── web/         # Astro — merchant dashboard + generated merchant sites
+│   ├── web/         # React + Vite — merchant dashboard
 │   ├── render/      # Remotion compositions
 │   └── bot/         # Telegram (grammY)
 ├── perception/      # Python CLI — transcribe, scene-cut, OCR, VLM
