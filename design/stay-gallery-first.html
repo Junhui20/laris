@@ -1,0 +1,402 @@
+<title>Rumah Ombak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@400;500;700&family=Noto+Sans+SC:wght@400;500&display=swap">
+<style>
+/* ───────────────────────────────────────────────────────────
+   Laris · stay · gallery-first
+   Committed to a single light world: a guest-facing hospitality
+   page looks the same for everyone. Every colour is painted
+   explicitly so it holds on any host background.
+
+   Theme levers (the only four a merchant varies):
+     --accent   derived from the hero photograph
+     layout     gallery-first
+     typePair   display-serif
+     density    airy
+   ─────────────────────────────────────────────────────────── */
+:root{
+  --accent:#10665A;
+  --accent-deep:#0A4A41;
+  --accent-wash:#E4EDE9;
+
+  --ground:#F3F5F2;
+  --surface:#FFFFFF;
+  --ink:#16211E;
+  --ink-2:#3F524D;
+  --ink-3:#72847F;
+  --rule:#DDE3DF;
+
+  --wa:#25D366;
+  --wa-deep:#128C7E;
+
+  --f-display:"Fraunces",Georgia,"Songti SC",serif;
+  --f-body:"Karla",-apple-system,"Noto Sans SC","PingFang SC",sans-serif;
+
+  --pad:20px;
+  --bar:76px;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--f-body);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:var(--bar);
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+.wrap{max-width:640px;margin:0 auto}
+@media (min-width:900px){ .wrap{max-width:1080px} }
+
+/* ── photo slots ──────────────────────────────────────────
+   The prototype ships photo briefs, not stock imagery: each
+   slot names the shot the owner has to take. Photography is
+   what actually decides whether this page looks good, so the
+   brief is part of the design, not a placeholder for it.     */
+.shot{
+  position:relative;
+  background:
+    radial-gradient(120% 90% at 22% 8%, rgba(255,255,255,.5), transparent 55%),
+    linear-gradient(168deg, #9FBFB6 0%, #6E9A93 42%, #3C6660 100%);
+  display:flex;align-items:flex-end;
+  overflow:hidden;
+}
+.shot.warm{
+  background:
+    radial-gradient(120% 90% at 78% 12%, rgba(255,255,255,.45), transparent 55%),
+    linear-gradient(168deg, #C9B79C 0%, #A08A6E 48%, #6B5844 100%);
+}
+.shot.dusk{
+  background:
+    radial-gradient(130% 100% at 50% 100%, rgba(255,214,160,.55), transparent 60%),
+    linear-gradient(180deg, #3E5C6B 0%, #5B6E72 55%, #8E7F6A 100%);
+}
+.brief{
+  font-family:var(--f-body);font-size:11.5px;letter-spacing:.06em;
+  text-transform:uppercase;color:#fff;
+  background:rgba(12,26,23,.42);backdrop-filter:blur(3px);
+  padding:6px 11px;margin:12px;border-radius:3px;font-weight:500;
+}
+
+/* ── hero ─────────────────────────────────────────────────── */
+.hero{position:relative;min-height:78svh;color:#fff;isolation:isolate}
+.hero .shot{position:absolute;inset:0;align-items:flex-start}
+.hero::after{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(9,22,19,.42) 0%,rgba(9,22,19,.05) 38%,rgba(9,22,19,.78) 100%);
+}
+.hero-in{
+  position:relative;z-index:2;min-height:78svh;
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:calc(var(--pad) + 4px) var(--pad) 30px;
+}
+.eyebrow{
+  font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
+  font-weight:700;color:rgba(255,255,255,.86);
+}
+.hero h1{
+  font-family:var(--f-display);font-weight:600;
+  font-size:clamp(42px,13vw,72px);line-height:.98;letter-spacing:-.02em;
+  margin:0 0 10px;text-wrap:balance;
+}
+.hero .where{font-size:16.5px;color:rgba(255,255,255,.92);margin:0 0 20px;font-weight:500}
+.from{display:flex;align-items:baseline;gap:9px;color:#fff}
+.from .n{font-family:var(--f-display);font-size:34px;font-weight:600;letter-spacing:-.02em}
+.from .u{font-size:13.5px;color:rgba(255,255,255,.82)}
+
+/* ── sections ─────────────────────────────────────────────── */
+section{padding:44px var(--pad)}
+.lab{
+  font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin:0 0 12px;
+}
+h2{
+  font-family:var(--f-display);font-weight:600;
+  font-size:clamp(27px,6.5vw,36px);line-height:1.15;letter-spacing:-.015em;
+  margin:0 0 16px;text-wrap:balance;
+}
+.lede{font-size:17px;color:var(--ink-2);margin:0;max-width:52ch}
+
+/* ── gallery strip ────────────────────────────────────────── */
+.strip{
+  display:grid;grid-auto-flow:column;grid-auto-columns:74%;gap:10px;
+  overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:0 var(--pad) 6px;margin:0 0 8px;
+  scrollbar-width:none;
+}
+.strip::-webkit-scrollbar{display:none}
+.strip .shot{scroll-snap-align:start;aspect-ratio:4/5;border-radius:6px}
+@media (min-width:900px){ .strip{grid-auto-columns:34%} }
+
+/* ── rooms ────────────────────────────────────────────────── */
+.rooms{display:grid;gap:18px}
+@media (min-width:900px){ .rooms{grid-template-columns:1fr 1fr;gap:22px} }
+.room{background:var(--surface);border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.room .shot{aspect-ratio:16/10}
+.room-body{padding:20px}
+.room h3{font-family:var(--f-display);font-weight:600;font-size:23px;margin:0 0 4px;letter-spacing:-.01em}
+.pax{font-size:13.5px;color:var(--ink-3);margin:0 0 14px}
+.rate{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+.rate b{font-family:var(--f-display);font-size:29px;font-weight:600;letter-spacing:-.02em}
+.rate span{font-size:13.5px;color:var(--ink-3)}
+.peak{
+  font-size:13px;color:var(--ink-2);background:var(--accent-wash);
+  border-radius:4px;padding:7px 11px;margin:12px 0 0;
+  display:flex;justify-content:space-between;gap:12px;
+}
+.peak b{font-weight:700;white-space:nowrap}
+.amen{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 0;padding:0;list-style:none}
+.amen li{
+  font-size:12.5px;color:var(--ink-2);border:1px solid var(--rule);
+  border-radius:99px;padding:4px 11px;
+}
+.mins{font-size:13px;color:var(--ink-3);margin:14px 0 0;padding-top:14px;border-top:1px solid var(--rule)}
+
+/* ── direct saving ────────────────────────────────────────── */
+.saving{
+  background:var(--accent);color:#fff;border-radius:8px;
+  padding:26px 22px;margin-top:26px;
+}
+.saving h3{font-family:var(--f-display);font-weight:600;font-size:24px;margin:0 0 8px;letter-spacing:-.01em}
+.saving p{margin:0;color:rgba(255,255,255,.9);font-size:15px;max-width:44ch}
+.compare{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.compare div{
+  flex:1 1 130px;background:rgba(255,255,255,.13);border-radius:6px;padding:13px 15px;
+}
+.compare .k{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:5px}
+.compare .v{font-family:var(--f-display);font-size:22px;font-weight:600}
+.compare .v s{opacity:.55;font-weight:400}
+
+/* ── location ─────────────────────────────────────────────── */
+.near{list-style:none;padding:0;margin:22px 0 0;border-top:1px solid var(--rule)}
+.near li{
+  display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+  padding:14px 0;border-bottom:1px solid var(--rule);
+}
+.near .p{font-weight:500}
+.near .t{font-size:13.5px;color:var(--ink-3);white-space:nowrap}
+
+/* ── faq ──────────────────────────────────────────────────── */
+.faq{margin-top:22px;border-top:1px solid var(--rule)}
+details{border-bottom:1px solid var(--rule)}
+summary{
+  padding:16px 0;cursor:pointer;font-weight:700;font-size:16px;
+  list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center;
+}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--accent);font-size:21px;font-weight:400;line-height:1}
+details[open] summary::after{content:"–"}
+details p{margin:0 0 18px;color:var(--ink-2);font-size:15.5px;max-width:56ch}
+
+/* ── footer ───────────────────────────────────────────────── */
+footer{padding:36px var(--pad) 44px;border-top:1px solid var(--rule);color:var(--ink-3);font-size:14px}
+footer .name{font-family:var(--f-display);font-size:19px;color:var(--ink);font-weight:600;margin-bottom:6px}
+footer a{color:var(--accent);font-weight:500}
+.by{margin-top:22px;font-size:12px;color:var(--ink-3)}
+
+/* ── sticky WhatsApp bar ──────────────────────────────────────
+   Bottom, thumb-reachable, always present. In Malaysia the
+   booking enquiry is WhatsApp — not a form, not email — so this
+   is the loudest element on the page and it wears WhatsApp's own
+   green, because recognising what the button does matters more
+   than palette purity.                                          */
+.bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  background:var(--surface);border-top:1px solid var(--rule);
+  padding:10px var(--pad) calc(10px + env(safe-area-inset-bottom));
+  display:flex;align-items:center;gap:12px;
+}
+.bar .price{flex:0 0 auto;line-height:1.25}
+.bar .price b{font-family:var(--f-display);font-size:19px;font-weight:600;display:block}
+.bar .price span{font-size:11.5px;color:var(--ink-3)}
+.wa{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:9px;
+  background:var(--wa);color:#052e1f;text-decoration:none;
+  font-weight:700;font-size:16px;padding:14px 18px;border-radius:8px;
+  box-shadow:0 1px 0 var(--wa-deep) inset;
+}
+.wa svg{width:20px;height:20px;flex:0 0 auto}
+@media (min-width:900px){
+  .bar{justify-content:center;gap:22px}
+  .wa{flex:0 0 auto;min-width:300px}
+}
+@media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important} }
+</style>
+
+<header class="hero">
+  <div class="shot"><span class="brief">主图 · 黄昏时从露台望向海面，横幅</span></div>
+  <div class="hero-in">
+    <div class="eyebrow">Batu Ferringhi · Pulau Pinang</div>
+    <div>
+      <h1>Rumah Ombak</h1>
+      <p class="where">走路 6 分钟到海边 · 两间房 · 可住 6 人</p>
+      <div class="from">
+        <span class="n">RM 180</span>
+        <span class="u">起 / 晚 · 最少住 2 晚</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="wrap">
+  <p class="lab">关于这里</p>
+  <h2>一间老屋，改成了看得见海的家</h2>
+  <p class="lede">露台正对海峡，傍晚风从海上来。厨房齐全，可以自己煮；巴刹和夜市走路十分钟。我们就住隔壁，有事随时叫。</p>
+</section>
+
+<div class="strip">
+  <div class="shot warm"><span class="brief">客厅 · 自然光，广角</span></div>
+  <div class="shot"><span class="brief">露台 · 有人坐着看海</span></div>
+  <div class="shot warm"><span class="brief">厨房 · 干净的台面细节</span></div>
+  <div class="shot dusk"><span class="brief">屋外街景 · 傍晚</span></div>
+</div>
+
+<section class="wrap">
+  <p class="lab">房型</p>
+  <h2>两间房，都可以整栋包下</h2>
+
+  <div class="rooms">
+    <article class="room">
+      <div class="shot"><span class="brief">海景房 · 床 + 窗外的海</span></div>
+      <div class="room-body">
+        <h3>Bilik Laut</h3>
+        <p class="pax">海景房 · 4 人 · 一张大床 + 一张单人床</p>
+        <div class="rate"><b>RM 250</b><span>/ 晚</span></div>
+        <div class="peak"><span>学校假期 · 公共假期</span><b>RM 380</b></div>
+        <ul class="amen">
+          <li>冷气</li><li>WiFi</li><li>海景</li><li>私人浴室</li>
+        </ul>
+        <p class="mins">入住 3:00pm · 退房 12:00pm · 最少 2 晚</p>
+      </div>
+    </article>
+
+    <article class="room">
+      <div class="shot warm"><span class="brief">园景房 · 床 + 绿意</span></div>
+      <div class="room-body">
+        <h3>Bilik Kebun</h3>
+        <p class="pax">园景房 · 2 人 · 一张大床</p>
+        <div class="rate"><b>RM 180</b><span>/ 晚</span></div>
+        <div class="peak"><span>学校假期 · 公共假期</span><b>RM 280</b></div>
+        <ul class="amen">
+          <li>冷气</li><li>WiFi</li><li>面向花园</li><li>私人浴室</li>
+        </ul>
+        <p class="mins">入住 3:00pm · 退房 12:00pm · 最少 2 晚</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="saving">
+    <h3>直接跟我们订，便宜一点</h3>
+    <p>不经过订房网站，省下的佣金直接算在你身上。同一间房，同一个日期。</p>
+    <div class="compare">
+      <div><div class="k">订房网站</div><div class="v"><s>RM 290</s></div></div>
+      <div><div class="k">直接 WhatsApp</div><div class="v">RM 250</div></div>
+      <div><div class="k">你省下</div><div class="v">RM 40 / 晚</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <p class="lab">位置</p>
+  <h2>附近有什么</h2>
+  <ul class="near">
+    <li><span class="p">Batu Ferringhi 海滩</span><span class="t">走路 6 分钟</span></li>
+    <li><span class="p">Batu Ferringhi 夜市</span><span class="t">走路 10 分钟</span></li>
+    <li><span class="p">Teluk Bahang 水坝</span><span class="t">开车 12 分钟</span></li>
+    <li><span class="p">升旗山 Penang Hill</span><span class="t">开车 25 分钟</span></li>
+    <li><span class="p">槟城国际机场</span><span class="t">开车 45 分钟</span></li>
+  </ul>
+</section>
+
+<section class="wrap">
+  <p class="lab">常见问题</p>
+  <h2>客人最常问的</h2>
+  <div class="faq">
+    <details open>
+      <summary>有停车位吗？</summary>
+      <p>有，屋前可以停两辆车，免费。旅游旺季街边也还找得到位子。</p>
+    </details>
+    <details>
+      <summary>厨房可以用吗？会不会不方便？</summary>
+      <p>可以用，锅碗瓢盆、冰箱、电磁炉都齐全。厨房没有分开煮清真食物的器具，介意的话可以先跟我们说，我们帮你准备。</p>
+    </details>
+    <details>
+      <summary>可以加床吗？</summary>
+      <p>可以，海景房能多加一张地铺，每晚 RM 40，最多加两个人。订房时先讲一声就好。</p>
+    </details>
+    <details>
+      <summary>几点可以入住？太早到怎么办？</summary>
+      <p>下午三点之后。早到可以先把行李放在客厅，我们就住隔壁，WhatsApp 叫一声就来开门。</p>
+    </details>
+    <details>
+      <summary>WiFi 快不快？可以在这里工作吗？</summary>
+      <p>可以，光纤 100Mbps，客厅和两间房都收得到。露台有插座，很多客人在那里开会。</p>
+    </details>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="name">Rumah Ombak</div>
+  <div>Jalan Batu Ferringhi, 11100 Batu Ferringhi, Pulau Pinang</div>
+  <div><a href="tel:+60123456789">+60 12-345 6789</a></div>
+  <div class="by">这个页面由 Laris 生成，资料改一次，Google 地图和这里同时更新。</div>
+</footer>
+
+<nav class="bar">
+  <div class="price"><b>RM 180</b><span>起 / 晚</span></div>
+  <a class="wa" href="https://wa.me/60123456789?text=Hi%2C%20想问问 Rumah Ombak 的空房" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1s-.7 1-.9 1.2c-.2.2-.3.2-.6.1-1.7-.8-2.8-1.5-3.9-3.4-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 1.9.8 2.6.9 3.5.7.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.3-.6-.4z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.1.8.8-3-.2-.3c-.9-1.4-1.3-3-1.3-4.6 0-4.6 3.8-8.4 8.4-8.4s8.4 3.8 8.4 8.4-3.7 8.5-8.3 8.5z"/></svg>
+    WhatsApp 问空房
+  </a>
+</nav>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "name": "Rumah Ombak",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Jalan Batu Ferringhi",
+    "addressLocality": "Batu Ferringhi",
+    "postalCode": "11100",
+    "addressRegion": "Pulau Pinang",
+    "addressCountry": "MY"
+  },
+  "telephone": "+60123456789",
+  "priceRange": "RM180–RM380",
+  "makesOffer": [
+    { "@type": "Offer", "name": "Bilik Laut", "price": "250", "priceCurrency": "MYR" },
+    { "@type": "Offer", "name": "Bilik Kebun", "price": "180", "priceCurrency": "MYR" }
+  ],
+  "amenityFeature": [
+    { "@type": "LocationFeatureSpecification", "name": "Free parking", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Kitchen", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Air conditioning", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Wi-Fi", "value": true }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "有停车位吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "有，屋前可以停两辆车，免费。旅游旺季街边也还找得到位子。" } },
+    { "@type": "Question", "name": "厨房可以用吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "可以用，锅碗瓢盆、冰箱、电磁炉都齐全。厨房没有分开煮清真食物的器具，介意的话可以先跟我们说。" } },
+    { "@type": "Question", "name": "可以加床吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "可以，海景房能多加一张地铺，每晚 RM 40，最多加两个人。" } },
+    { "@type": "Question", "name": "几点可以入住？",
+      "acceptedAnswer": { "@type": "Answer", "text": "下午三点之后。早到可以先把行李放在客厅。" } }
+  ]
+}
+</script>
