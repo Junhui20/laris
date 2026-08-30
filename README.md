@@ -52,12 +52,17 @@ All of that comes from [**mycal**](https://github.com/Junhui20/malaysia-calendar
 
 The business profile is **core (shared) + vertical (specialised)**. A new industry is a new template, not a change to the core.
 
-| Vertical | Offerings look like | `leads` means |
+| Vertical | An Offering is | A Contact is |
 |---|---|---|
-| `fnb` | Menu items | Enquiries / directions taps |
-| `stay` | Room types, rates, min nights | Availability checks / direct-booking clicks |
-| `retail` | Products | In-store enquiries |
-| `service` | Services | Appointment requests |
+| `fnb` | A menu item | An enquiry or a directions tap |
+| `stay` | A room type, with rates and minimum nights | An availability check or a direct-booking tap |
+| `retail` | A product | An in-store enquiry |
+| `service` | A service | An appointment request |
+
+Terms are defined in [CONTEXT.md](CONTEXT.md) — use them exactly. Note there is
+no such thing as a "lead" here: a **Contact** is observed interest and a
+**Booking** is business actually won, and conflating them is how a product ends
+up reporting numbers it cannot measure.
 
 Templates are the easiest and most valuable thing to contribute — see [CONTRIBUTING.md](CONTRIBUTING.md). If you run a business in one of these categories, you know your industry's fields better than we do.
 
