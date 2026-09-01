@@ -90,7 +90,7 @@ describe("compareIdentity", () => {
     expect(compareIdentity(extracted, profile)).toEqual([]);
   });
 
-  it("reports a certain postcode or premises-number contradiction", () => {
+  it("reports a certain postcode contradiction", () => {
     expect(
       compareIdentity(
         {
@@ -102,6 +102,72 @@ describe("compareIdentity", () => {
         profile,
       ),
     ).toMatchObject([{ field: "address", confidence: "certain" }]);
+  });
+
+  it("extracts a five-digit postcode before comparing it", () => {
+    const klProfile = Identity.parse({
+      ...profile,
+      postcode: "50450",
+      state: "kuala-lumpur",
+    });
+
+    expect(
+      compareIdentity(
+        {
+          address: certain({ postcode: "50450 Kuala Lumpur" }, "50450 Kuala Lumpur"),
+        },
+        klProfile,
+      ),
+    ).toEqual([]);
+  });
+
+  it.each([
+    ["Selangor Darul Ehsan", "selangor"],
+    ["Wilayah Persekutuan Kuala Lumpur", "kuala-lumpur"],
+    ["Malacca", "melaka"],
+  ] as const)("stays silent for unresolved state spelling %s", (channelState, profileState) => {
+    const stateProfile = Identity.parse({ ...profile, state: profileState });
+
+    expect(
+      compareIdentity(
+        {
+          address: certain({ state: channelState }, channelState),
+        },
+        stateProfile,
+      ),
+    ).toEqual([]);
+  });
+
+  it("still reports a contradiction between two canonical state codes", () => {
+    const stateProfile = Identity.parse({ ...profile, state: "selangor" });
+
+    expect(
+      compareIdentity(
+        {
+          address: certain({ state: "perak" }, "Perak"),
+        },
+        stateProfile,
+      ),
+    ).toMatchObject([{ field: "address", confidence: "certain" }]);
+  });
+
+  it("stays silent when Malaysian unit-number punctuation does not line up", () => {
+    const unitProfile = Identity.parse({
+      ...profile,
+      addressLines: ["No. 12-A Jalan Batu Ferringhi"],
+    });
+
+    expect(
+      compareIdentity(
+        {
+          address: certain(
+            { streetAddress: "12A Jalan Batu Ferringhi" },
+            "12A Jalan Batu Ferringhi",
+          ),
+        },
+        unitProfile,
+      ),
+    ).toEqual([]);
   });
 
   it("compares only hours that the Channel explicitly states", () => {
@@ -125,5 +191,16 @@ describe("compareIdentity", () => {
     expect(compareIdentity({ hours: certain(sunday, "Su 09:00-18:00") }, profile)).toMatchObject([
       { field: "hours" },
     ]);
+  });
+
+  it("stays silent when the Merchant has not filled in hours", () => {
+    const profileWithoutHours = Identity.parse({ ...profile, hours: [] });
+    const monday: OpeningHours[] = [
+      { weekday: 1, opens: "09:00", closes: "18:00", closesNextDay: false },
+    ];
+
+    expect(
+      compareIdentity({ hours: certain(monday, "Mo 09:00-18:00") }, profileWithoutHours),
+    ).toEqual([]);
   });
 });

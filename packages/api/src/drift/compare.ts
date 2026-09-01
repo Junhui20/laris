@@ -1,4 +1,4 @@
-import type { Identity, Mismatch, OpeningHours } from "@laris/schema";
+import { type Identity, type Mismatch, type OpeningHours, StateCode } from "@laris/schema";
 import {
   normalizeAddress,
   normalizeName,
@@ -41,37 +41,21 @@ export function compareIdentity(extracted: ExtractedIdentity, profile: Identity)
 }
 
 function addressCertainlyDisagrees(channel: ExtractedAddress, profile: Identity): boolean {
-  if (
-    channel.postcode &&
-    normalizeAddress(channel.postcode) !== normalizeAddress(profile.postcode)
-  ) {
-    return true;
+  if (channel.postcode) {
+    const channelPostcode = extractMalaysianPostcode(channel.postcode);
+    const profilePostcode = extractMalaysianPostcode(profile.postcode);
+    if (channelPostcode && profilePostcode && channelPostcode !== profilePostcode) return true;
   }
 
   if (channel.state) {
-    const channelState = normalizeState(channel.state);
-    const profileState = normalizeState(profile.state);
-    if (channelState && profileState && channelState !== profileState) return true;
+    const channelState = canonicalStateCode(channel.state);
+    if (channelState && channelState !== profile.state) return true;
   }
 
-  if (channel.streetAddress) {
-    const profileStreet = normalizeAddress(profile.addressLines.join(" "));
-    const channelStreet = normalizeAddress(channel.streetAddress);
-    if (
-      profileStreet === channelStreet ||
-      profileStreet.includes(channelStreet) ||
-      channelStreet.includes(profileStreet)
-    ) {
-      return false;
-    }
-
-    const profileNumbers = numericAddressTokens(profileStreet);
-    const channelNumbers = numericAddressTokens(channelStreet);
-    if (profileNumbers.length > 0 && channelNumbers.length > 0) {
-      return !profileNumbers.some((value) => channelNumbers.includes(value));
-    }
-  }
-
+  // Street text alone is not enough for a `certain` mismatch. Malaysian unit
+  // numbers routinely move punctuation and spaces ("No. 12-A" / "12A"), and
+  // road names carry meaningful numbers too. A missed drift is cheaper than a
+  // false report, so V1 requires a contradictory postcode or canonical state.
   return false;
 }
 
@@ -79,6 +63,9 @@ function hoursCertainlyDisagree(
   channel: readonly OpeningHours[],
   profile: readonly OpeningHours[],
 ): boolean {
+  // An empty profile means "not filled in", not "closed every day".
+  if (profile.length === 0) return false;
+
   const channelHours = normalizeWeeklyHours(channel);
   const profileHours = normalizeWeeklyHours(profile);
 
@@ -131,19 +118,21 @@ function serializeIntervals(
     .join(",");
 }
 
-function numericAddressTokens(value: string): string[] {
-  return value.split(" ").filter((token) => /^\d+[a-z]?$/.test(token));
+function extractMalaysianPostcode(value: string): string | null {
+  const matches = [...value.normalize("NFKC").matchAll(/(?:^|\D)(\d{5})(?!\d)/g)].map(
+    (match) => match[1],
+  );
+  const unique = [...new Set(matches)];
+  return unique.length === 1 ? (unique[0] ?? null) : null;
 }
 
-function normalizeState(value: string): string {
-  const normalized = normalizeAddress(value);
-  const aliases: Readonly<Record<string, string>> = {
-    kl: "kuala lumpur",
-    penang: "pulau pinang",
-    putrajaya: "putrajaya",
-    "wp putrajaya": "putrajaya",
-    labuan: "labuan",
-    "wp labuan": "labuan",
-  };
-  return aliases[normalized] ?? normalized;
+/**
+ * Natural-language aliases belong to mycal. Until its snapshot/resolver is on
+ * main, only the schema's own canonical spellings are certain enough to
+ * compare; an unresolved addressRegion is missing evidence, not a mismatch.
+ */
+function canonicalStateCode(value: string): StateCode | null {
+  const candidate = normalizeAddress(value).replace(/\s+/g, "-");
+  const parsed = StateCode.safeParse(candidate);
+  return parsed.success ? parsed.data : null;
 }
