@@ -1,4 +1,5 @@
 import { BusinessContext } from "@laris/schema";
+import type { Context } from "hono";
 import { Hono } from "hono";
 import { type Env, getBusinessContext } from "./repo/merchant.js";
 import { StaySite } from "./site/render.js";
@@ -60,14 +61,26 @@ app.use("/v1/*", async (c, next) => {
 });
 
 /**
+ * Merchant Sites are served on their own hostname — that is the product, and a
+ * guest should never see a URL with our slug in it.
+ *
+ * Until #3 this map is the whole registry. It belongs in the merchants table
+ * beside the slug; a Merchant does not have a domain in the schema yet, and
+ * inventing one for a single real merchant would be the wrong order.
+ */
+const SLUG_BY_HOST: Readonly<Record<string, string>> = {
+  "pangkormyhomestay.top": "pangkor-my-homestay",
+  "www.pangkormyhomestay.top": "pangkor-my-homestay",
+};
+
+/**
  * A Merchant Site, rendered from the Business Profile on every request.
  *
- * Reachable at /site/:slug during development. In production each Merchant is
- * served on its own hostname — `<slug>.laris.my`, or their own domain via
- * Cloudflare for SaaS — and the hostname resolves to the same handler.
+ * Rendered rather than built ahead of time on purpose: a static build stays
+ * wrong until the next one, and "change it once and everywhere follows" is the
+ * first thing this product promises.
  */
-app.get("/site/:slug", async (c) => {
-  const slug = c.req.param("slug");
+async function renderSite(c: Context<{ Bindings: Bindings }>, slug: string, siteUrl: string) {
   const ctx = await getBusinessContext(c.env, slug, { allowFixture: allowFixture(c.env) });
   if (!ctx) return c.notFound();
 
@@ -77,12 +90,30 @@ app.get("/site/:slug", async (c) => {
     return c.text(`no template yet for vertical "${ctx.vertical}"`, 501);
   }
 
-  const siteUrl = `${new URL(c.req.url).origin}/site/${slug}`;
-
   // Cached at the edge, purged when the Profile changes. Freshness is the
   // product promise, so the TTL is short and the purge is the real mechanism.
   c.header("cache-control", "public, max-age=60, s-maxage=300");
   return c.html(<StaySite ctx={ctx} siteUrl={siteUrl} />);
+}
+
+/** The merchant's own domain. The canonical URL, and what goes on the GBP. */
+app.get("/", async (c) => {
+  const url = new URL(c.req.url);
+  const slug = SLUG_BY_HOST[url.hostname];
+  if (!slug) return c.notFound();
+  return renderSite(c, slug, `${url.origin}/`);
+});
+
+/** The same site by slug, for development and for a merchant with no domain. */
+app.get("/site/:slug", async (c) => {
+  const slug = c.req.param("slug");
+  const url = new URL(c.req.url);
+  // A merchant with a domain of their own is canonical there, wherever the
+  // request arrived. Two URLs serving one page is a Drift Check finding
+  // waiting to happen, and it splits whatever Answer Presence we earn.
+  const domain = Object.entries(SLUG_BY_HOST).find(([, s]) => s === slug)?.[0];
+  const siteUrl = domain ? `https://${domain}/` : `${url.origin}/site/${slug}`;
+  return renderSite(c, slug, siteUrl);
 });
 
 /** The Business Profile behind a site. Read-only for now. */
