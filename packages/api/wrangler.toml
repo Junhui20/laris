@@ -15,6 +15,16 @@ compatibility_date = "2026-08-01"
 [assets]
 directory = "./public"
 
+# Production by default. `pnpm dev:api` overrides ENVIRONMENT, so a deploy that
+# forgets to think about it is locked down rather than open — the safe direction
+# for the mistake to fall in.
+[vars]
+ENVIRONMENT = "production"
+# Serve the built-in fixture Merchant in production. A deliberate phase-00
+# decision for a single real merchant whose Profile is hand-maintained, not an
+# accident of Supabase being unconfigured. Remove it when #3 lands.
+ALLOW_FIXTURE = "true"
+
 [observability]
 enabled = true
 

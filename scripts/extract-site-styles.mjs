@@ -5,6 +5,7 @@
  */
 import { execFileSync } from "node:child_process";
 import { readFileSync, writeFileSync } from "node:fs";
+import { createRequire } from "node:module";
 
 const SRC = "design/stay-gallery-first.html";
 const OUT = "packages/api/src/site/styles.ts";
@@ -26,6 +27,10 @@ writeFileSync(
 // Formatted here rather than left to the author: the output is generated, so a
 // `pnpm check` failure after `pnpm sync:styles` is a broken generator, not a
 // mistake anyone can fix by hand.
-execFileSync("npx", ["biome", "format", "--write", OUT], { stdio: "inherit" });
+//
+// Run through node against the resolved binary rather than `npx`: on Windows
+// `npx` is a .cmd shim, which execFileSync cannot spawn as a native executable.
+const biome = createRequire(import.meta.url).resolve("@biomejs/biome/bin/biome");
+execFileSync(process.execPath, [biome, "format", "--write", OUT], { stdio: "inherit" });
 
 console.log(`wrote ${OUT} (${css.length} bytes of css)`);
