@@ -72,15 +72,29 @@ export const OpeningHours = z.object({
 });
 export type OpeningHours = z.infer<typeof OpeningHours>;
 
+/**
+ * An asset key: ours, opaque, and stable across a domain move.
+ *
+ * Never a URL and never a path. The same Business Profile compiles a Merchant
+ * Site, a GBP listing and social posts — the Site wants a relative reference,
+ * the other two need an absolute one — so neither can be the stored value.
+ */
+export const AssetKey = z
+  .string()
+  .regex(/^[a-z0-9][a-z0-9._/-]{2,120}$/, "expected an asset key, not a URL")
+  .refine((key) => !key.split("/").includes(".."), "no traversal");
+
 export const Photo = z.object({
+  key: AssetKey,
+  /** Intrinsic size of the largest variant. Reserves space; kills layout shift. */
+  width: z.number().int().positive(),
+  height: z.number().int().positive(),
   /**
-   * An absolute URL, or a root-relative path served from the site's own
-   * origin. Merchant photos belong on a CDN eventually, but a Merchant Site is
-   * rendered on the same origin the photos are served from, so "/m/<slug>/x.jpg"
-   * is the honest form until they move — and it does not bake a hostname into
-   * the Business Profile, which would then be wrong in every other Channel.
+   * Variant widths actually stored, ascending. Drives `srcset`. Each variant's
+   * height follows from the aspect ratio — storing it twice invites the two to
+   * disagree.
    */
-  url: z.union([z.string().url(), z.string().regex(/^\/[^/]/, "expected a URL or a /path")]),
+  widths: z.array(z.number().int().positive()).nonempty(),
   alt: z.string().optional(),
 });
 export type Photo = z.infer<typeof Photo>;

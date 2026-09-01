@@ -26,8 +26,11 @@ function ringgit(cents: number): string {
 export function lodgingBusinessJsonLd(ctx: BusinessContext, siteUrl: string) {
   const { identity } = ctx;
   const rooms = ctx.offerings.filter((o) => o.kind === "room_type");
-  // A site that does not publish rates does not assert one to Google either.
-  const rates = ctx.theme.showRates ? rooms.map((r) => r.baseRateCents) : [];
+  // An offering that quotes on enquiry contributes no price. A site that will
+  // not name a number should not name one to Google either.
+  const rates = rooms
+    .map((r) => r.baseRateCents)
+    .filter((rate): rate is number => rate !== undefined);
 
   return {
     "@context": "https://schema.org",
@@ -57,7 +60,10 @@ export function lodgingBusinessJsonLd(ctx: BusinessContext, siteUrl: string) {
     makesOffer: rooms.map((r) => ({
       "@type": "Offer",
       name: r.name,
-      ...(ctx.theme.showRates && { price: ringgit(r.baseRateCents), priceCurrency: MYR }),
+      ...(r.baseRateCents !== undefined && {
+        price: ringgit(r.baseRateCents),
+        priceCurrency: MYR,
+      }),
       ...(r.description && { description: r.description }),
     })),
     amenityFeature: amenityUnion(ctx).map((name) => ({
