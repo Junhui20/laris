@@ -46,9 +46,11 @@ export const pangkorMyHomestay: BusinessContext = {
         // TODO(owner): the ad says "前面就有" — confirm the actual walk.
         { name: "7-Eleven、cafe、煮炒店", walkMin: 2 },
       ],
-      // The owner has not said whether the house is listed on any OTA. Until
-      // they do this stays empty, and the site cannot make a commission
-      // argument — see the note in stay.ts about that being the value prop.
+      // Empty because the house is on no OTA at all — every booking is direct,
+      // through WhatsApp and word of mouth. Not a gap in the data: it means
+      // directBookingSavingCents() has nothing to compute for this merchant,
+      // and the commission argument stay.ts calls the value proposition does
+      // not apply to the first business we put on the product.
       otaListings: [],
     },
   },
