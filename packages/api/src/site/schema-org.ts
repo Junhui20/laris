@@ -1,4 +1,5 @@
 import type { BusinessContext } from "@laris/schema";
+import { amenityEn, stateOfficial } from "./labels.js";
 
 /**
  * Structured data for a Merchant Site.
@@ -37,7 +38,7 @@ export function lodgingBusinessJsonLd(ctx: BusinessContext, siteUrl: string) {
       streetAddress: identity.addressLines.join(", "),
       addressLocality: identity.area,
       postalCode: identity.postcode,
-      addressRegion: identity.state,
+      addressRegion: stateOfficial(identity.state),
       addressCountry: "MY",
     },
     ...(identity.geo && {
@@ -84,27 +85,11 @@ export function faqPageJsonLd(ctx: BusinessContext) {
   };
 }
 
-const AMENITY_LABELS: Record<string, string> = {
-  wifi: "Wi-Fi",
-  aircon: "Air conditioning",
-  parking: "Free parking",
-  pool: "Swimming pool",
-  kitchen: "Kitchen",
-  washer: "Washing machine",
-  tv: "Television",
-  workspace: "Dedicated workspace",
-  bbq: "Barbecue",
-  seaview: "Sea view",
-  "pet-friendly": "Pet friendly",
-  "halal-kitchen": "Halal kitchen",
-  "prayer-mat": "Prayer mat",
-};
-
 function amenityUnion(ctx: BusinessContext): string[] {
   const seen = new Set<string>();
   for (const o of ctx.offerings) {
     if (o.kind !== "room_type") continue;
-    for (const a of o.amenities) seen.add(AMENITY_LABELS[a] ?? a);
+    for (const a of o.amenities) seen.add(amenityEn(a));
   }
   return [...seen];
 }

@@ -1,6 +1,7 @@
 import type { BusinessContext } from "@laris/schema";
 import type { stay } from "@laris/schema";
 import { jsonLdScript } from "./json-ld.js";
+import { amenityZh, stateZh } from "./labels.js";
 import { faqPageJsonLd, lodgingBusinessJsonLd } from "./schema-org.js";
 import { stayGalleryFirstCss } from "./styles.js";
 
@@ -108,7 +109,7 @@ export function StaySite({ ctx, siteUrl }: { ctx: BusinessContext; siteUrl: stri
           </div>
           <div class="hero-in">
             <div class="eyebrow">
-              {identity.area} · {identity.state.replace(/-/g, " ")}
+              {identity.area} · {stateZh(identity.state)}
             </div>
             <div>
               <h1>{identity.name}</h1>
@@ -179,7 +180,7 @@ export function StaySite({ ctx, siteUrl }: { ctx: BusinessContext; siteUrl: stri
                     {room.amenities.length > 0 && (
                       <ul class="amen">
                         {room.amenities.map((a) => (
-                          <li key={a}>{a}</li>
+                          <li key={a}>{amenityZh(a)}</li>
                         ))}
                       </ul>
                     )}
