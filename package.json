@@ -13,7 +13,8 @@
     "test": "vitest run",
     "dev:api": "pnpm --filter @laris/api dev",
     "dev:web": "pnpm --filter @laris/web dev",
-    "sync:styles": "node scripts/extract-site-styles.mjs"
+    "sync:styles": "node scripts/extract-site-styles.mjs",
+    "refresh:calendar": "node scripts/refresh-calendar-data.mjs"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",

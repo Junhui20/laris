@@ -9,6 +9,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@catlabtech/mycal-core": "^0.1.3",
     "@laris/schema": "workspace:*",
     "@supabase/supabase-js": "^2.45.4",
     "hono": "^4.6.9"

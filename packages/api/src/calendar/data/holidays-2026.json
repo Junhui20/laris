@@ -1,0 +1,911 @@
+[
+  {
+    "id": "2026-tahun-baharu",
+    "date": "2026-01-01",
+    "name": {
+      "ms": "Tahun Baharu",
+      "en": "New Year's Day",
+      "zh": "元旦"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": [
+      "perak",
+      "pulau-pinang",
+      "selangor",
+      "negeri-sembilan",
+      "melaka",
+      "pahang",
+      "sabah",
+      "sarawak",
+      "kuala-lumpur",
+      "wp-putrajaya",
+      "wp-labuan",
+      "perlis"
+    ],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-keputeraan-ydb-ns",
+    "date": "2026-01-14",
+    "name": {
+      "ms": "Hari Keputeraan Yang di-Pertuan Besar Negeri Sembilan",
+      "en": "Birthday of Yang di-Pertuan Besar of Negeri Sembilan"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["negeri-sembilan"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-israk-mikraj",
+    "date": "2026-01-17",
+    "name": {
+      "ms": "Israk dan Mikraj",
+      "en": "Isra' Mi'raj",
+      "zh": "夜行登霄"
+    },
+    "type": "islamic_state",
+    "status": "confirmed",
+    "states": ["kedah", "kelantan", "terengganu", "perlis", "negeri-sembilan", "pahang"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "hijriDate": "27 Rejab 1447",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-hari-wilayah",
+    "date": "2026-02-01",
+    "name": {
+      "ms": "Hari Wilayah Persekutuan",
+      "en": "Federal Territory Day",
+      "zh": "联邦直辖区日"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["kuala-lumpur", "wp-putrajaya", "wp-labuan"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33501",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-thaipusam",
+    "date": "2026-02-01",
+    "name": {
+      "ms": "Hari Thaipusam",
+      "en": "Thaipusam",
+      "zh": "大宝森节"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": [
+      "perak",
+      "pulau-pinang",
+      "selangor",
+      "negeri-sembilan",
+      "kuala-lumpur",
+      "wp-putrajaya",
+      "wp-labuan",
+      "johor",
+      "melaka",
+      "pahang",
+      "perlis"
+    ],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33501",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-tahun-baharu-cina-1",
+    "date": "2026-02-17",
+    "name": {
+      "ms": "Tahun Baharu Cina",
+      "en": "Chinese New Year",
+      "zh": "农历新年"
+    },
+    "type": "federal",
+    "status": "confirmed",
+    "states": ["*"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "P",
+    "source": "jpm",
+    "gazetteRef": "GN-33499",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-tahun-baharu-cina-2",
+    "date": "2026-02-18",
+    "name": {
+      "ms": "Tahun Baharu Cina (Hari Kedua)",
+      "en": "Chinese New Year (2nd Day)",
+      "zh": "农历新年（第二天）"
+    },
+    "type": "federal",
+    "status": "confirmed",
+    "states": ["*"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "P",
+    "source": "jpm",
+    "gazetteRef": "GN-33499",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-awal-ramadan",
+    "date": "2026-02-19",
+    "name": {
+      "ms": "Awal Ramadan",
+      "en": "Beginning of Ramadan",
+      "zh": "斋戒月首日"
+    },
+    "type": "islamic_state",
+    "status": "confirmed",
+    "states": ["johor", "kedah", "kelantan", "terengganu", "melaka", "perlis"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "hijriDate": "1 Ramadan 1447",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2026-07-06T00:00:00+08:00"
+  },
+  {
+    "id": "2026-pengisytiharan-kemerdekaan",
+    "date": "2026-02-20",
+    "name": {
+      "ms": "Hari Pengisytiharan Tarikh Kemerdekaan",
+      "en": "Declaration of Independence Day"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["melaka"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-pertabalan-sultan-terengganu",
+    "date": "2026-03-04",
+    "name": {
+      "ms": "Hari Ulang Tahun Pertabalan Sultan Terengganu",
+      "en": "Anniversary of Sultan of Terengganu's Installation"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["terengganu"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-nuzul-quran",
+    "date": "2026-03-07",
+    "name": {
+      "ms": "Hari Nuzul Al-Quran",
+      "en": "Revelation of the Quran",
+      "zh": "可兰经降世"
+    },
+    "type": "islamic",
+    "status": "confirmed",
+    "states": ["*"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "P",
+    "hijriDate": "17 Ramadan 1447",
+    "source": "jpm",
+    "gazetteRef": "GN-33499",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2026-07-06T00:00:00+08:00"
+  },
+  {
+    "id": "2026-hari-raya-aidilfitri-tambahan",
+    "date": "2026-03-20",
+    "name": {
+      "ms": "Hari Raya Aidilfitri (Cuti Tambahan)",
+      "en": "Hari Raya Aidilfitri (Additional Public Holiday)",
+      "zh": "开斋节（额外假期）"
+    },
+    "type": "adhoc",
+    "status": "confirmed",
+    "states": ["*"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "P",
+    "source": "jpm",
+    "createdAt": "2026-03-15T00:00:00+08:00",
+    "updatedAt": "2026-03-15T00:00:00+08:00"
+  },
+  {
+    "id": "2026-hari-raya-aidilfitri-1",
+    "date": "2026-03-21",
+    "name": {
+      "ms": "Hari Raya Aidilfitri",
+      "en": "Eid al-Fitr",
+      "zh": "开斋节"
+    },
+    "type": "islamic",
+    "status": "confirmed",
+    "states": ["*"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "P",
+    "hijriDate": "1 Syawal 1447",
+    "source": "jpm",
+    "gazetteRef": "GN-33499",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2026-07-06T00:00:00+08:00"
+  },
+  {
+    "id": "2026-hari-raya-aidilfitri-2",
+    "date": "2026-03-22",
+    "name": {
+      "ms": "Hari Raya Aidilfitri (Hari Kedua)",
+      "en": "Eid al-Fitr (2nd Day)",
+      "zh": "开斋节（第二天）"
+    },
+    "type": "islamic",
+    "status": "confirmed",
+    "states": ["*"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "P",
+    "hijriDate": "2 Syawal 1447",
+    "source": "jpm",
+    "gazetteRef": "GN-33499",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2026-07-06T00:00:00+08:00"
+  },
+  {
+    "id": "2026-keputeraan-sultan-johor",
+    "date": "2026-03-23",
+    "name": {
+      "ms": "Hari Keputeraan Sultan Johor",
+      "en": "Birthday of Sultan of Johor"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["johor"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-hari-raya-aidilfitri-3",
+    "date": "2026-03-23",
+    "name": {
+      "ms": "Hari Raya Puasa (Hari Ketiga)",
+      "en": "Eid al-Fitr (3rd Day)"
+    },
+    "type": "islamic_state",
+    "status": "confirmed",
+    "states": ["kelantan", "terengganu", "kedah", "johor", "perlis"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "hijriDate": "3 Syawal 1447",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2026-07-06T00:00:00+08:00"
+  },
+  {
+    "id": "2026-hari-jadi-tyt-sabah",
+    "date": "2026-03-30",
+    "name": {
+      "ms": "Hari Jadi Yang di-Pertua Negeri Sabah",
+      "en": "Birthday of Governor of Sabah"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["sabah"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-good-friday",
+    "date": "2026-04-03",
+    "name": {
+      "ms": "Good Friday",
+      "en": "Good Friday",
+      "zh": "耶稣受难日"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["sabah", "sarawak"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-keputeraan-sultan-terengganu",
+    "date": "2026-04-26",
+    "name": {
+      "ms": "Hari Keputeraan Sultan Terengganu",
+      "en": "Birthday of Sultan of Terengganu"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["terengganu"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-hari-pekerja",
+    "date": "2026-05-01",
+    "name": {
+      "ms": "Hari Pekerja",
+      "en": "Labour Day",
+      "zh": "劳动节"
+    },
+    "type": "federal",
+    "status": "confirmed",
+    "states": ["*"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "P",
+    "source": "jpm",
+    "gazetteRef": "GN-33499",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-keputeraan-raja-perlis",
+    "date": "2026-05-17",
+    "name": {
+      "ms": "Hari Ulang Tahun Keputeraan Raja Perlis",
+      "en": "Birthday of Raja of Perlis"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["perlis"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-hari-hol-pahang",
+    "date": "2026-05-22",
+    "name": {
+      "ms": "Hari Hol Almarhum Sultan Ahmad Shah Al-Musta'in Billah ibni Almarhum Sultan Abu Bakar",
+      "en": "Pahang Hol Day"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["pahang"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-hari-arafah",
+    "date": "2026-05-26",
+    "name": {
+      "ms": "Hari Arafah",
+      "en": "Day of Arafah"
+    },
+    "type": "islamic_state",
+    "status": "confirmed",
+    "states": ["kelantan", "terengganu", "kedah", "perlis"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "hijriDate": "9 Zulhijjah 1447",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2026-07-06T00:00:00+08:00"
+  },
+  {
+    "id": "2026-hari-raya-haji-1",
+    "date": "2026-05-27",
+    "name": {
+      "ms": "Hari Raya Qurban",
+      "en": "Eid al-Adha",
+      "zh": "哈芝节"
+    },
+    "type": "islamic",
+    "status": "confirmed",
+    "states": ["*"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "P",
+    "hijriDate": "10 Zulhijjah 1447",
+    "source": "jpm",
+    "gazetteRef": "GN-33499",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2026-07-06T00:00:00+08:00"
+  },
+  {
+    "id": "2026-hari-raya-haji-2",
+    "date": "2026-05-28",
+    "name": {
+      "ms": "Hari Raya Qurban (Hari Kedua)",
+      "en": "Eid al-Adha (2nd Day)",
+      "zh": "哈芝节（第二天）"
+    },
+    "type": "islamic",
+    "status": "confirmed",
+    "states": ["*"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "P",
+    "hijriDate": "11 Zulhijjah 1447",
+    "source": "jpm",
+    "gazetteRef": "GN-33499",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2026-07-06T00:00:00+08:00"
+  },
+  {
+    "id": "2026-pesta-kaamatan-1",
+    "date": "2026-05-30",
+    "name": {
+      "ms": "Pesta Kaamatan (Pesta Menuai)",
+      "en": "Harvest Festival (Kaamatan)"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["sabah", "wp-labuan"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-pesta-kaamatan-2",
+    "date": "2026-05-31",
+    "name": {
+      "ms": "Pesta Kaamatan (Pesta Menuai) Hari Kedua",
+      "en": "Harvest Festival (Kaamatan) 2nd Day"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["sabah", "wp-labuan"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-hari-wesak",
+    "date": "2026-05-31",
+    "name": {
+      "ms": "Hari Wesak",
+      "en": "Vesak Day",
+      "zh": "卫塞节"
+    },
+    "type": "federal",
+    "status": "confirmed",
+    "states": ["*"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "P",
+    "source": "jpm",
+    "gazetteRef": "GN-33499",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-keputeraan-agong",
+    "date": "2026-06-01",
+    "name": {
+      "ms": "Hari Keputeraan Rasmi Seri Paduka Baginda Yang di-Pertuan Agong",
+      "en": "Official Birthday of the Yang di-Pertuan Agong",
+      "zh": "最高元首诞辰"
+    },
+    "type": "federal",
+    "status": "confirmed",
+    "states": ["*"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "P",
+    "source": "jpm",
+    "gazetteRef": "GN-33499",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-gawai-dayak-1",
+    "date": "2026-06-01",
+    "name": {
+      "ms": "Perayaan Hari Gawai Dayak",
+      "en": "Gawai Dayak Festival"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["sarawak"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-gawai-dayak-2",
+    "date": "2026-06-02",
+    "name": {
+      "ms": "Perayaan Hari Gawai Dayak (Hari Kedua)",
+      "en": "Gawai Dayak Festival (2nd Day)"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["sarawak"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-awal-muharam",
+    "date": "2026-06-17",
+    "name": {
+      "ms": "Awal Muharam (Maal Hijrah)",
+      "en": "Islamic New Year",
+      "zh": "回历新年"
+    },
+    "type": "islamic",
+    "status": "confirmed",
+    "states": ["*"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "P",
+    "hijriDate": "1 Muharam 1448",
+    "source": "jpm",
+    "gazetteRef": "GN-33499",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2026-07-06T00:00:00+08:00"
+  },
+  {
+    "id": "2026-keputeraan-sultan-kedah",
+    "date": "2026-06-21",
+    "name": {
+      "ms": "Hari Keputeraan Sultan Kedah",
+      "en": "Birthday of Sultan of Kedah"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["kedah"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-tapak-warisan-dunia",
+    "date": "2026-07-07",
+    "name": {
+      "ms": "Hari Ulang Tahun Perisytiharan Tapak Warisan Dunia",
+      "en": "World Heritage Site Declaration Anniversary"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["melaka"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-hari-jadi-tyt-penang",
+    "date": "2026-07-11",
+    "name": {
+      "ms": "Hari Jadi Yang di-Pertua Negeri Pulau Pinang",
+      "en": "Birthday of Governor of Penang"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["pulau-pinang"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-hari-hol-johor",
+    "date": "2026-07-21",
+    "name": {
+      "ms": "Hari Hol Almarhum Sultan Iskandar",
+      "en": "Johor Hol Day"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["johor"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-hari-kemerdekaan-sarawak",
+    "date": "2026-07-22",
+    "name": {
+      "ms": "Hari Kemerdekaan Sarawak",
+      "en": "Sarawak Independence Day"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["sarawak"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-keputeraan-sultan-pahang",
+    "date": "2026-07-31",
+    "name": {
+      "ms": "Hari Keputeraan Sultan Pahang",
+      "en": "Birthday of Sultan of Pahang"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["pahang"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-hari-jadi-tyt-melaka",
+    "date": "2026-08-24",
+    "name": {
+      "ms": "Hari Jadi Yang di-Pertua Negeri Melaka",
+      "en": "Birthday of Governor of Malacca"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["melaka"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-maulidur-rasul",
+    "date": "2026-08-25",
+    "name": {
+      "ms": "Hari Keputeraan Nabi Muhammad S.A.W. (Maulidur Rasul)",
+      "en": "Prophet Muhammad's Birthday",
+      "zh": "先知穆罕默德诞辰"
+    },
+    "type": "islamic",
+    "status": "tentative",
+    "states": ["*"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "P",
+    "hijriDate": "12 Rabiulawal 1448",
+    "source": "jpm",
+    "gazetteRef": "GN-33499",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-hari-kebangsaan",
+    "date": "2026-08-31",
+    "name": {
+      "ms": "Hari Kebangsaan",
+      "en": "National Day",
+      "zh": "国庆日"
+    },
+    "type": "federal",
+    "status": "confirmed",
+    "states": ["*"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "P",
+    "source": "jpm",
+    "gazetteRef": "GN-33499",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-hari-malaysia",
+    "date": "2026-09-16",
+    "name": {
+      "ms": "Hari Malaysia",
+      "en": "Malaysia Day",
+      "zh": "马来西亚日"
+    },
+    "type": "federal",
+    "status": "confirmed",
+    "states": ["*"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "P",
+    "source": "jpm",
+    "gazetteRef": "GN-33499",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-keputeraan-sultan-kelantan-1",
+    "date": "2026-09-29",
+    "name": {
+      "ms": "Hari Keputeraan Sultan Kelantan",
+      "en": "Birthday of Sultan of Kelantan (Day 1)"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["kelantan"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-keputeraan-sultan-kelantan-2",
+    "date": "2026-09-30",
+    "name": {
+      "ms": "Hari Keputeraan Sultan Kelantan (Hari Kedua)",
+      "en": "Birthday of Sultan of Kelantan (Day 2)"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["kelantan"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-hari-jadi-tyt-sarawak",
+    "date": "2026-10-10",
+    "name": {
+      "ms": "Hari Jadi Yang di-Pertua Negeri Sarawak",
+      "en": "Birthday of Governor of Sarawak"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["sarawak"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-keputeraan-sultan-perak",
+    "date": "2026-11-06",
+    "name": {
+      "ms": "Hari Keputeraan Sultan Perak",
+      "en": "Birthday of Sultan of Perak"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["perak"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-deepavali",
+    "date": "2026-11-08",
+    "name": {
+      "ms": "Hari Deepavali",
+      "en": "Deepavali",
+      "zh": "屠妖节"
+    },
+    "type": "federal",
+    "status": "confirmed",
+    "states": ["*"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "P",
+    "source": "jpm",
+    "gazetteRef": "GN-33499",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-keputeraan-sultan-selangor",
+    "date": "2026-12-11",
+    "name": {
+      "ms": "Hari Keputeraan Sultan Selangor",
+      "en": "Birthday of Sultan of Selangor"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["selangor"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-christmas-eve",
+    "date": "2026-12-24",
+    "name": {
+      "ms": "Christmas Eve",
+      "en": "Christmas Eve",
+      "zh": "圣诞夜"
+    },
+    "type": "state",
+    "status": "confirmed",
+    "states": ["sabah"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "source": "jpm",
+    "gazetteRef": "GN-33500",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  },
+  {
+    "id": "2026-hari-krismas",
+    "date": "2026-12-25",
+    "name": {
+      "ms": "Hari Krismas",
+      "en": "Christmas Day",
+      "zh": "圣诞节"
+    },
+    "type": "federal",
+    "status": "confirmed",
+    "states": ["*"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "P",
+    "source": "jpm",
+    "gazetteRef": "GN-33499",
+    "createdAt": "2025-08-28T00:00:00+08:00",
+    "updatedAt": "2025-08-28T00:00:00+08:00"
+  }
+]

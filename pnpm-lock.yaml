@@ -20,6 +20,9 @@ importers:
 
   packages/api:
     dependencies:
+      '@catlabtech/mycal-core':
+        specifier: ^0.1.3
+        version: 0.1.3
       '@laris/schema':
         specifier: workspace:*
         version: link:../schema
@@ -205,6 +208,9 @@ packages:
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [win32]
+
+  '@catlabtech/mycal-core@0.1.3':
+    resolution: {integrity: sha512-TFfAgFcMlc3Y1//U/hkQ/W16FshhbRVj13ncY3P/FwQfJsAkf6+yv2V06WyQ+aHYKjZoUkYuTgSWcRArskLRuQ==}
 
   '@cloudflare/kv-asset-handler@0.3.4':
     resolution: {integrity: sha512-YLPHc8yASwjNkmcDMQMY35yiWjoKAKnhUbPRszBRS0YgH+IXtsMp61j+yTcnCE3oO2DgP0U3iejLC8FTtKDC8Q==}
@@ -1503,6 +1509,10 @@ snapshots:
 
   '@biomejs/cli-win32-x64@1.9.4':
     optional: true
+
+  '@catlabtech/mycal-core@0.1.3':
+    dependencies:
+      zod: 3.25.76
 
   '@cloudflare/kv-asset-handler@0.3.4':
     dependencies:
