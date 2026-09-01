@@ -1,4 +1,4 @@
-import type { BusinessContext } from "@laris/schema";
+import type { BusinessContext, Photo } from "@laris/schema";
 import type { stay } from "@laris/schema";
 import { jsonLdScript } from "./json-ld.js";
 import { amenityZh, stateZh } from "./labels.js";
@@ -55,6 +55,43 @@ function waLink(whatsapp: string, name: string): string {
 }
 
 /**
+ * A photo slot. The layout was designed against briefs — "客厅 · 自然光，广角" —
+ * and those stay as the fallback rather than a grey box, so a Profile with no
+ * photographs yet still reads as a finished page and says what is missing.
+ */
+function Shot({
+  photo,
+  brief,
+  tone,
+  priority,
+}: { photo?: Photo; brief: string; tone?: string; priority?: boolean }) {
+  return (
+    <div class={tone ? `shot ${tone}` : "shot"}>
+      {photo ? (
+        <img
+          src={photo.url}
+          alt={photo.alt ?? brief}
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
+        />
+      ) : (
+        <span class="brief">{brief}</span>
+      )}
+    </div>
+  );
+}
+
+/** Tones cycle so a strip of real photographs keeps the designed rhythm. */
+const STRIP_TONES = ["warm", "", "warm", "dusk"];
+
+const STRIP_BRIEFS = [
+  "客厅 · 自然光，广角",
+  "露台 · 有人坐着看海",
+  "厨房 · 干净的台面细节",
+  "屋外街景 · 傍晚",
+];
+
+/**
  * The single point where structured data crosses into markup. Routing both
  * JSON-LD blocks through here means the escaping in jsonLdScript cannot be
  * forgotten at one of two call sites.
@@ -73,6 +110,8 @@ export function StaySite({ ctx, siteUrl }: { ctx: BusinessContext; siteUrl: stri
   const landmarks = ctx.verticalProfile.stay?.landmarks ?? [];
   const wa = identity.whatsapp ?? identity.phone;
   const faqLd = faqPageJsonLd(ctx);
+  // The hero takes the first photograph; everything after it fills the strip.
+  const strip = ctx.photos.slice(1);
 
   return (
     // biome-ignore lint/a11y/useValidLang: zh-Hans-MY is valid BCP-47 — Simplified Chinese as written in Malaysia
@@ -104,9 +143,7 @@ export function StaySite({ ctx, siteUrl }: { ctx: BusinessContext; siteUrl: stri
       </head>
       <body>
         <header class="hero">
-          <div class="shot">
-            <span class="brief">主图 · 黄昏时从露台望向海面，横幅</span>
-          </div>
+          <Shot photo={ctx.photos[0]} brief="主图 · 黄昏时从露台望向海面，横幅" priority />
           <div class="hero-in">
             <div class="eyebrow">
               {identity.area} · {stateZh(identity.state)}
@@ -135,18 +172,18 @@ export function StaySite({ ctx, siteUrl }: { ctx: BusinessContext; siteUrl: stri
         </header>
 
         <div class="strip">
-          <div class="shot warm">
-            <span class="brief">客厅 · 自然光，广角</span>
-          </div>
-          <div class="shot">
-            <span class="brief">露台 · 有人坐着看海</span>
-          </div>
-          <div class="shot warm">
-            <span class="brief">厨房 · 干净的台面细节</span>
-          </div>
-          <div class="shot dusk">
-            <span class="brief">屋外街景 · 傍晚</span>
-          </div>
+          {strip.length > 0
+            ? strip.map((photo, i) => (
+                <Shot
+                  key={photo.url}
+                  photo={photo}
+                  brief={photo.alt ?? ""}
+                  tone={STRIP_TONES[i % STRIP_TONES.length]}
+                />
+              ))
+            : STRIP_BRIEFS.map((brief, i) => (
+                <Shot key={brief} brief={brief} tone={STRIP_TONES[i]} />
+              ))}
         </div>
 
         <section class="wrap">
@@ -159,9 +196,11 @@ export function StaySite({ ctx, siteUrl }: { ctx: BusinessContext; siteUrl: stri
               const peak = peakRate(room);
               return (
                 <article class="room" key={room.id}>
-                  <div class={room.isSignature ? "shot" : "shot warm"}>
-                    <span class="brief">{room.name} · 床 + 窗外</span>
-                  </div>
+                  <Shot
+                    photo={room.photos[0]}
+                    brief={`${room.name} · 床 + 窗外`}
+                    tone={room.isSignature ? undefined : "warm"}
+                  />
                   <div class="room-body">
                     <h3>{room.name}</h3>
                     <p class="pax">

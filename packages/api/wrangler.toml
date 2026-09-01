@@ -9,6 +9,12 @@ compatibility_date = "2026-08-01"
 # With neither set, the API serves the built-in fixture merchant so a fresh
 # clone runs with no credentials at all.
 
+# Merchant photographs, served from the same origin as the site so a Business
+# Profile never has to carry a hostname. Requests that match a file here are
+# served straight from the edge; everything else reaches the Worker.
+[assets]
+directory = "./public"
+
 [observability]
 enabled = true
 

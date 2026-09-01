@@ -3,6 +3,7 @@
  * Site looks. This lifts its <style> block into the renderer so the two cannot
  * drift — edit the prototype, run `pnpm sync:styles`, never edit the output.
  */
+import { execFileSync } from "node:child_process";
 import { readFileSync, writeFileSync } from "node:fs";
 
 const SRC = "design/stay-gallery-first.html";
@@ -22,4 +23,9 @@ writeFileSync(
   `${banner}export const stayGalleryFirstCss = ${JSON.stringify(css.trim())};\n`,
   "utf8",
 );
+// Formatted here rather than left to the author: the output is generated, so a
+// `pnpm check` failure after `pnpm sync:styles` is a broken generator, not a
+// mistake anyone can fix by hand.
+execFileSync("npx", ["biome", "format", "--write", OUT], { stdio: "inherit" });
+
 console.log(`wrote ${OUT} (${css.length} bytes of css)`);

@@ -73,7 +73,14 @@ export const OpeningHours = z.object({
 export type OpeningHours = z.infer<typeof OpeningHours>;
 
 export const Photo = z.object({
-  url: z.string().url(),
+  /**
+   * An absolute URL, or a root-relative path served from the site's own
+   * origin. Merchant photos belong on a CDN eventually, but a Merchant Site is
+   * rendered on the same origin the photos are served from, so "/m/<slug>/x.jpg"
+   * is the honest form until they move — and it does not bake a hostname into
+   * the Business Profile, which would then be wrong in every other Channel.
+   */
+  url: z.union([z.string().url(), z.string().regex(/^\/[^/]/, "expected a URL or a /path")]),
   alt: z.string().optional(),
 });
 export type Photo = z.infer<typeof Photo>;
