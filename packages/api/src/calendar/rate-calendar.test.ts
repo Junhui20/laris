@@ -83,6 +83,23 @@ describe("deriveRateCalendar", () => {
     expect(windows[0]?.rateCents).toBe(50_000);
   });
 
+  it("prices a replacement day, which is a working day turned into a holiday", () => {
+    // Thaipusam falls on Sunday 2026-02-01 in Perak; the cuti ganti is Monday
+    // the 2nd, and Monday is exactly the night that would otherwise be empty.
+    const windows = derive("perak", "2026-02-02", "2026-02-02");
+    expect(windows).toHaveLength(1);
+    expect(windows[0]?.rateCents).toBe(BASE * DEFAULT_PEAK_MULTIPLIERS.publicHoliday);
+  });
+
+  it("names both holidays when two share a day", () => {
+    // Kuala Lumpur, 2026-02-01: Federal Territory Day and Thaipusam. The rate
+    // moves once; the explanation should not drop one of the reasons.
+    const windows = derive("kuala-lumpur", "2026-02-01", "2026-02-01");
+    expect(windows).toHaveLength(1);
+    expect(windows[0]?.label).toContain("Federal Territory Day");
+    expect(windows[0]?.label).toContain("Thaipusam");
+  });
+
   it("covers the federal territories, whose mycal codes are prefixed", () => {
     // `putrajaya` is `wp-putrajaya` upstream. Unmapped it matches nothing and
     // returns an empty calendar with no error at all.

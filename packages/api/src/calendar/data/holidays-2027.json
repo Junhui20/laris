@@ -42,8 +42,8 @@
     "isPublicHoliday": true,
     "gazetteLevel": "N",
     "hijriDate": "27 Rejab 1448",
-    "isEstimated": true,
     "source": "jakim",
+    "isEstimated": true,
     "createdAt": "2026-06-28T00:00:00+08:00",
     "updatedAt": "2026-06-28T00:00:00+08:00"
   },
@@ -153,8 +153,8 @@
     "isPublicHoliday": true,
     "gazetteLevel": "N",
     "hijriDate": "1 Ramadan 1448",
-    "isEstimated": true,
     "source": "jakim",
+    "isEstimated": true,
     "createdAt": "2026-06-28T00:00:00+08:00",
     "updatedAt": "2026-06-28T00:00:00+08:00"
   },
@@ -199,8 +199,8 @@
     "isPublicHoliday": true,
     "gazetteLevel": "N",
     "hijriDate": "17 Ramadan 1448",
-    "isEstimated": true,
     "source": "jakim",
+    "isEstimated": true,
     "createdAt": "2026-06-28T00:00:00+08:00",
     "updatedAt": "2026-06-28T00:00:00+08:00"
   },
@@ -234,8 +234,8 @@
     "isPublicHoliday": true,
     "gazetteLevel": "P",
     "hijriDate": "1 Syawal 1448",
-    "isEstimated": true,
     "source": "jakim",
+    "isEstimated": true,
     "createdAt": "2026-06-28T00:00:00+08:00",
     "updatedAt": "2026-06-28T00:00:00+08:00"
   },
@@ -253,8 +253,8 @@
     "isPublicHoliday": true,
     "gazetteLevel": "P",
     "hijriDate": "2 Syawal 1448",
-    "isEstimated": true,
     "source": "jakim",
+    "isEstimated": true,
     "createdAt": "2026-06-28T00:00:00+08:00",
     "updatedAt": "2026-06-28T00:00:00+08:00"
   },
@@ -353,8 +353,8 @@
     "isPublicHoliday": true,
     "gazetteLevel": "N",
     "hijriDate": "9 Zulhijjah 1448",
-    "isEstimated": true,
     "source": "jakim",
+    "isEstimated": true,
     "createdAt": "2026-06-28T00:00:00+08:00",
     "updatedAt": "2026-06-28T00:00:00+08:00"
   },
@@ -372,8 +372,8 @@
     "isPublicHoliday": true,
     "gazetteLevel": "P",
     "hijriDate": "10 Zulhijjah 1448",
-    "isEstimated": true,
     "source": "jakim",
+    "isEstimated": true,
     "createdAt": "2026-06-28T00:00:00+08:00",
     "updatedAt": "2026-06-28T00:00:00+08:00"
   },
@@ -406,8 +406,8 @@
     "isPublicHoliday": true,
     "gazetteLevel": "N",
     "hijriDate": "11 Zulhijjah 1448",
-    "isEstimated": true,
     "source": "jakim",
+    "isEstimated": true,
     "createdAt": "2026-06-28T00:00:00+08:00",
     "updatedAt": "2026-06-28T00:00:00+08:00"
   },
@@ -522,8 +522,8 @@
     "isPublicHoliday": true,
     "gazetteLevel": "P",
     "hijriDate": "1 Muharram 1449",
-    "isEstimated": true,
     "source": "jakim",
+    "isEstimated": true,
     "createdAt": "2026-06-28T00:00:00+08:00",
     "updatedAt": "2026-06-28T00:00:00+08:00"
   },
@@ -653,8 +653,8 @@
     "isPublicHoliday": true,
     "gazetteLevel": "P",
     "hijriDate": "12 Rabiulawal 1449",
-    "isEstimated": true,
     "source": "jakim",
+    "isEstimated": true,
     "createdAt": "2026-06-28T00:00:00+08:00",
     "updatedAt": "2026-06-28T00:00:00+08:00"
   },
@@ -868,8 +868,8 @@
     "isPublicHoliday": true,
     "gazetteLevel": "N",
     "hijriDate": "27 Rejab 1449",
-    "isEstimated": true,
     "source": "jakim",
+    "isEstimated": true,
     "createdAt": "2026-06-28T00:00:00+08:00",
     "updatedAt": "2026-06-28T00:00:00+08:00"
   }

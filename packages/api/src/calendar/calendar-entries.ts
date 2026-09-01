@@ -6,9 +6,11 @@ import { larisStateCode, publicHolidays, schoolHolidays } from "./mycal.js";
 /**
  * The holidays themselves, for `BusinessContext.calendar`.
  *
- * Names come through in Malay, English and Chinese because copy has to address
- * the audience in its own language — "Hari Raya Aidilfitri", "Chinese New Year"
- * and "农历新年" are the same window and three different posts.
+ * Names carry Malay and English always, and Chinese where the gazette data has
+ * it. Chinese is genuinely partial upstream — roughly half the public holidays
+ * and none of the school-holiday rows — so a caller writing Chinese copy has to
+ * handle its absence. Claiming three languages when the data holds two and a
+ * half would just move the failure to whoever trusted the claim.
  */
 export function deriveCalendarEntries(options: {
   state: StateCode;
@@ -65,23 +67,29 @@ function yearsSpanned(from: string, to: string): number[] {
 }
 
 /**
- * The Business Profile with its mycal window refreshed.
+ * The Business Profile with one window of its mycal calendar refreshed.
  *
- * Entries the merchant wrote themselves — promos, closures, their own events —
- * are never touched. Only previously derived `mycal` entries are replaced, so
- * running this twice is the same as running it once.
+ * This replaces a range, not the whole calendar. Entries the merchant wrote
+ * themselves are never touched, and neither are mycal entries outside the
+ * window — refreshing 2026 on a Profile that also holds 2027 used to delete
+ * every 2027 entry, silently, because they were derived too.
+ *
+ * Running it twice over the same range is still the same as running it once.
  */
 export function withDerivedCalendar(
   ctx: BusinessContext,
   range: { from: string; to: string },
 ): BusinessContext {
-  const merchantEntries = ctx.calendar.filter((entry) => entry.source !== "mycal");
+  const kept = ctx.calendar.filter((entry) => {
+    if (entry.source !== "mycal") return true;
+    const end = entry.endDate ?? entry.date;
+    const overlapsWindow = diffDays(entry.date, range.to) >= 0 && diffDays(range.from, end) >= 0;
+    return !overlapsWindow;
+  });
   const derived = deriveCalendarEntries({ state: ctx.identity.state, ...range });
 
   return {
     ...ctx,
-    calendar: [...merchantEntries, ...derived].sort((left, right) =>
-      left.date.localeCompare(right.date),
-    ),
+    calendar: [...kept, ...derived].sort((left, right) => left.date.localeCompare(right.date)),
   };
 }

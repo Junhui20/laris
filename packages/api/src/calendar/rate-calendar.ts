@@ -28,7 +28,8 @@ export const DEFAULT_PEAK_MULTIPLIERS: PeakMultipliers = {
 
 type DayReason = {
   multiplier: number;
-  label: string;
+  /** Every reason this day is peak. Two holidays can land on one date. */
+  labels: string[];
 };
 
 export function deriveRateCalendar(options: {
@@ -43,25 +44,35 @@ export function deriveRateCalendar(options: {
   if (diffDays(from, to) < 0) return [];
 
   const reasons = new Map<string, DayReason>();
-  const claim = (date: string, reason: DayReason) => {
+  const claim = (date: string, multiplier: number, label: string) => {
     if (diffDays(from, date) < 0 || diffDays(date, to) < 0) return;
+    const existing = reasons.get(date);
     // First claim wins, and school holidays claim first. A public holiday inside
     // a school break does not raise the rate again — the break is already peak,
     // and splitting it would hand the owner the same window three times to
     // approve. Only a public holiday standing on its own gets its own rate.
-    if (!reasons.has(date)) reasons.set(date, reason);
+    if (!existing) {
+      reasons.set(date, { multiplier, labels: [label] });
+      return;
+    }
+    // Two reasons at the same rate share the day rather than one erasing the
+    // other. Kuala Lumpur on 2026-02-01 is Federal Territory Day *and*
+    // Thaipusam; the rate moves once, the explanation keeps both names.
+    if (existing.multiplier === multiplier && !existing.labels.includes(label)) {
+      existing.labels.push(label);
+    }
   };
 
   for (const year of yearsSpanned(from, to)) {
     for (const holiday of schoolHolidays(state, year)) {
       for (const date of datesBetween(holiday.startDate, holiday.endDate)) {
-        claim(date, { multiplier: multipliers.schoolHoliday, label: holiday.name.en });
+        claim(date, multipliers.schoolHoliday, holiday.name.en);
       }
     }
 
     for (const holiday of publicHolidays(state, year)) {
       for (const date of datesBetween(holiday.date, holiday.endDate ?? holiday.date)) {
-        claim(date, { multiplier: multipliers.publicHoliday, label: holiday.name.en });
+        claim(date, multipliers.publicHoliday, holiday.name.en);
       }
     }
   }
@@ -103,15 +114,20 @@ function mergeWindows(
     }
     if (open && open.reason.multiplier === reason.multiplier) {
       open.end = date;
-      open.labels.push(reason.label);
+      open.labels.push(dayLabel(reason));
       continue;
     }
     close();
-    open = { start: date, end: date, reason, labels: [reason.label] };
+    open = { start: date, end: date, reason, labels: [dayLabel(reason)] };
   }
   close();
 
   return windows;
+}
+
+/** One day's reasons, joined. A single-day window shows all of them. */
+function dayLabel(reason: DayReason): string {
+  return reason.labels.join(" · ");
 }
 
 function dominantLabel(labels: readonly string[]): string {
