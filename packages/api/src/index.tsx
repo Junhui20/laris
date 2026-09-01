@@ -69,9 +69,22 @@ app.use("/v1/*", async (c, next) => {
  * inventing one for a single real merchant would be the wrong order.
  */
 const SLUG_BY_HOST: Readonly<Record<string, string>> = {
+  // The first host listed for a slug is its canonical one.
   "pangkormyhomestay.top": "pangkor-my-homestay",
   "www.pangkormyhomestay.top": "pangkor-my-homestay",
 };
+
+/**
+ * One address per Merchant, whichever hostname the request arrived on.
+ *
+ * A page reachable at an apex, a www and a slug path is three pages as far as
+ * a search engine is concerned — it splits whatever Answer Presence the site
+ * earns, and it is a Drift Check finding waiting to happen.
+ */
+function canonicalUrl(slug: string, requestUrl: URL): string {
+  const domain = Object.entries(SLUG_BY_HOST).find(([, s]) => s === slug)?.[0];
+  return domain ? `https://${domain}/` : `${requestUrl.origin}/site/${slug}`;
+}
 
 /**
  * A Merchant Site, rendered from the Business Profile on every request.
@@ -101,19 +114,13 @@ app.get("/", async (c) => {
   const url = new URL(c.req.url);
   const slug = SLUG_BY_HOST[url.hostname];
   if (!slug) return c.notFound();
-  return renderSite(c, slug, `${url.origin}/`);
+  return renderSite(c, slug, canonicalUrl(slug, url));
 });
 
 /** The same site by slug, for development and for a merchant with no domain. */
 app.get("/site/:slug", async (c) => {
   const slug = c.req.param("slug");
-  const url = new URL(c.req.url);
-  // A merchant with a domain of their own is canonical there, wherever the
-  // request arrived. Two URLs serving one page is a Drift Check finding
-  // waiting to happen, and it splits whatever Answer Presence we earn.
-  const domain = Object.entries(SLUG_BY_HOST).find(([, s]) => s === slug)?.[0];
-  const siteUrl = domain ? `https://${domain}/` : `${url.origin}/site/${slug}`;
-  return renderSite(c, slug, siteUrl);
+  return renderSite(c, slug, canonicalUrl(slug, new URL(c.req.url)));
 });
 
 /** The Business Profile behind a site. Read-only for now. */
