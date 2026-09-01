@@ -87,7 +87,11 @@ export const pangkorMyHomestay: BusinessContext = {
       // amenity enum has no way to say that. Listing it would put a free
       // Barbecue into the JSON-LD Google reads. It stays in the FAQ instead.
       amenities: ["wifi", "aircon", "kitchen", "washer", "tv", "parking"],
-      photos: [],
+      photos: [
+        { url: "/m/pangkor-my-homestay/room-double.jpg", alt: "双人房 · 冷气、风扇，房内自带卫浴" },
+        { url: "/m/pangkor-my-homestay/room-twin.jpg", alt: "四人房 · 两张床并排" },
+        { url: "/m/pangkor-my-homestay/loft-beds.jpg", alt: "小格楼床位" },
+      ],
       isSignature: true,
     },
   ],
@@ -129,6 +133,21 @@ export const pangkorMyHomestay: BusinessContext = {
   ],
 
   watchlist: [],
-  photos: [],
+
+  // The owner's own photographs. Their two marketing collages are deliberately
+  // left out: the phone number is burned into the image, which makes it a fact
+  // no Profile edit can ever reach.
+  photos: [
+    {
+      url: "/m/pangkor-my-homestay/frontage-sky.jpg",
+      alt: "屋子正面 · 双层排屋，有遮阳棚和停车位",
+    },
+    { url: "/m/pangkor-my-homestay/living-room.jpg", alt: "楼下客厅 · 冷气、电视、Astro" },
+    { url: "/m/pangkor-my-homestay/room-balcony.jpg", alt: "楼上房间 · 两张床，外面连着阳台" },
+    { url: "/m/pangkor-my-homestay/loft-stairs.jpg", alt: "小格楼 · 三个床位，木楼梯上去" },
+    { url: "/m/pangkor-my-homestay/mahjong.jpg", alt: "麻将台和扑克牌，免费用" },
+    { url: "/m/pangkor-my-homestay/frontage.jpg", alt: "屋前停车位 · 脚踏车免费借" },
+    { url: "/m/pangkor-my-homestay/room-ensuite.jpg", alt: "房间自带卫浴" },
+  ],
   updatedAt: "2026-09-01T00:00:00.000Z",
 };
