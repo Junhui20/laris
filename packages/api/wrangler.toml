@@ -40,3 +40,8 @@ enabled = true
 [[routes]]
 pattern = "pangkormyhomestay.top"
 custom_domain = true
+
+# People type it. A hostname that answers nothing reads as a dead business.
+[[routes]]
+pattern = "www.pangkormyhomestay.top"
+custom_domain = true
