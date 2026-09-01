@@ -105,8 +105,9 @@ function JsonLd({ data }: { data: unknown }) {
 export function StaySite({ ctx, siteUrl }: { ctx: BusinessContext; siteUrl: string }) {
   const { identity, theme } = ctx;
   const rooms = ctx.offerings.filter((o) => o.kind === "room_type");
-  const from = fromRate(ctx);
-  const saving = directSaving(ctx);
+  const showRates = theme.showRates;
+  const from = showRates ? fromRate(ctx) : null;
+  const saving = showRates ? directSaving(ctx) : null;
   const landmarks = ctx.verticalProfile.stay?.landmarks ?? [];
   const wa = identity.whatsapp ?? identity.phone;
   const faqLd = faqPageJsonLd(ctx);
@@ -206,11 +207,13 @@ export function StaySite({ ctx, siteUrl }: { ctx: BusinessContext; siteUrl: stri
                     <p class="pax">
                       {room.description ?? ""} · {room.capacityPax} 人
                     </p>
-                    <div class="rate">
-                      <b>{money(room.baseRateCents)}</b>
-                      <span>/ 晚</span>
-                    </div>
-                    {peak && (
+                    {showRates && (
+                      <div class="rate">
+                        <b>{money(room.baseRateCents)}</b>
+                        <span>/ 晚</span>
+                      </div>
+                    )}
+                    {showRates && peak && (
                       <div class="peak">
                         <span>{peak.label}</span>
                         <b>{money(peak.rateCents)}</b>

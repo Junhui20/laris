@@ -38,6 +38,15 @@ export const SiteTheme = z.object({
     .default("#1F6F63"),
   typePair: z.enum(["serif-sans", "sans-sans", "display-serif"]).default("serif-sans"),
   density: z.enum(["airy", "compact"]).default("airy"),
+  /**
+   * Whether the site publishes rates at all.
+   *
+   * The rate is a fact about the business and belongs in the Profile either
+   * way — the rate calendar and the OTA comparison both need it. Whether a
+   * Channel shows it is a separate decision, and a merchant who quotes per
+   * enquiry is making a real choice, not leaving a field blank.
+   */
+  showRates: z.boolean().default(true),
 });
 export type SiteTheme = z.infer<typeof SiteTheme>;
 

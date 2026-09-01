@@ -26,7 +26,8 @@ function ringgit(cents: number): string {
 export function lodgingBusinessJsonLd(ctx: BusinessContext, siteUrl: string) {
   const { identity } = ctx;
   const rooms = ctx.offerings.filter((o) => o.kind === "room_type");
-  const rates = rooms.map((r) => r.baseRateCents);
+  // A site that does not publish rates does not assert one to Google either.
+  const rates = ctx.theme.showRates ? rooms.map((r) => r.baseRateCents) : [];
 
   return {
     "@context": "https://schema.org",
@@ -56,8 +57,7 @@ export function lodgingBusinessJsonLd(ctx: BusinessContext, siteUrl: string) {
     makesOffer: rooms.map((r) => ({
       "@type": "Offer",
       name: r.name,
-      price: ringgit(r.baseRateCents),
-      priceCurrency: MYR,
+      ...(ctx.theme.showRates && { price: ringgit(r.baseRateCents), priceCurrency: MYR }),
       ...(r.description && { description: r.description }),
     })),
     amenityFeature: amenityUnion(ctx).map((name) => ({

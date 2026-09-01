@@ -59,6 +59,9 @@ export const pangkorMyHomestay: BusinessContext = {
     accent: "#2F7FA8",
     typePair: "display-serif",
     density: "airy",
+    // She quotes per enquiry and has never had a rate card. The site's job here
+    // is to say what the house is; the number stays a WhatsApp conversation.
+    showRates: false,
   },
 
   offerings: [

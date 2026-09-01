@@ -49,6 +49,7 @@ export const rumahOmbak: BusinessContext = {
     accent: "#10665A",
     typePair: "display-serif",
     density: "airy",
+    showRates: true,
   },
 
   offerings: [
