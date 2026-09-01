@@ -17,10 +17,13 @@ export const pangkorMyHomestay: BusinessContext = {
   vertical: "stay",
 
   identity: {
-    name: "Pangkor My Homestay",
-    // TODO(owner): confirm the street line. The GBP card reads "No. 21"; the
-    // owner says the house is 23, so one of the two is wrong and the GBP is
-    // the one guests navigate by.
+    // Exactly as the Google Business Profile reads it today. The domain says
+    // "pangkormyhomestay" and Facebook says something third — that disagreement
+    // is real and needs settling, but not before the GBP API application: a
+    // name change can trigger re-verification, and the prerequisite is a
+    // profile verified and active for 60+ days.
+    name: "邦咯岛渡假屋No.23双层屋",
+    // Verified against the Business Profile itself, 2026-09-01.
     addressLines: ["No. 23, Jalan Pangkor Mutiara 2"],
     area: "Taman Pangkor Mutiara",
     postcode: "32300",
@@ -29,7 +32,7 @@ export const pangkorMyHomestay: BusinessContext = {
     phone: "+60125358226",
     whatsapp: "+60125358226",
     // TODO(owner): the Facebook page URL, once we have it.
-    sameAs: [],
+    sameAs: ["https://maps.google.com/?cid=8495038843976437085"],
     // A whole-house rental has no opening hours. Left empty deliberately —
     // and note this is exactly the case that makes Drift Check report a
     // `certain` hours mismatch against every Channel (issue #7 review).
