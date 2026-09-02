@@ -11,7 +11,14 @@
  * `packages/api/public/m/<slug>/`, and it is not here.
  */
 import { execFileSync } from "node:child_process";
-import { copyFileSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import {
+  copyFileSync,
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  readdirSync,
+  writeFileSync,
+} from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import jpeg from "jpeg-js";
@@ -22,6 +29,7 @@ const SLUG = "pangkor-my-homestay";
 const PHOTOS_SRC = join(pkg, "../api/public/m", SLUG);
 const PHOTOS_OUT = join(pkg, "public/photos");
 const VO = join(pkg, "public/vo");
+const MUSIC = join(pkg, "public/music/bed.mp3");
 
 const CONTACT = "WhatsApp 012-535 8226";
 
@@ -219,12 +227,15 @@ const photo = (stem) => {
 const plan = {
   merchantSlug: SLUG,
   contact: CONTACT,
+  // Present only when a licensed track has actually been put there.
+  ...(existsSync(MUSIC) ? { music: "music/bed.mp3" } : {}),
   scenes: SCENES.map((scene) => {
     const audio = `vo/line-${scene.line}.mp3`;
     const first = photo(scene.frames[0][0]);
     const raw = jpeg.decode(readFileSync(join(PHOTOS_OUT, first)), { useTArray: true });
     return {
       audio,
+      speechMs: durationMs(join(VO, `line-${scene.line}.mp3`)),
       durationMs: durationMs(join(VO, `line-${scene.line}.mp3`)) + TAIL_MS,
       spoken: scene.spoken,
       headline: scene.headline,
@@ -243,7 +254,10 @@ const plan = {
 writeFileSync(join(pkg, "src/shot-plan.json"), `${JSON.stringify(plan, null, 2)}\n`);
 const total = plan.scenes.reduce((n, s) => n + s.durationMs, 0);
 const cuts = plan.scenes.reduce((n, s) => n + s.frames.length, 0);
-console.log(`${plan.scenes.length} scenes, ${cuts} cuts, ${(total / 1000).toFixed(1)}s`);
+console.log(
+  `${plan.scenes.length} scenes, ${cuts} cuts, ${(total / 1000).toFixed(1)}s` +
+    `${plan.music ? " + music bed" : " (no music bed — drop a licensed track at public/music/bed.mp3)"}`,
+);
 for (const s of plan.scenes) {
   console.log(
     `  ${String(s.durationMs).padStart(5)}ms  ${s.color}  ${s.frames.length}×  ${s.headline}`,

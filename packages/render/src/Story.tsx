@@ -2,6 +2,7 @@ import { Audio } from "@remotion/media";
 import { AbsoluteFill, Sequence, staticFile, useVideoConfig } from "remotion";
 import { Caption } from "./Caption";
 import { Frame } from "./Frame";
+import { MusicBed } from "./MusicBed";
 import type { ShotPlan } from "./shot-plan";
 
 /**
@@ -26,6 +27,7 @@ export function Story({ plan, typeScale = 1 }: { plan: ShotPlan; typeScale?: num
   let from = 0;
   return (
     <AbsoluteFill style={{ backgroundColor: "#0B1418" }}>
+      <MusicBed plan={plan} />
       {plan.scenes.map((scene, i) => {
         const length = Math.round((scene.durationMs / 1000) * fps);
         const start = from;

@@ -35,6 +35,12 @@ export type Frame = z.infer<typeof Frame>;
 export const Scene = z.object({
   /** One narration line. Absent means the scene is silent and self-timed. */
   audio: z.string().optional(),
+  /**
+   * How long the voice actually speaks, which is shorter than the scene: each
+   * one carries a tail of silence so the cut lands in a breath rather than
+   * mid-sentence. A music bed ducks against this, not against `durationMs`.
+   */
+  speechMs: z.number().int().nonnegative(),
   durationMs: z.number().int().positive(),
   /** What the voice says. Kept so the plan is readable without playing it. */
   spoken: z.string(),
@@ -56,6 +62,12 @@ export type Scene = z.infer<typeof Scene>;
 export const ShotPlan = z.object({
   merchantSlug: z.string(),
   contact: z.string(),
+  /**
+   * A music bed under the narration, if one has been licensed and dropped into
+   * `public/music/`. Absent is the honest default: borrowing a track is how a
+   * merchant collects a copyright claim on their own listing.
+   */
+  music: z.string().optional(),
   scenes: z.array(Scene).nonempty(),
 });
 export type ShotPlan = z.infer<typeof ShotPlan>;

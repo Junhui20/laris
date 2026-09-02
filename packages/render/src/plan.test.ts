@@ -103,3 +103,24 @@ describe("the subsetted typeface", () => {
     expect(missing.join(""), "run `pnpm --filter @laris/render fonts`").toBe("");
   });
 });
+
+describe("the music bed", () => {
+  const plan = ShotPlan.parse(planJson);
+
+  it("knows when the voice actually speaks, not just how long the scene is", () => {
+    // The bed ducks against `speechMs`. Ducking against `durationMs` would hold
+    // the music down through the tail of silence that exists so the cut lands
+    // in a breath — the one moment the bed should be audible.
+    for (const scene of plan.scenes) {
+      if (!scene.audio) continue;
+      expect(scene.speechMs, scene.headline).toBeGreaterThan(0);
+      expect(scene.speechMs, scene.headline).toBeLessThan(scene.durationMs);
+    }
+  });
+
+  it("ships no track", () => {
+    // Borrowing one is how a merchant collects a copyright claim on their own
+    // listing. `music` appears only once a licensed file is really there.
+    expect(existsSync(join(here, "../public/music/bed.mp3"))).toBe(plan.music !== undefined);
+  });
+});
