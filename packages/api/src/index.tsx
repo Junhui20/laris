@@ -1,5 +1,6 @@
 import { BusinessContext } from "@laris/schema";
 import { Hono } from "hono";
+import { serveMedia } from "./media/serve.js";
 import { type Env, getBusinessContext } from "./repo/merchant.js";
 import { StaySite } from "./site/render.js";
 
@@ -43,6 +44,17 @@ app.get("/site/:slug", async (c) => {
   c.header("cache-control", "public, max-age=60, s-maxage=300");
   return c.html(<StaySite ctx={ctx} siteUrl={siteUrl} />);
 });
+
+/**
+ * A Merchant's photographs, proxied from a private bucket and cached hard.
+ *
+ * MERGE NOTE: #11 adds `[assets]` serving the committed fixture photographs
+ * under this same prefix. Cloudflare's asset server answers before the Worker
+ * unless told otherwise, so when those two meet, decide deliberately which is
+ * the fallback — uploaded media and fixture photographs share this URL space on
+ * purpose, since `Photo.key` does not say where the bytes live.
+ */
+app.get("/m/*", (c) => serveMedia(c.env, c.req.path.slice("/m/".length)));
 
 /** The Business Profile behind a site. Read-only for now. */
 app.get("/v1/merchants/:slug", async (c) => {
