@@ -96,10 +96,9 @@ export const pangkorMyHomestay: BusinessContext = {
       // No enum value yet for the things that actually sell this house to a
       // group — bicycles, mahjong, karaoke, Astro. They live in the description
       // for now; see the note in the PR.
-      // `bbq` is deliberately absent: it is available but costs extra, and the
-      // amenity enum has no way to say that. Listing it would put a free
-      // Barbecue into the JSON-LD Google reads. It stays in the FAQ instead.
-      amenities: ["wifi", "aircon", "kitchen", "washer", "tv", "parking"],
+      // `bbq` is honest now that we know why it cost extra: the grill is there
+      // and free to use, and what costs money is her catering the food for it.
+      amenities: ["wifi", "aircon", "kitchen", "washer", "tv", "parking", "bbq"],
       photos: [
         {
           key: "pangkor-my-homestay/room-double",
@@ -143,7 +142,22 @@ export const pangkorMyHomestay: BusinessContext = {
     },
     {
       q: "可以自己煮吗？",
-      a: "可以，厨房齐全，冰箱、过滤水机、煮热水器都有。想烧烤的话我们也可以帮你准备 BBQ，另外算钱。",
+      a: "可以，厨房齐全，冰箱、过滤水机、煮热水器都有。",
+      source: "merchant",
+    },
+    {
+      q: "可以烧烤吗？",
+      a: "可以。10 人份的 BBQ 配套 RM 550，料我们准备。或者用屋子现成的烤炉，自己带料来，不另外收钱。",
+      source: "merchant",
+    },
+    {
+      q: "要给订金吗？",
+      a: "要，订金 RM 500，WhatsApp 谈好日期之后给。",
+      source: "merchant",
+    },
+    {
+      q: "订了不能来怎么办？",
+      a: "可以改日期，先 WhatsApp 跟我们说一声就好。",
       source: "merchant",
     },
     {
