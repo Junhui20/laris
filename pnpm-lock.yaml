@@ -48,6 +48,9 @@ importers:
       '@laris/schema':
         specifier: workspace:*
         version: link:../schema
+      '@supabase/supabase-js':
+        specifier: ^2.45.4
+        version: 2.112.4
       react:
         specifier: ^18.3.1
         version: 18.3.1
