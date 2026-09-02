@@ -1,6 +1,6 @@
-import { addDays, diffDays } from "@catlabtech/mycal-core";
+import { addDays, diffDays, isWeekend } from "@catlabtech/mycal-core";
 import type { StateCode, stay } from "@laris/schema";
-import { publicHolidays, schoolHolidays } from "./mycal.js";
+import { coveredYears, getState, publicHolidays, schoolHolidays } from "./mycal.js";
 
 /**
  * In `stay` the calendar does not decorate the price, it sets it. These are the
@@ -15,6 +15,12 @@ import { publicHolidays, schoolHolidays } from "./mycal.js";
 export type PeakMultipliers = {
   schoolHoliday: number;
   publicHoliday: number;
+  /**
+   * The most frequent peak of all — about a hundred nights a year, against a
+   * couple of dozen holidays. Leaving it out was the largest thing this module
+   * got wrong.
+   */
+  weekend: number;
 };
 
 /**
@@ -34,6 +40,7 @@ export type PeakMultipliers = {
 export const DEFAULT_PEAK_MULTIPLIERS: PeakMultipliers = {
   schoolHoliday: 1.15,
   publicHoliday: 1.2,
+  weekend: 1.15,
 };
 
 type DayReason = {
@@ -85,6 +92,29 @@ export function deriveRateCalendar(options: {
         claim(date, multipliers.publicHoliday, holiday.name.en);
       }
     }
+  }
+
+  // A weekend night is the night *before* a rest day, not the rest day itself.
+  // Nobody books Sunday night to be at work on Monday, and every hotel in the
+  // country prices Friday and Saturday. Which two nights those are is the
+  // state's business: Kelantan rests Friday–Saturday, so its weekend nights are
+  // Thursday and Friday.
+  //
+  // Claimed last and without merging labels: it is the least specific reason a
+  // night is busy, and a Saturday inside a school break should still read as
+  // the school break.
+  //
+  // Only for years the gazette snapshot covers. Weekends alone need no gazette
+  // — mycal knows the weekend history back to 1900 — but a calendar of nothing
+  // but weekends would be missing every holiday in the year, and the owner
+  // would be approving it without any way to see the gap.
+  const resolved = getState(state);
+  const covered = new Set(coveredYears().holidays);
+  for (const date of datesBetween(from, to)) {
+    if (!covered.has(Number(date.slice(0, 4)))) continue;
+    if (reasons.has(date)) continue;
+    if (!isWeekend(addDays(date, 1), resolved)) continue;
+    reasons.set(date, { multiplier: multipliers.weekend, labels: ["Weekend"] });
   }
 
   return mergeWindows(reasons, from, to, baseRateCents);
