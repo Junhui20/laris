@@ -140,7 +140,78 @@ describe.skipIf(!admin)("live database", () => {
     ).toEqual({ ok: false, reason: "not-found" });
   });
 
-  it("bumps the row clock on update", async () => {
+  it("refuses a document whose accountId disagrees with its row", async () => {
+    // The sibling constraint to the merchantId one. The PR claimed both were
+    // covered; only one was.
+    const bogus = {
+      ...rumahOmbak,
+      accountId: "77777777-7777-4777-8777-777777777777",
+    };
+    const { error } = await db()
+      .from("merchants")
+      .insert({
+        id: "66666666-6666-4666-8666-666666666666",
+        account_id: rumahOmbak.accountId,
+        slug: `${SLUG}-bad-account`,
+        business_context: bogus,
+      });
+    expect(error?.message).toMatch(/merchants_context_account_agrees/);
+  });
+
+  it("returns the document token the next write has to send back", async () => {
+    // The concurrency token is the document's own `updatedAt`, not the row's
+    // `updated_at`. This asserts the value a caller reads is the value that
+    // works — the earlier version of this test watched the row clock move,
+    // which is audit metadata and would have passed with the token broken.
+    const current = await getBusinessContext(env, SLUG, { allowFixture: false });
+    if (!current) throw new Error("missing merchant");
+
+    const stale = await putBusinessContext(env, SLUG, current, {
+      expectedUpdatedAt: "2020-01-01T00:00:00.000Z",
+    });
+    expect(stale).toEqual({ ok: false, reason: "conflict" });
+
+    const fresh = await putBusinessContext(env, SLUG, current, {
+      expectedUpdatedAt: current.updatedAt,
+    });
+    expect(fresh.ok).toBe(true);
+  });
+
+  for (const [what, languages] of [
+    ["an empty language list", []],
+    ["a language the schema does not have", ["en", "klingon"]],
+  ] as const) {
+    it(`refuses an Account with ${what}`, async () => {
+      // `Account.languages` is a non-empty array of ms | en | zh. The column
+      // used to permit anything and default to empty, so a row the database
+      // called valid could be impossible to parse as the shape the schema is
+      // supposed to be the source of truth for.
+      const { error } = await db().from("accounts").insert({
+        id: "55555555-5555-4555-8555-555555555555",
+        brand_name: "language check",
+        whatsapp: "+60100000000",
+        languages,
+      });
+      expect(error?.message).toMatch(/accounts_languages_known/);
+    });
+  }
+
+  it("accepts an Account whose languages the schema recognises", async () => {
+    const id = "44444444-4444-4444-8444-444444444444";
+    await db().from("accounts").delete().eq("id", id);
+    const { error } = await db()
+      .from("accounts")
+      .insert({
+        id,
+        brand_name: "language check",
+        whatsapp: "+60100000000",
+        languages: ["ms", "en", "zh"],
+      });
+    expect(error?.message ?? null).toBeNull();
+    await db().from("accounts").delete().eq("id", id);
+  });
+
+  it("keeps the row clock as audit metadata", async () => {
     const { data } = await db()
       .from("merchants")
       .select("created_at, updated_at")

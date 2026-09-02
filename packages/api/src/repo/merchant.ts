@@ -46,6 +46,16 @@ export async function getBusinessContext(
 }
 
 /**
+ * Writes always run as the service role, which **bypasses row-level security**.
+ * That is correct for a Worker rendering a Merchant Site and for onboarding,
+ * and it means RLS gives a future route calling this function no Account
+ * isolation at all: the argument is a slug, and a slug is not an identity.
+ *
+ * Caller identity and Account scoping are #8's job. Nothing in this module is
+ * application-level authorisation, and it should not be read as any.
+ */
+
+/**
  * The outcome of a write, as a value rather than an exception.
  *
  * `conflict` is a normal thing to happen, not a fault: it means the Profile

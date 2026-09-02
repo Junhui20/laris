@@ -95,9 +95,10 @@ create table public.merchants (
 
 create index merchants_account_idx on public.merchants (account_id);
 
--- `updated_at` is the row's own clock, and the write path uses it as an
--- optimistic-concurrency token: an update carries the value it read, so two
--- editors cannot silently overwrite each other's Profile.
+-- `updated_at` is the row's own clock — audit metadata, not the concurrency
+-- token. See the later migration: the write path matches on the document's own
+-- `updatedAt`, and two timestamps both presented as authoritative is how one of
+-- them quietly stops being true.
 create or replace function public.touch_updated_at()
 returns trigger
 language plpgsql
