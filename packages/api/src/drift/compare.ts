@@ -1,4 +1,5 @@
 import { type Identity, type Mismatch, type OpeningHours, StateCode } from "@laris/schema";
+import { stateOfficial } from "../site/labels.js";
 import {
   normalizeAddress,
   normalizeName,
@@ -63,18 +64,15 @@ function hoursCertainlyDisagree(
   channel: readonly OpeningHours[],
   profile: readonly OpeningHours[],
 ): boolean {
-  // An empty profile means "not filled in", not "closed every day".
-  if (profile.length === 0) return false;
-
   const channelHours = normalizeWeeklyHours(channel);
   const profileHours = normalizeWeeklyHours(profile);
 
   for (const [weekday, channelIntervals] of channelHours) {
     const profileIntervals = profileHours.get(weekday);
-    if (
-      !profileIntervals ||
-      serializeIntervals(channelIntervals) !== serializeIntervals(profileIntervals)
-    ) {
+    // With the current schema, an absent weekday means "unknown", not
+    // explicitly closed. Only two stated schedules can certainly disagree.
+    if (!profileIntervals) continue;
+    if (serializeIntervals(channelIntervals) !== serializeIntervals(profileIntervals)) {
       return true;
     }
   }
@@ -101,14 +99,29 @@ function isCertain<T>(value: ExtractedValue<T> | undefined): value is ExtractedV
 }
 
 function formatProfileAddress(profile: Identity): string {
-  return [...profile.addressLines, profile.area, profile.postcode, profile.state].join(", ");
+  return [
+    ...profile.addressLines,
+    profile.area,
+    profile.postcode,
+    stateOfficial(profile.state),
+  ].join(", ");
 }
 
 function formatHours(hours: readonly OpeningHours[]): string {
   return [...normalizeWeeklyHours(hours).entries()]
-    .map(([weekday, intervals]) => `${weekday}:${serializeIntervals(intervals)}`)
-    .join(";");
+    .map(
+      ([weekday, intervals]) =>
+        `${WEEKDAY_LABELS[weekday] ?? "Unknown day"} ${intervals
+          .map(
+            ({ opens, closes, closesNextDay }) =>
+              `${opens}–${closes}${closesNextDay ? " (next day)" : ""}`,
+          )
+          .join(", ")}`,
+    )
+    .join("; ");
 }
+
+const WEEKDAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] as const;
 
 function serializeIntervals(
   intervals: readonly Pick<OpeningHours, "opens" | "closes" | "closesNextDay">[],

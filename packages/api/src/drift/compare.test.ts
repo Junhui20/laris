@@ -101,7 +101,13 @@ describe("compareIdentity", () => {
         },
         profile,
       ),
-    ).toMatchObject([{ field: "address", confidence: "certain" }]);
+    ).toMatchObject([
+      {
+        field: "address",
+        profileValue: "12 Jalan Batu Ferringhi, Batu Ferringhi, 11100, Pulau Pinang",
+        confidence: "certain",
+      },
+    ]);
   });
 
   it("extracts a five-digit postcode before comparing it", () => {
@@ -181,16 +187,20 @@ describe("compareIdentity", () => {
     ];
     expect(
       compareIdentity({ hours: certain(changedMonday, "Mo 10:00-18:00") }, profile),
-    ).toMatchObject([{ field: "hours", confidence: "certain" }]);
+    ).toMatchObject([
+      {
+        field: "hours",
+        profileValue: "Mon 09:00–18:00; Sat 09:00–13:00",
+        confidence: "certain",
+      },
+    ]);
   });
 
-  it("reports a Channel claiming hours on a day closed in the Profile", () => {
+  it("stays silent when the Channel states a weekday missing from the Profile", () => {
     const sunday: OpeningHours[] = [
       { weekday: 0, opens: "09:00", closes: "18:00", closesNextDay: false },
     ];
-    expect(compareIdentity({ hours: certain(sunday, "Su 09:00-18:00") }, profile)).toMatchObject([
-      { field: "hours" },
-    ]);
+    expect(compareIdentity({ hours: certain(sunday, "Su 09:00-18:00") }, profile)).toEqual([]);
   });
 
   it("stays silent when the Merchant has not filled in hours", () => {
