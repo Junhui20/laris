@@ -9,12 +9,18 @@ type Bindings = Env & { ENVIRONMENT?: string; ALLOW_FIXTURE?: string; API_TOKEN?
 const app = new Hono<{ Bindings: Bindings }>();
 
 /**
- * Development is declared, never inferred. It used to be `!env.SUPABASE_URL`,
- * which made every deployment without a database look like a laptop — so a
- * misconfigured production Worker served the built-in fixture and called it
- * fine, which is the exact failure the repo layer warns about.
+ * Development is declared, never inferred, and it is the value that has to be
+ * spelled correctly — not the safe one.
+ *
+ * This was `!env.SUPABASE_URL`, which made every database-less deployment look
+ * like a laptop. Replacing it with `!== "production"` fixed that case and kept
+ * the shape of the bug: an absent binding, a typo, or any value someone adds
+ * later still read as development, so a Worker whose `ENVIRONMENT` was
+ * misspelled would serve the fixture and expose `/v1/*`. Only the exact string
+ * `"development"` opens anything; everything else, including nothing at all,
+ * is production.
  */
-const isDev = (env: Bindings) => env.ENVIRONMENT !== "production";
+const isDev = (env: Bindings) => env.ENVIRONMENT === "development";
 
 /**
  * Whether the built-in fixture Merchant may be served. Deliberate in

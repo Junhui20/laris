@@ -84,19 +84,45 @@ export const AssetKey = z
   .regex(/^[a-z0-9][a-z0-9._/-]{2,120}$/, "expected an asset key, not a URL")
   .refine((key) => !key.split("/").includes(".."), "no traversal");
 
-export const Photo = z.object({
-  key: AssetKey,
-  /** Intrinsic size of the largest variant. Reserves space; kills layout shift. */
-  width: z.number().int().positive(),
-  height: z.number().int().positive(),
-  /**
-   * Variant widths actually stored, ascending. Drives `srcset`. Each variant's
-   * height follows from the aspect ratio — storing it twice invites the two to
-   * disagree.
-   */
-  widths: z.array(z.number().int().positive()).nonempty(),
-  alt: z.string().optional(),
-});
+export const Photo = z
+  .object({
+    key: AssetKey,
+    /** Intrinsic size of the largest variant. Reserves space; kills layout shift. */
+    width: z.number().int().positive(),
+    height: z.number().int().positive(),
+    /**
+     * Variant widths actually stored, ascending. Drives `srcset`. Each variant's
+     * height follows from the aspect ratio — storing it twice invites the two to
+     * disagree.
+     */
+    widths: z.array(z.number().int().positive()).nonempty(),
+    alt: z.string().optional(),
+  })
+  .superRefine((photo, ctx) => {
+    // "Ascending" and "largest" were documented but not enforced, which meant
+    // upload code could produce a Photo whose `srcset` was in a nonsense order,
+    // or whose declared intrinsic size belonged to no variant that exists. The
+    // browser picks a source from these numbers; a wrong one is a wrong download.
+    for (let i = 1; i < photo.widths.length; i++) {
+      if ((photo.widths[i] as number) <= (photo.widths[i - 1] as number)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ["widths"],
+          message: "widths must be ascending and unique",
+        });
+        return;
+      }
+    }
+
+    const largest = photo.widths[photo.widths.length - 1] as number;
+    if (largest !== photo.width) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["widths"],
+        message: `width is the largest variant's intrinsic size, so widths must end at ${photo.width}`,
+      });
+    }
+  });
 export type Photo = z.infer<typeof Photo>;
 
 export const GeoPoint = z.object({
