@@ -20,10 +20,20 @@ export type PeakMultipliers = {
 /**
  * Deliberately conservative. A suggestion that is too low gets raised; one that
  * is too high looks greedy and costs the owner's trust in every later suggestion.
+ *
+ * These used to be 1.3 and 1.4, which were invented. The only real rate card we
+ * have — Pangkor, confirmed by the owner — is RM 550 normally and RM 650 on
+ * what she calls 大日子: a single peak tier at ×1.18. The old defaults would
+ * have proposed RM 715 and RM 770 for nights she charges 650, which is exactly
+ * the failure the paragraph above describes.
+ *
+ * The two tiers stay because some merchants do price a school break and a
+ * public holiday differently; a merchant who does not sets both to the same
+ * number. One data point is thin, but a measured number beats a made-up one.
  */
 export const DEFAULT_PEAK_MULTIPLIERS: PeakMultipliers = {
-  schoolHoliday: 1.3,
-  publicHoliday: 1.4,
+  schoolHoliday: 1.15,
+  publicHoliday: 1.2,
 };
 
 type DayReason = {

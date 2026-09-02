@@ -3,6 +3,10 @@ import { DEFAULT_PEAK_MULTIPLIERS, deriveRateCalendar } from "./rate-calendar.js
 
 const BASE = 25_000;
 
+/** The same rounding the module applies, so a multiplier change cannot make
+ * these assertions quietly wrong the way whole-ringgit multipliers did. */
+const peak = (multiplier: number) => Math.round((BASE * multiplier) / 100) * 100;
+
 const derive = (
   state: Parameters<typeof deriveRateCalendar>[0]["state"],
   from: string,
@@ -40,7 +44,7 @@ describe("deriveRateCalendar", () => {
     // The owner should be asked to approve one window, not five.
     expect(midYear).toHaveLength(1);
     expect(midYear[0]).toMatchObject({ from: "2026-05-23", to: "2026-06-07" });
-    expect(midYear[0]?.rateCents).toBe(BASE * DEFAULT_PEAK_MULTIPLIERS.schoolHoliday);
+    expect(midYear[0]?.rateCents).toBe(peak(DEFAULT_PEAK_MULTIPLIERS.schoolHoliday));
   });
 
   it("gives a public holiday standing on its own the public-holiday rate", () => {
@@ -50,7 +54,7 @@ describe("deriveRateCalendar", () => {
       from: "2026-05-01",
       to: "2026-05-01",
       label: "Labour Day",
-      rateCents: BASE * DEFAULT_PEAK_MULTIPLIERS.publicHoliday,
+      rateCents: peak(DEFAULT_PEAK_MULTIPLIERS.publicHoliday),
     });
   });
 
@@ -69,7 +73,7 @@ describe("deriveRateCalendar", () => {
       from: "2026-05-01",
       to: "2026-05-01",
     });
-    expect(windows[0]?.rateCents).toBe(39_700);
+    expect(windows[0]?.rateCents).toBe(34_000);
   });
 
   it("honours a multiplier the owner has adjusted", () => {
@@ -88,7 +92,7 @@ describe("deriveRateCalendar", () => {
     // the 2nd, and Monday is exactly the night that would otherwise be empty.
     const windows = derive("perak", "2026-02-02", "2026-02-02");
     expect(windows).toHaveLength(1);
-    expect(windows[0]?.rateCents).toBe(BASE * DEFAULT_PEAK_MULTIPLIERS.publicHoliday);
+    expect(windows[0]?.rateCents).toBe(peak(DEFAULT_PEAK_MULTIPLIERS.publicHoliday));
   });
 
   it("names both holidays when two share a day", () => {
