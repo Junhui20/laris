@@ -1,0 +1,8 @@
+# Copied from packages/api by `pnpm --filter @laris/render plan`, not committed:
+# the photographs have one home and it is the Merchant's own assets directory.
+public/photos/
+out/
+out-render.log
+public/fonts/
+public/music/
+public/vo/*.mp3
