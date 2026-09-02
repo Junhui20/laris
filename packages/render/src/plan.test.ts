@@ -62,16 +62,16 @@ describe("the committed shot plan", () => {
   });
 
   it("never narrates something the photographs cannot show", () => {
-    // Two lines were cut for this. The kitchen and barbecue: no photograph of
-    // either exists. And the beach, which was narrated over the car porch —
-    // re-recorded to claim the bicycles instead, because the bicycles are
-    // actually in that frame. The walk to the beach survives as caption text,
-    // which is a claim the viewer reads rather than one the picture makes.
-    const spoken = plan.scenes.map((s) => s.spoken).join(" ");
-    expect(spoken).not.toMatch(/厨房|烧烤/);
-    expect(spoken).not.toMatch(/十三分钟就到海滩。$/);
-    const beach = plan.scenes.find((s) => s.headline.includes("海滩"));
-    expect(beach?.frames.every((f) => f.photo.startsWith("frontage"))).toBe(true);
+    // Asserted per scene. The version of this test that joined every line into
+    // one string and anchored on the end could only ever fail on the last
+    // scene, so it passed while the beach claim was still in the voice.
+    //
+    // These are the subjects no photograph in this set supports: there is no
+    // kitchen, no barbecue, no beach and nobody in any of the ten.
+    const UNSUPPORTED = /厨房|烧烤|海滩|沙滩/;
+    for (const scene of plan.scenes) {
+      expect(scene.spoken, `${scene.headline}: ${scene.spoken}`).not.toMatch(UNSUPPORTED);
+    }
   });
 
   it("opens on the hook and closes on the call to action", () => {

@@ -101,13 +101,16 @@ const SCENES = [
   },
   {
     line: 7,
-    spoken: "脚踏车免费借，走路十三分钟就到海滩。",
+    spoken: "脚踏车免费借，想去哪里自己骑。",
     headline: "海滩走路 13 分钟",
     sub: "脚踏车免费借 · 7-Eleven 2 分钟",
-    // Re-recorded. The line used to claim the beach over a photograph of the
-    // car porch. This one claims the bicycles, and the bicycles are in the
-    // frame — the walk to the beach stays as text, which is a caption rather
-    // than a thing the picture is pretending to show.
+    // Re-recorded twice. The first version claimed the beach over a photograph
+    // of the car porch. The second still ended on "就到海滩" — the claim was
+    // still in the voice, and the test that was supposed to catch it joined
+    // every line into one string and anchored on the end, so only the last
+    // scene could ever fail it. This one claims the bicycles, which are in the
+    // frame. The walk to the beach survives as caption text: a caption is a
+    // claim the viewer reads, not one the picture is pretending to show.
     frames: [["frontage", "pan-x", true]],
   },
   {

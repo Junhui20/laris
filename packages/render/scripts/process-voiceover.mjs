@@ -24,7 +24,7 @@ const RAW = join(pkg, "public/vo/raw");
 const OUT = join(pkg, "public/vo");
 
 /** 1.0 keeps the take as recorded. Raise to speed the delivery up. */
-const SPEED = 1.2;
+const SPEED = 1.4;
 const TRIM =
   "silenceremove=start_periods=1:start_silence=0.05:start_threshold=-45dB:detection=peak," +
   "areverse," +
