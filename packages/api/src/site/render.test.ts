@@ -76,10 +76,25 @@ describe("what the page will not claim", () => {
     expect(body).not.toContain("起 / 晚");
   });
 
-  it("stays quiet about check-in times nobody has confirmed", () => {
+  it("shows the times the owner guaranteed, not the schema's old defaults", () => {
     const page = html(pangkorMyHomestay);
-    expect(page).not.toContain("入住 15:00");
-    expect(page).toContain("最少 1 晚");
+    expect(page).toContain("入住 14:00 · 退房 12:00 · 最少 1 晚");
+    expect(page).not.toContain("15:00");
+  });
+
+  it("omits check-in entirely when it is genuinely unknown", () => {
+    // An unasked question is not 15:00, so a Profile without one says nothing
+    // rather than defaulting to a time the merchant never agreed to.
+    const offering = pangkorMyHomestay.offerings[0];
+    if (offering?.kind !== "room_type") throw new Error("fixture shape changed");
+    const page = html({
+      ...pangkorMyHomestay,
+      offerings: [{ ...offering, checkin: undefined, checkout: undefined }],
+    });
+    // Scoped to the room card's own line: the FAQ legitimately asks about
+    // check-in in the merchant's own words.
+    const mins = page.match(/<p class="mins">(.*?)<\/p>/)?.[1] ?? "";
+    expect(mins).toBe("最少 1 晚");
   });
 
   it("still prices a merchant that has a rate card", () => {
