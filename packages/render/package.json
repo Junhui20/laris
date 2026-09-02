@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "voice": "node scripts/process-voiceover.mjs",
     "fonts": "node scripts/build-fonts.mjs",
     "plan": "node scripts/build-plan.mjs",
     "render": "node scripts/render.mjs",

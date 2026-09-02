@@ -5,3 +5,4 @@ out/
 out-render.log
 public/fonts/
 public/music/
+public/vo/*.mp3

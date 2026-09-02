@@ -4,8 +4,8 @@
   "scenes": [
     {
       "audio": "vo/line-0.mp3",
-      "speechMs": 3676,
-      "durationMs": 3976,
+      "speechMs": 2398,
+      "durationMs": 2698,
       "spoken": "一团人出游，最怕分开住。",
       "headline": "最怕分开住",
       "frames": [
@@ -19,8 +19,8 @@
     },
     {
       "audio": "vo/line-1.mp3",
-      "speechMs": 3601,
-      "durationMs": 3901,
+      "speechMs": 2221,
+      "durationMs": 2521,
       "spoken": "这里整栋租给你，十五个人。",
       "headline": "整栋租给你",
       "sub": "12–15 人 · 加床到 20",
@@ -40,8 +40,8 @@
     },
     {
       "audio": "vo/line-2.mp3",
-      "speechMs": 4181,
-      "durationMs": 4481,
+      "speechMs": 3230,
+      "durationMs": 3530,
       "spoken": "四间房，每间房里都有厕所。",
       "headline": "4 间房，4 个厕所",
       "sub": "早上不用排队",
@@ -61,8 +61,8 @@
     },
     {
       "audio": "vo/line-3.mp3",
-      "speechMs": 5300,
-      "durationMs": 5600,
+      "speechMs": 4173,
+      "durationMs": 4473,
       "spoken": "楼上楼下两个客厅，吵的和睡的分得开。",
       "headline": "楼上楼下两个客厅",
       "sub": "全屋冷气 · 7 架冷气 7 架风扇",
@@ -77,8 +77,8 @@
     },
     {
       "audio": "vo/line-4.mp3",
-      "speechMs": 3799,
-      "durationMs": 4099,
+      "speechMs": 3005,
+      "durationMs": 3305,
       "spoken": "小格楼上面，还有三个床位。",
       "headline": "小格楼再加 3 个床位",
       "frames": [
@@ -97,8 +97,8 @@
     },
     {
       "audio": "vo/line-5.mp3",
-      "speechMs": 4504,
-      "durationMs": 4804,
+      "speechMs": 4708,
+      "durationMs": 5008,
       "spoken": "麻将、K歌、脚踏车，全部不另外收钱。",
       "headline": "麻将 · K 歌 · 脚踏车",
       "sub": "全部不另外收钱",
@@ -113,8 +113,8 @@
     },
     {
       "audio": "vo/line-7.mp3",
-      "speechMs": 5080,
-      "durationMs": 5380,
+      "speechMs": 3737,
+      "durationMs": 4037,
       "spoken": "脚踏车免费借，走路十三分钟就到海滩。",
       "headline": "海滩走路 13 分钟",
       "sub": "脚踏车免费借 · 7-Eleven 2 分钟",
@@ -129,8 +129,8 @@
     },
     {
       "audio": "vo/line-8.mp3",
-      "speechMs": 3828,
-      "durationMs": 4128,
+      "speechMs": 2316,
+      "durationMs": 2616,
       "spoken": "日期先问，价钱 WhatsApp 报给你。",
       "headline": "邦咯岛渡假屋 No.23",
       "sub": "WhatsApp 012-535 8226",
