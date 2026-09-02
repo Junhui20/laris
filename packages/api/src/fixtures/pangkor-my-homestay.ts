@@ -41,10 +41,17 @@ export const pangkorMyHomestay: BusinessContext = {
 
   verticalProfile: {
     stay: {
+      // Measured on Google Maps rather than taken from her advertising, which
+      // says "步行8分钟到海边". The beach is 950 m and thirteen minutes on foot.
+      // Five minutes of Malaysian midday is the difference between a guest who
+      // was told the truth and a guest writing a review about it.
       landmarks: [
-        { name: "海边", walkMin: 8 },
-        // No walkMin: her advertising says "前面就有" and never gives a number.
-        { name: "7-Eleven、cafe、煮炒店" },
+        { name: "Pasir Bogak 海滩", walkMin: 13, driveMin: 3 },
+        { name: "7-Eleven", walkMin: 2 },
+        { name: "Sea Moon Cafe", walkMin: 3 },
+        { name: "潮盛海鲜餐室", walkMin: 11 },
+        // Nobody walks 1.8 km from the ferry with luggage.
+        { name: "邦咯岛码头 Pangkor Island Jetty", driveMin: 5 },
       ],
       // Empty because the house is on no OTA at all — every booking is direct,
       // through WhatsApp and word of mouth. Not a gap in the data: it means
@@ -146,12 +153,17 @@ export const pangkorMyHomestay: BusinessContext = {
     },
     {
       q: "怎么去？",
-      a: "从 Lumut 码头或 Marina 码头搭船进邦咯岛。上岛之后可以租摩托自己驾，也可以租车，或者叫 taxi van，都找得到。",
+      a: "从 Lumut 码头或 Marina 码头搭船进邦咯岛。上岛后从码头到屋子 1.8 公里，开车大概 5 分钟。码头有 taxi van，也可以租摩托或租车自己驾。",
       source: "merchant",
     },
     {
       q: "附近有得吃吗？",
-      a: "屋子前面就有小食店、cafe 和煮炒店，7-Eleven 也在附近。走路 8 分钟就到海边。",
+      a: "7-Eleven 走路 2 分钟，Sea Moon Cafe 3 分钟，潮盛海鲜餐室 11 分钟。走路 13 分钟到 Pasir Bogak 海滩，开车 3 分钟。",
+      source: "merchant",
+    },
+    {
+      q: "可以带猪肉和酒进来吗？",
+      a: "可以。这间屋子不是清真的，厨房也没有分开的器具，所以自己煮什么、带什么酒来都没问题。介意的话订房前先跟我们说。",
       source: "merchant",
     },
   ],
