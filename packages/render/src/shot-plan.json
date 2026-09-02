@@ -1,6 +1,10 @@
 {
   "merchantSlug": "pangkor-my-homestay",
-  "contact": "WhatsApp 012-535 8226",
+  "contact": "WhatsApp +60125358226",
+  "card": {
+    "headline": "15 个人，住一整栋",
+    "sub": "邦咯岛 · 4 间房，每间自带卫浴 · 加床到 20 人\nWhatsApp +60125358226"
+  },
   "scenes": [
     {
       "audio": "vo/line-0.mp3",
@@ -133,7 +137,7 @@
       "durationMs": 2289,
       "spoken": "日期先问，价钱 WhatsApp 报给你。",
       "headline": "邦咯岛渡假屋 No.23",
-      "sub": "WhatsApp 012-535 8226",
+      "sub": "WhatsApp +60125358226",
       "tag": "问日期 · 问价钱",
       "frames": [
         {

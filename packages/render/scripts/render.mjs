@@ -23,7 +23,31 @@ if (!existsSync(join(pkg, "public/photos"))) {
 /** Far enough into the card composition that every line has landed. */
 const STILL_FRAME = 45;
 
-const chrome = ["/usr/bin/google-chrome", "/usr/bin/chromium"].find(existsSync) ?? null;
+/**
+ * A Chrome this machine already has, if it has one.
+ *
+ * Remotion otherwise downloads its own Headless Shell — 113 MB, once per
+ * checkout. That is a fine fallback and a bad surprise, so it is reported
+ * rather than left to be discovered mid-render. Set `CHROME_PATH` to override.
+ */
+const CHROME_CANDIDATES = [
+  process.env.CHROME_PATH,
+  "/usr/bin/google-chrome",
+  "/usr/bin/google-chrome-stable",
+  "/usr/bin/chromium",
+  "/usr/bin/chromium-browser",
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+  "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
+].filter(Boolean);
+
+const chrome = CHROME_CANDIDATES.find(existsSync) ?? null;
+console.log(
+  chrome
+    ? `browser: ${chrome}`
+    : "browser: none found — Remotion will download its own Headless Shell (~113 MB, once). " +
+        "Set CHROME_PATH to use an installed Chrome.",
+);
 const gl = process.env.REMOTION_GL ?? "angle";
 const options = { browserExecutable: chrome, chromiumOptions: { gl } };
 

@@ -6,6 +6,10 @@ import type { ShotPlan } from "./shot-plan";
  * The 图文 cover, from the same plan and the same components. One template, two
  * shapes — a merchant should not make the same decision twice because two
  * channels want different aspect ratios.
+ *
+ * The copy comes from `plan.card`. It used to be three facts typed into this
+ * file — "15 个人", "4 间房", "加床到 20 人" — which meant an edit to the
+ * Business Profile left a valid-looking, stale cover behind and nothing said so.
  */
 export function Card({ plan }: { plan: ShotPlan }) {
   const { width, height } = useVideoConfig();
@@ -29,11 +33,7 @@ export function Card({ plan }: { plan: ShotPlan }) {
           padding: `0 ${Math.round(width * 0.075)}px ${Math.round(height * 0.07)}px`,
         }}
       >
-        <Caption
-          headline="15 个人，住一整栋"
-          sub={`邦咯岛 · 4 间房，每间自带卫浴 · 加床到 20 人\n${plan.contact}`}
-          animate={false}
-        />
+        <Caption headline={plan.card.headline} sub={plan.card.sub} animate={false} />
       </AbsoluteFill>
     </AbsoluteFill>
   );

@@ -59,9 +59,17 @@ export const Scene = z.object({
 });
 export type Scene = z.infer<typeof Scene>;
 
+/** The 图文 cover's copy. In the plan, not inside the composition. */
+export const Card = z.object({
+  headline: z.string(),
+  sub: z.string(),
+});
+export type Card = z.infer<typeof Card>;
+
 export const ShotPlan = z.object({
   merchantSlug: z.string(),
   contact: z.string(),
+  card: Card,
   /**
    * A music bed under the narration, if one has been licensed and dropped into
    * `public/music/`. Absent is the honest default: borrowing a track is how a

@@ -16,6 +16,7 @@
  */
 import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { homedir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -23,12 +24,40 @@ const here = dirname(fileURLToPath(import.meta.url));
 const pkg = join(here, "..");
 const OUT = join(pkg, "public/fonts");
 
-/** The SC face of Noto Sans CJK is index 2 of each collection. */
+/**
+ * Noto Sans CJK, wherever this machine keeps it. The SC face is index 2 of each
+ * collection.
+ *
+ * Set `NOTO_CJK_DIR` if it lives somewhere else — the alternative to searching
+ * is a hard-coded Linux path, which is what made this script fail on the other
+ * maintainer's Windows checkout.
+ */
+const FONT_DIRS = [
+  process.env.NOTO_CJK_DIR,
+  "/usr/share/fonts/opentype/noto",
+  "/usr/share/fonts/truetype/noto",
+  "/usr/local/share/fonts",
+  join(homedir(), ".local/share/fonts"),
+  "/Library/Fonts",
+  join(homedir(), "Library/Fonts"),
+  "C:/Windows/Fonts",
+].filter(Boolean);
+
 const FACES = [
-  { weight: "400", src: "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc" },
-  { weight: "900", src: "/usr/share/fonts/opentype/noto/NotoSansCJK-Black.ttc" },
+  { weight: "400", file: "NotoSansCJK-Regular.ttc" },
+  { weight: "900", file: "NotoSansCJK-Black.ttc" },
 ];
 const FACE_INDEX = 2;
+
+function findFace(file) {
+  for (const dir of FONT_DIRS) {
+    const candidate = join(dir, file);
+    if (existsSync(candidate)) return candidate;
+  }
+  throw new Error(
+    `cannot find ${file}. Install Noto Sans CJK — \`apt install fonts-noto-cjk fonts-noto-cjk-extra\`, \`brew install --cask font-noto-sans-cjk\`, or download from https://github.com/notofonts/noto-cjk/releases — then set NOTO_CJK_DIR if it is not in one of: ${FONT_DIRS.join(", ")}`,
+  );
+}
 
 /** Latin, digits and punctuation that copy reaches for even when the plan does not. */
 const ALWAYS = "0123456789 ·—–-…，。、：；！？（）「」《》%RM+/.,:;!?'\"&@#";
@@ -50,10 +79,8 @@ const glyphs = [...new Set([...copy])]
   .join("");
 
 mkdirSync(OUT, { recursive: true });
-for (const { weight, src } of FACES) {
-  if (!existsSync(src)) {
-    throw new Error(`missing ${src} — install fonts-noto-cjk (and -extra for Black)`);
-  }
+for (const { weight, file } of FACES) {
+  const src = findFace(file);
   const out = join(OUT, `noto-sans-sc-${weight}.woff2`);
   execFileSync(
     "uvx",

@@ -6,7 +6,7 @@
   "scripts": {
     "voice": "node scripts/process-voiceover.mjs",
     "fonts": "node scripts/build-fonts.mjs",
-    "plan": "node scripts/build-plan.mjs",
+    "plan": "node scripts/run-ts.mjs scripts/build-plan.ts",
     "render": "node scripts/render.mjs",
     "studio": "remotion studio src/index.ts",
     "typecheck": "tsc --noEmit"
@@ -27,6 +27,7 @@
     "@remotion/renderer": "^4.0.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
+    "esbuild": "^0.24.0",
     "jpeg-js": "^0.4.4"
   }
 }
