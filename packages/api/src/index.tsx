@@ -21,9 +21,13 @@ app.get("/health", (c) =>
 /**
  * A Merchant Site, rendered from the Business Profile on every request.
  *
- * Reachable at /site/:slug during development. In production each Merchant is
- * served on its own hostname — `<slug>.laris.my`, or their own domain via
- * Cloudflare for SaaS — and the hostname resolves to the same handler.
+ * Reachable at /site/:slug during development, and in production for a Merchant
+ * who has no domain yet. Otherwise a Merchant is served on their own hostname,
+ * which resolves to this same handler — see SLUG_BY_HOST.
+ *
+ * There is deliberately no `<slug>.laris.my` here. That domain is registered to
+ * somebody else; a merchant's own domain is the better shape anyway, since it
+ * is what goes on their Google Business Profile.
  */
 app.get("/site/:slug", async (c) => {
   const slug = c.req.param("slug");
