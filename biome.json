@@ -16,13 +16,6 @@
     }
   },
   "files": {
-    "ignore": [
-      "dist",
-      ".wrangler",
-      ".astro",
-      "node_modules",
-      ".agents",
-      ".claude"
-    ]
+    "ignore": ["dist", ".wrangler", ".astro", "node_modules", ".agents", ".claude"]
   }
 }
