@@ -1,3 +1,4 @@
+import { StateCode } from "@laris/schema";
 import { describe, expect, it } from "vitest";
 import { coveredYears, larisStateCode, publicHolidays, schoolHolidays } from "./mycal.js";
 
@@ -43,6 +44,27 @@ describe("publicHolidays", () => {
 
   it("returns nothing for a year the snapshot does not cover", () => {
     expect(publicHolidays("perak", 2031)).toEqual([]);
+  });
+
+  it("lets no tentative holiday back in through its replacement", () => {
+    // 2027's lunar dates are estimates upstream. Filtering the gazette is not
+    // enough: mycal calculates replacements for them too and copies the status
+    // across, so Awal Muharram and Maulidur Rasul would return as cuti ganti
+    // and land in a rate calendar as certain peak nights.
+    for (const year of coveredYears().holidays) {
+      for (const state of StateCode.options) {
+        const escaped = publicHolidays(state, year).filter((h) => h.status !== "confirmed");
+        expect(escaped.map((h) => `${state} ${h.id}`)).toEqual([]);
+      }
+    }
+  });
+
+  it("keeps the replacements a confirmed holiday earns in a tentative year", () => {
+    // The filter must not empty 2027 wholesale — the confirmed half still has
+    // weekend clashes, and those nights are real.
+    const perak2027 = publicHolidays("perak", 2027);
+    expect(perak2027.length).toBeGreaterThan(0);
+    expect(perak2027.some((h) => h.type === "replacement")).toBe(true);
   });
 });
 

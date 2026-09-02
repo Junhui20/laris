@@ -124,6 +124,14 @@ export function coveredYears(): Coverage {
  * Leaving them out was not a rounding error: a replacement day is an ordinary
  * working day turned into a holiday, which for a homestay is exactly a night
  * that fills up.
+ *
+ * Replacements are calculated from the *whole* gazette rather than the confirmed
+ * subset on purpose: rolling a holiday forward has to know which days are
+ * already taken, and a tentative lunar date still occupies its day. But mycal
+ * excludes only `cancelled` there and copies the source's status onto what it
+ * builds, so a tentative holiday yields a tentative replacement — which would
+ * re-enter a confirmed-only calendar wearing a different id. Hence the status
+ * check below rather than a narrower input.
  */
 export function publicHolidays(state: StateCode, year: number): readonly Holiday[] {
   const all = HOLIDAYS_BY_YEAR[year];
@@ -134,6 +142,7 @@ export function publicHolidays(state: StateCode, year: number): readonly Holiday
 
   const byId = new Map<string, Holiday>();
   for (const holiday of [...gazetted, ...replacements]) {
+    if (holiday.status !== "confirmed") continue;
     if (!holiday.isPublicHoliday) continue;
     if (!holiday.date.startsWith(`${year}-`)) continue;
     byId.set(holiday.id, holiday);
