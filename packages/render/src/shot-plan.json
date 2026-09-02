@@ -1,88 +1,145 @@
 {
   "merchantSlug": "pangkor-my-homestay",
-  "footer": "邦咯岛渡假屋 No.23 · Pulau Pangkor · 012-535 8226",
-  "shots": [
+  "contact": "WhatsApp 012-535 8226",
+  "scenes": [
     {
-      "photo": "frontage-sky-1080.jpg",
-      "eyebrow": "整栋",
-      "headline": "15 个人，一整栋",
-      "sub": "邦咯岛 · 4 间房 · 加床到 20 人",
-      "durationMs": 2300,
-      "layout": "panel",
-      "panelColor": "#0f2840"
+      "audio": "vo/line-0.mp3",
+      "durationMs": 3676,
+      "spoken": "一团人出游，最怕分开住。",
+      "headline": "最怕分开住",
+      "frames": [
+        {
+          "photo": "frontage-sky-1080.jpg",
+          "motion": "punch",
+          "reverse": false
+        }
+      ],
+      "color": "#0f2840"
     },
     {
-      "photo": "living-room-1080.jpg",
-      "eyebrow": "客厅",
+      "audio": "vo/line-1.mp3",
+      "durationMs": 3601,
+      "spoken": "这里整栋租给你，十五个人。",
+      "headline": "整栋租给你",
+      "sub": "12–15 人 · 加床到 20",
+      "frames": [
+        {
+          "photo": "frontage-960.jpg",
+          "motion": "pan-x",
+          "reverse": false
+        },
+        {
+          "photo": "room-balcony-960.jpg",
+          "motion": "pan-x",
+          "reverse": true
+        }
+      ],
+      "color": "#1a2a35"
+    },
+    {
+      "audio": "vo/line-2.mp3",
+      "durationMs": 4181,
+      "spoken": "四间房，每间房里都有厕所。",
+      "headline": "4 间房，4 个厕所",
+      "sub": "早上不用排队",
+      "frames": [
+        {
+          "photo": "room-ensuite-720.jpg",
+          "motion": "pan-y",
+          "reverse": false
+        },
+        {
+          "photo": "room-double-720.jpg",
+          "motion": "pan-y",
+          "reverse": true
+        }
+      ],
+      "color": "#1a2535"
+    },
+    {
+      "audio": "vo/line-3.mp3",
+      "durationMs": 5300,
+      "spoken": "楼上楼下两个客厅，吵的和睡的分得开。",
       "headline": "楼上楼下两个客厅",
       "sub": "全屋冷气 · 7 架冷气 7 架风扇",
-      "durationMs": 2300,
-      "layout": "panel",
-      "panelColor": "#14223b"
+      "frames": [
+        {
+          "photo": "living-room-1080.jpg",
+          "motion": "pan-x",
+          "reverse": false
+        },
+        {
+          "photo": "room-twin-960.jpg",
+          "motion": "pan-x",
+          "reverse": true
+        }
+      ],
+      "color": "#14223b"
     },
     {
-      "photo": "room-balcony-960.jpg",
-      "eyebrow": "房间",
-      "headline": "4 间房，间间有窗",
-      "sub": "每间房内自带卫浴",
-      "durationMs": 2300,
-      "layout": "panel",
-      "panelColor": "#0f3b40"
+      "audio": "vo/line-4.mp3",
+      "durationMs": 3799,
+      "spoken": "小格楼上面，还有三个床位。",
+      "headline": "小格楼再加 3 个床位",
+      "frames": [
+        {
+          "photo": "loft-stairs-720.jpg",
+          "motion": "pan-y",
+          "reverse": false
+        },
+        {
+          "photo": "loft-beds-960.jpg",
+          "motion": "pan-x",
+          "reverse": false
+        }
+      ],
+      "color": "#10273f"
     },
     {
-      "photo": "room-twin-960.jpg",
-      "eyebrow": "房间",
-      "headline": "四人房 · 两张床并排",
-      "sub": "一家人不用分开住",
-      "durationMs": 2300,
-      "layout": "panel",
-      "panelColor": "#143a3b"
-    },
-    {
-      "photo": "room-ensuite-720.jpg",
-      "eyebrow": "房间",
-      "headline": "厕所在房里",
-      "sub": "早上不用排队",
-      "durationMs": 2300,
-      "layout": "full-bleed",
-      "panelColor": "#1a2535"
-    },
-    {
-      "photo": "loft-stairs-720.jpg",
-      "eyebrow": "房间",
-      "headline": "木楼梯上去",
-      "sub": "小格楼还有 3 个床位",
-      "durationMs": 2300,
-      "layout": "full-bleed",
-      "panelColor": "#10273f"
-    },
-    {
-      "photo": "mahjong-1040.jpg",
-      "eyebrow": "设施",
+      "audio": "vo/line-5.mp3",
+      "durationMs": 4504,
+      "spoken": "麻将、K歌、脚踏车，全部不另外收钱。",
       "headline": "麻将 · K 歌 · 脚踏车",
-      "sub": "全部免费用",
-      "durationMs": 2300,
-      "layout": "panel",
-      "panelColor": "#10400f"
+      "sub": "全部不另外收钱",
+      "frames": [
+        {
+          "photo": "mahjong-1040.jpg",
+          "motion": "punch",
+          "reverse": false
+        }
+      ],
+      "color": "#10400f"
     },
     {
-      "photo": "frontage-960.jpg",
-      "eyebrow": "位置",
-      "headline": "走路 13 分钟到海滩",
+      "audio": "vo/line-7.mp3",
+      "durationMs": 5300,
+      "spoken": "海滩走路十三分钟，7-Eleven 两分钟。",
+      "headline": "海滩走路 13 分钟",
       "sub": "7-Eleven 2 分钟 · 码头开车 5 分钟",
-      "durationMs": 2300,
-      "layout": "panel",
-      "panelColor": "#1a2a35"
+      "frames": [
+        {
+          "photo": "frontage-960.jpg",
+          "motion": "pan-x",
+          "reverse": true
+        }
+      ],
+      "color": "#1a2a35"
     },
     {
-      "photo": "frontage-sky-1080.jpg",
-      "eyebrow": "联络",
+      "audio": "vo/line-8.mp3",
+      "durationMs": 3828,
+      "spoken": "日期先问，价钱 WhatsApp 报给你。",
       "headline": "邦咯岛渡假屋 No.23",
       "sub": "WhatsApp 012-535 8226",
-      "tag": "问价 · 看日期",
-      "durationMs": 3200,
-      "layout": "panel",
-      "panelColor": "#0f2840"
+      "tag": "问日期 · 问价钱",
+      "frames": [
+        {
+          "photo": "frontage-sky-1080.jpg",
+          "motion": "punch",
+          "reverse": false
+        }
+      ],
+      "color": "#0f2840"
     }
   ]
 }

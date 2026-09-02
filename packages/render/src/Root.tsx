@@ -1,50 +1,51 @@
 import { loadFont as loadSans } from "@remotion/google-fonts/NotoSansSC";
-import { loadFont as loadSerif } from "@remotion/google-fonts/NotoSerifSC";
 import { Composition } from "remotion";
 import { Card } from "./Card";
-import { Reel, reelFrames } from "./Reel";
+import { Story, storyFrames } from "./Story";
 import { ShotPlan } from "./shot-plan";
 import planJson from "./shot-plan.json";
-import { CARD_FRAMES, CARD_HEIGHT, CARD_WIDTH, FPS, HEIGHT, WIDTH } from "./theme";
+import { CARD, CARD_FRAMES, FPS, REEL, WIDE } from "./theme";
 
-// Loaded at module scope so Remotion has the faces before the first frame.
+// Two weights and two subsets. Left at its defaults a CJK family fetches every
+// subset it has — 909 requests, per browser tab, on every render.
 //
-// Both are asked for exactly two weights and two subsets. Left at their
-// defaults, a CJK family fetches every subset it has — 909 requests for Noto
-// Sans SC alone, per browser tab, on every render.
-//
-// TODO: subset these to the glyphs the plan actually uses and commit them.
-// Google Fonts means the render reaches the network, which is fine on a laptop
-// and wrong in CI.
-const WEIGHTS = ["400", "700"] as const;
-const SUBSETS = ["chinese-simplified", "latin"] as const;
+// TODO: subset to the glyphs the plan uses and commit them. Google Fonts means
+// the render reaches the network, which is fine on a laptop and wrong in CI.
+loadSans("normal", { weights: ["400", "900"], subsets: ["chinese-simplified", "latin"] });
 
-loadSans("normal", { weights: [...WEIGHTS], subsets: [...SUBSETS] });
-loadSerif("normal", { weights: [...WEIGHTS], subsets: [...SUBSETS] });
-
-// Parsed, not cast. The plan is generated, and a generated file that has
-// drifted from its schema should fail here rather than render as a blank.
+// Parsed, not cast. The plan is generated, and a generated file that has drifted
+// from its schema should fail here rather than render as a blank.
 const plan = ShotPlan.parse(planJson);
 
 export function RemotionRoot() {
   return (
     <>
+      {/* TikTok, Reels, Shorts — where a homestay actually gets discovered. */}
       <Composition
         id="ListingReel"
-        component={Reel}
-        durationInFrames={reelFrames(plan, FPS)}
+        component={Story}
+        durationInFrames={storyFrames(plan, FPS)}
         fps={FPS}
-        width={WIDTH}
-        height={HEIGHT}
-        defaultProps={{ plan }}
+        {...REEL}
+        defaultProps={{ plan, typeScale: 1 }}
+      />
+      {/* 16:9, for the Merchant Site hero, the Facebook page and YouTube. Every
+          one of these photographs is landscape or 3:4, so this is the shape the
+          material was actually taken in. */}
+      <Composition
+        id="ListingWide"
+        component={Story}
+        durationInFrames={storyFrames(plan, FPS)}
+        fps={FPS}
+        {...WIDE}
+        defaultProps={{ plan, typeScale: 0.62 }}
       />
       <Composition
         id="ListingCard"
         component={Card}
         durationInFrames={CARD_FRAMES}
         fps={FPS}
-        width={CARD_WIDTH}
-        height={CARD_HEIGHT}
+        {...CARD}
         defaultProps={{ plan }}
       />
     </>

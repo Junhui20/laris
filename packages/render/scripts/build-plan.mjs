@@ -1,15 +1,16 @@
 /**
  * Compile a Business Profile into a Shot Plan.
  *
- * Everything that needs to look at a photograph or make an editorial choice
- * happens here, once, and lands in JSON. The compositions only draw. That split
- * is not tidiness — it is the same boundary phase 01 and phase 02 have to hold,
- * and it makes the decisions reviewable as a diff instead of as twenty seconds
- * of video.
+ * Everything that looks at a photograph, measures an audio file or makes an
+ * editorial choice happens here, once, and lands in JSON. The compositions only
+ * draw. That is the same boundary phase 01 and phase 02 have to hold, and it
+ * makes the decisions reviewable as a diff instead of as thirty seconds of
+ * video.
  *
  * Also copies the Merchant's photographs into `public/`. They have one home,
  * `packages/api/public/m/<slug>/`, and it is not here.
  */
+import { execFileSync } from "node:child_process";
 import { copyFileSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -20,37 +21,91 @@ const pkg = join(here, "..");
 const SLUG = "pangkor-my-homestay";
 const PHOTOS_SRC = join(pkg, "../api/public/m", SLUG);
 const PHOTOS_OUT = join(pkg, "public/photos");
+const VO = join(pkg, "public/vo");
 
-const SHOT_MS = 2300;
-const CTA_MS = 3200;
-/** Only a true 3:4 survives a 9:16 crop. 1040x1080 does not — it becomes felt. */
-const PORTRAIT_MAX = 0.8;
+const CONTACT = "WhatsApp 012-535 8226";
 
 /**
- * The shot list. Every line is a fact from `pangkor-my-homestay.ts`; the
- * eyebrow says which part of the listing it belongs to.
+ * The narration, and what the screen says over it.
  *
- * hook.type is `number`: the strongest fact she has is that it is a whole house
- * for fifteen, and it is the one thing a hotel cannot answer.
+ * `spoken` is a sentence; `headline` is three or four words. They are not the
+ * same text on purpose — a caption that transcribes the voice gives a viewer
+ * two copies of one thing and no reason to look at either.
+ *
+ * Every claim is a fact from `pangkor-my-homestay.ts`. The one line we recorded
+ * and did not use is the kitchen and barbecue: there is no photograph of either,
+ * and saying it over a bedroom is how "walk 13 minutes to the beach" ended up
+ * over a picture of the car porch in the first cut.
  */
-const SHOTS = [
-  ["frontage-sky", "整栋", "15 个人，一整栋", "邦咯岛 · 4 间房 · 加床到 20 人"],
-  ["living-room", "客厅", "楼上楼下两个客厅", "全屋冷气 · 7 架冷气 7 架风扇"],
-  ["room-balcony", "房间", "4 间房，间间有窗", "每间房内自带卫浴"],
-  ["room-twin", "房间", "四人房 · 两张床并排", "一家人不用分开住"],
-  ["room-ensuite", "房间", "厕所在房里", "早上不用排队"],
-  ["loft-stairs", "房间", "木楼梯上去", "小格楼还有 3 个床位"],
-  ["mahjong", "设施", "麻将 · K 歌 · 脚踏车", "全部免费用"],
-  ["frontage", "位置", "走路 13 分钟到海滩", "7-Eleven 2 分钟 · 码头开车 5 分钟"],
+const SCENES = [
+  {
+    line: 0,
+    spoken: "一团人出游，最怕分开住。",
+    headline: "最怕分开住",
+    frames: [["frontage-sky", "punch"]],
+  },
+  {
+    line: 1,
+    spoken: "这里整栋租给你，十五个人。",
+    headline: "整栋租给你",
+    sub: "12–15 人 · 加床到 20",
+    frames: [
+      ["frontage", "pan-x"],
+      ["room-balcony", "pan-x", true],
+    ],
+  },
+  {
+    line: 2,
+    spoken: "四间房，每间房里都有厕所。",
+    headline: "4 间房，4 个厕所",
+    sub: "早上不用排队",
+    frames: [
+      ["room-ensuite", "pan-y"],
+      ["room-double", "pan-y", true],
+    ],
+  },
+  {
+    line: 3,
+    spoken: "楼上楼下两个客厅，吵的和睡的分得开。",
+    headline: "楼上楼下两个客厅",
+    sub: "全屋冷气 · 7 架冷气 7 架风扇",
+    frames: [
+      ["living-room", "pan-x"],
+      ["room-twin", "pan-x", true],
+    ],
+  },
+  {
+    line: 4,
+    spoken: "小格楼上面，还有三个床位。",
+    headline: "小格楼再加 3 个床位",
+    frames: [
+      ["loft-stairs", "pan-y"],
+      ["loft-beds", "pan-x"],
+    ],
+  },
+  {
+    line: 5,
+    spoken: "麻将、K歌、脚踏车，全部不另外收钱。",
+    headline: "麻将 · K 歌 · 脚踏车",
+    sub: "全部不另外收钱",
+    frames: [["mahjong", "punch"]],
+  },
+  {
+    line: 7,
+    spoken: "海滩走路十三分钟，7-Eleven 两分钟。",
+    headline: "海滩走路 13 分钟",
+    sub: "7-Eleven 2 分钟 · 码头开车 5 分钟",
+    frames: [["frontage", "pan-x", true]],
+  },
+  {
+    line: 8,
+    spoken: "日期先问，价钱 WhatsApp 报给你。",
+    headline: "邦咯岛渡假屋 No.23",
+    sub: CONTACT,
+    tag: "问日期 · 问价钱",
+    frames: [["frontage-sky", "punch"]],
+  },
 ];
-const CTA = [
-  "frontage-sky",
-  "联络",
-  "邦咯岛渡假屋 No.23",
-  "WhatsApp 012-535 8226",
-  "问价 · 看日期",
-];
-const FOOTER = "邦咯岛渡假屋 No.23 · Pulau Pangkor · 012-535 8226";
 
 const hex = ([r, g, b]) =>
   `#${[r, g, b].map((v) => Math.round(v).toString(16).padStart(2, "0")).join("")}`;
@@ -81,12 +136,13 @@ function rgbToHsl(red, green, blue) {
 }
 
 /**
- * The panel colour: the most saturated colour the photograph actually contains,
+ * The scene colour: the most saturated colour the photograph actually contains,
  * weighted by how much of the frame it covers, then taken down to a tone white
  * type sits on. The wall paint is what reads as "this house"; the floor tile is
- * what an average returns.
+ * what an average returns, and the yellow front door — one percent of two
+ * frames — is what saturation alone picks.
  */
-function panelColour(pixels, width, height) {
+function sceneColour(pixels, width, height) {
   const buckets = new Map();
   for (let y = 0; y < height; y += 3) {
     for (let x = 0; x < width; x += 3) {
@@ -101,10 +157,6 @@ function panelColour(pixels, width, height) {
     }
   }
 
-  // A yellow front door is the most saturated thing in two of these frames and
-  // covers about one percent of them. Saturation alone picks it and the panel
-  // comes out olive under a blue sky, so a colour has to hold a real share of
-  // the frame before it can speak for it.
   const sampled = [...buckets.values()].reduce((t, c) => t + c[3], 0);
   const floor = sampled * 0.02;
 
@@ -126,34 +178,62 @@ function panelColour(pixels, width, height) {
   return hex(hslToRgb(h, Math.max(0.34, Math.min(s * 1.5, 0.62)), 0.155));
 }
 
+const durationMs = (file) =>
+  Math.round(
+    Number.parseFloat(
+      execFileSync("ffprobe", [
+        "-v",
+        "error",
+        "-show_entries",
+        "format=duration",
+        "-of",
+        "csv=p=0",
+        file,
+      ]).toString(),
+    ) * 1000,
+  );
+
 mkdirSync(PHOTOS_OUT, { recursive: true });
 const files = readdirSync(PHOTOS_SRC).filter((f) => f.endsWith(".jpg"));
 for (const f of files) copyFileSync(join(PHOTOS_SRC, f), join(PHOTOS_OUT, f));
 
 const byStem = new Map(files.map((f) => [f.replace(/-\d+\.jpg$/, ""), f]));
-
-function compile([stem, eyebrow, headline, sub, tag], durationMs) {
+const photo = (stem) => {
   const file = byStem.get(stem);
   if (!file) throw new Error(`no photograph for "${stem}" in ${PHOTOS_SRC}`);
-  const raw = jpeg.decode(readFileSync(join(PHOTOS_OUT, file)), { useTArray: true });
-  return {
-    photo: file,
-    eyebrow,
-    headline,
-    sub,
-    ...(tag ? { tag } : {}),
-    durationMs,
-    layout: raw.width / raw.height <= PORTRAIT_MAX ? "full-bleed" : "panel",
-    panelColor: panelColour(raw.data, raw.width, raw.height),
-  };
-}
+  return file;
+};
 
 const plan = {
   merchantSlug: SLUG,
-  footer: FOOTER,
-  shots: [...SHOTS.map((s) => compile(s, SHOT_MS)), compile(CTA, CTA_MS)],
+  contact: CONTACT,
+  scenes: SCENES.map((scene) => {
+    const audio = `vo/line-${scene.line}.mp3`;
+    const first = photo(scene.frames[0][0]);
+    const raw = jpeg.decode(readFileSync(join(PHOTOS_OUT, first)), { useTArray: true });
+    return {
+      audio,
+      durationMs: durationMs(join(VO, `line-${scene.line}.mp3`)),
+      spoken: scene.spoken,
+      headline: scene.headline,
+      ...(scene.sub ? { sub: scene.sub } : {}),
+      ...(scene.tag ? { tag: scene.tag } : {}),
+      frames: scene.frames.map(([stem, motion, reverse]) => ({
+        photo: photo(stem),
+        motion,
+        reverse: Boolean(reverse),
+      })),
+      color: sceneColour(raw.data, raw.width, raw.height),
+    };
+  }),
 };
 
 writeFileSync(join(pkg, "src/shot-plan.json"), `${JSON.stringify(plan, null, 2)}\n`);
-console.log(`${files.length} photographs, ${plan.shots.length} shots`);
-for (const s of plan.shots) console.log(`  ${s.layout.padEnd(10)} ${s.panelColor}  ${s.photo}`);
+const total = plan.scenes.reduce((n, s) => n + s.durationMs, 0);
+const cuts = plan.scenes.reduce((n, s) => n + s.frames.length, 0);
+console.log(`${plan.scenes.length} scenes, ${cuts} cuts, ${(total / 1000).toFixed(1)}s`);
+for (const s of plan.scenes) {
+  console.log(
+    `  ${String(s.durationMs).padStart(5)}ms  ${s.color}  ${s.frames.length}×  ${s.headline}`,
+  );
+}

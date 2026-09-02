@@ -5,45 +5,57 @@ import { z } from "zod";
  *
  * The plan is data, not code: nothing in a composition reads a Business
  * Profile, samples a photograph or decides what to say. That work happens once,
- * up front, and lands here — which is the same split phase 01 and phase 02 have
- * to hold anyway. Perception produces a plan; the renderer draws it.
+ * up front, and lands here — the same split phase 01 and phase 02 have to hold
+ * anyway. Perception produces a plan; the renderer draws it.
  *
- * It also makes the interesting decisions reviewable. A wrong panel colour or a
- * mis-ordered shot is a line in a JSON file, not something you find by watching
- * twenty seconds of video.
+ * A **Scene** is one line of narration. Its length comes from the audio file,
+ * not from a number someone picked, and its photographs share that length. The
+ * picture cutting faster than the voice is what a cut made this decade sounds
+ * like; one photograph per sentence is what a slideshow looks like.
  */
 
-export const Layout = z.enum([
-  /** A 3:4 photograph fills the 9:16 frame. Type sits on a gradient. */
-  "full-bleed",
-  /** Anything wider is cropped square and takes the top; type sits on a panel. */
-  "panel",
+export const Motion = z.enum([
+  /** Slow horizontal travel. What lets a landscape photograph live in 9:16. */
+  "pan-x",
+  /** Slow vertical travel, for a tall photograph in a wide frame. */
+  "pan-y",
+  /** Settle out of a slight over-scale. Used on the opening frame. */
+  "punch",
 ]);
-export type Layout = z.infer<typeof Layout>;
+export type Motion = z.infer<typeof Motion>;
 
-export const Shot = z.object({
+export const Frame = z.object({
   photo: z.string(),
-  /** Which part of the listing this fact belongs to — the Site's own grouping. */
-  eyebrow: z.string(),
-  headline: z.string(),
-  sub: z.string(),
-  /** Set on the closing shot only. Renders as a pill. */
-  tag: z.string().optional(),
+  motion: Motion,
+  /** Travel direction, so two consecutive frames do not drift the same way. */
+  reverse: z.boolean().default(false),
+});
+export type Frame = z.infer<typeof Frame>;
+
+export const Scene = z.object({
+  /** One narration line. Absent means the scene is silent and self-timed. */
+  audio: z.string().optional(),
   durationMs: z.number().int().positive(),
-  layout: Layout,
+  /** What the voice says. Kept so the plan is readable without playing it. */
+  spoken: z.string(),
+  /** What the screen says — shorter than the line, never a transcript of it. */
+  headline: z.string(),
+  sub: z.string().optional(),
+  /** Set on the closing scene. Renders as a pill. */
+  tag: z.string().optional(),
+  frames: z.array(Frame).nonempty(),
   /**
-   * Sampled from the photograph itself — its most saturated colour, taken down
-   * to a tone white type sits on. Averaging gives mud: every room in this house
+   * Sampled from the first photograph: its most saturated colour, taken down to
+   * a tone white type sits on. Averaging gives mud — every room in this house
    * averages to grey floor tile.
    */
-  panelColor: z.string().regex(/^#[0-9a-f]{6}$/),
+  color: z.string().regex(/^#[0-9a-f]{6}$/),
 });
-export type Shot = z.infer<typeof Shot>;
+export type Scene = z.infer<typeof Scene>;
 
 export const ShotPlan = z.object({
   merchantSlug: z.string(),
-  /** Rendered under the rule on every frame. Listing videos get screenshotted. */
-  footer: z.string(),
-  shots: z.array(Shot).nonempty(),
+  contact: z.string(),
+  scenes: z.array(Scene).nonempty(),
 });
 export type ShotPlan = z.infer<typeof ShotPlan>;

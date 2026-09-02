@@ -31,6 +31,7 @@ const serveUrl = await bundle({ entryPoint: join(pkg, "src/index.ts") });
 
 for (const [id, file] of [
   ["ListingReel", "listing-reel.mp4"],
+  ["ListingWide", "listing-wide.mp4"],
   ["ListingCard", "listing-card.jpeg"],
 ]) {
   const composition = await selectComposition({ serveUrl, id, ...options });
@@ -45,6 +46,7 @@ for (const [id, file] of [
       serveUrl,
       codec: "h264",
       crf: 22,
+      audioCodec: "aac",
       outputLocation: target,
       ...options,
       onProgress: ({ progress }) => process.stdout.write(`\r  ${Math.round(progress * 100)}%   `),

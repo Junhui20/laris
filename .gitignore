@@ -34,6 +34,14 @@ renders/
 *.mp3
 media_cache/
 
+# …with one exception. The narration is a *source* asset, not an artefact:
+# the shot plan takes each scene's length from its audio file, so without
+# these a clone renders a silent video with the wrong timing — which fails
+# quietly, and is exactly the class of thing this repo tries not to ship.
+# Half a megabyte, and `packages/render/src/plan.test.ts` asserts they exist.
+!packages/render/public/vo/
+!packages/render/public/vo/*.mp3
+
 # ── OS / editor ────────────────────────────────────────────────
 .DS_Store
 Thumbs.db
