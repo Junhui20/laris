@@ -1,17 +1,11 @@
-import { loadFont as loadSans } from "@remotion/google-fonts/NotoSansSC";
 import { Composition } from "remotion";
 import { Card } from "./Card";
+// Imported for its side effect: registers the typeface before the first frame.
+import "./fonts";
 import { Story, storyFrames } from "./Story";
 import { ShotPlan } from "./shot-plan";
 import planJson from "./shot-plan.json";
 import { CARD, CARD_FRAMES, FPS, REEL, WIDE } from "./theme";
-
-// Two weights and two subsets. Left at its defaults a CJK family fetches every
-// subset it has — 909 requests, per browser tab, on every render.
-//
-// TODO: subset to the glyphs the plan uses and commit them. Google Fonts means
-// the render reaches the network, which is fine on a laptop and wrong in CI.
-loadSans("normal", { weights: ["400", "900"], subsets: ["chinese-simplified", "latin"] });
 
 // Parsed, not cast. The plan is generated, and a generated file that has drifted
 // from its schema should fail here rather than render as a blank.

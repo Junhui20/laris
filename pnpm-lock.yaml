@@ -48,6 +48,9 @@ importers:
       '@laris/schema':
         specifier: workspace:*
         version: link:../schema
+      '@remotion/fonts':
+        specifier: ^4.0.0
+        version: 4.0.520(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remotion/google-fonts':
         specifier: ^4.0.0
         version: 4.0.520(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -991,6 +994,9 @@ packages:
     resolution: {integrity: sha512-kQyBCQgxJeZbcI0zfE/vgQHz0JaAx3mGTJCj0Ta9207enFHF/0hNZ0+jNxrYg74bo2kTRIoyWbNaOqXI5G332Q==}
     cpu: [x64]
     os: [win32]
+
+  '@remotion/fonts@4.0.520':
+    resolution: {integrity: sha512-0MwKPt5Oreqw5aPApXxCQVSx/EJYlNM//6uw1wZkF2Zm/c8xjP8P3Gi/dgk/I4ahRYPmT5pqP+QWArMD1hsVRw==}
 
   '@remotion/google-fonts@4.0.520':
     resolution: {integrity: sha512-IsvJNtTk617//pI9RxzMxSidLIrVY8r8uv7SLGX+PCOZNb5WR02mBjGURvlHuGPzMFXV2sosKNwAtXzeBmN7fw==}
@@ -3080,13 +3086,13 @@ snapshots:
       '@remotion/timeline-utils': 4.0.520(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@rspack/core': 1.7.11
       '@rspack/plugin-react-refresh': 1.6.1(react-refresh@0.18.0)
-      css-loader: 7.1.4(@rspack/core@1.7.11)(webpack@5.105.0(postcss@8.5.26))
+      css-loader: 7.1.4(@rspack/core@1.7.11)(webpack@5.105.0(esbuild@0.28.1)(postcss@8.5.26))
       esbuild: 0.28.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       react-refresh: 0.18.0
       remotion: 4.0.520(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      style-loader: 4.0.0(webpack@5.105.0(postcss@8.5.26))
+      style-loader: 4.0.0(webpack@5.105.0(esbuild@0.28.1)(postcss@8.5.26))
       webpack: 5.105.0(esbuild@0.28.1)(postcss@8.5.26)
     transitivePeerDependencies:
       - '@minify-html/node'
@@ -3172,6 +3178,13 @@ snapshots:
 
   '@remotion/compositor-win32-x64-msvc@4.0.520':
     optional: true
+
+  '@remotion/fonts@4.0.520(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      remotion: 4.0.520(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+    transitivePeerDependencies:
+      - react
+      - react-dom
 
   '@remotion/google-fonts@4.0.520(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
@@ -3903,7 +3916,7 @@ snapshots:
       shebang-command: 2.0.0
       which: 2.0.2
 
-  css-loader@7.1.4(@rspack/core@1.7.11)(webpack@5.105.0(postcss@8.5.26)):
+  css-loader@7.1.4(@rspack/core@1.7.11)(webpack@5.105.0(esbuild@0.28.1)(postcss@8.5.26)):
     dependencies:
       icss-utils: 5.1.0(postcss@8.5.26)
       postcss: 8.5.26
@@ -4513,7 +4526,7 @@ snapshots:
 
   strip-final-newline@2.0.0: {}
 
-  style-loader@4.0.0(webpack@5.105.0(postcss@8.5.26)):
+  style-loader@4.0.0(webpack@5.105.0(esbuild@0.28.1)(postcss@8.5.26)):
     dependencies:
       webpack: 5.105.0(esbuild@0.28.1)(postcss@8.5.26)
 

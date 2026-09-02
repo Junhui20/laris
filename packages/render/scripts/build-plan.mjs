@@ -51,7 +51,7 @@ const SCENES = [
     sub: "12–15 人 · 加床到 20",
     frames: [
       ["frontage", "pan-x"],
-      ["room-balcony", "pan-x", true],
+      ["room-twin", "pan-x", true],
     ],
   },
   {
@@ -59,9 +59,10 @@ const SCENES = [
     spoken: "四间房，每间房里都有厕所。",
     headline: "4 间房，4 个厕所",
     sub: "早上不用排队",
+    // The first of these two is the shot with the ensuite door open in it.
     frames: [
       ["room-ensuite", "pan-y"],
-      ["room-double", "pan-y", true],
+      ["room-balcony", "pan-x", true],
     ],
   },
   {
@@ -69,10 +70,10 @@ const SCENES = [
     spoken: "楼上楼下两个客厅，吵的和睡的分得开。",
     headline: "楼上楼下两个客厅",
     sub: "全屋冷气 · 7 架冷气 7 架风扇",
-    frames: [
-      ["living-room", "pan-x"],
-      ["room-twin", "pan-x", true],
-    ],
+    // One cut, because there is exactly one photograph of a living room. The
+    // second frame here used to be a bedroom, which is the same fault as
+    // narrating the beach over the car porch — just less obvious.
+    frames: [["living-room", "pan-x"]],
   },
   {
     line: 4,
@@ -92,9 +93,13 @@ const SCENES = [
   },
   {
     line: 7,
-    spoken: "海滩走路十三分钟，7-Eleven 两分钟。",
+    spoken: "脚踏车免费借，走路十三分钟就到海滩。",
     headline: "海滩走路 13 分钟",
-    sub: "7-Eleven 2 分钟 · 码头开车 5 分钟",
+    sub: "脚踏车免费借 · 7-Eleven 2 分钟",
+    // Re-recorded. The line used to claim the beach over a photograph of the
+    // car porch. This one claims the bicycles, and the bicycles are in the
+    // frame — the walk to the beach stays as text, which is a caption rather
+    // than a thing the picture is pretending to show.
     frames: [["frontage", "pan-x", true]],
   },
   {
@@ -106,6 +111,13 @@ const SCENES = [
     frames: [["frontage-sky", "punch"]],
   },
 ];
+
+/**
+ * Silence after each line, so the cut lands in a gap rather than mid-sentence.
+ * Without it the narration runs continuously across every cut and the voice
+ * stops sounding like it belongs to the picture.
+ */
+const TAIL_MS = 300;
 
 const hex = ([r, g, b]) =>
   `#${[r, g, b].map((v) => Math.round(v).toString(16).padStart(2, "0")).join("")}`;
@@ -213,7 +225,7 @@ const plan = {
     const raw = jpeg.decode(readFileSync(join(PHOTOS_OUT, first)), { useTArray: true });
     return {
       audio,
-      durationMs: durationMs(join(VO, `line-${scene.line}.mp3`)),
+      durationMs: durationMs(join(VO, `line-${scene.line}.mp3`)) + TAIL_MS,
       spoken: scene.spoken,
       headline: scene.headline,
       ...(scene.sub ? { sub: scene.sub } : {}),

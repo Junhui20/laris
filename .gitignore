@@ -42,6 +42,9 @@ media_cache/
 !packages/render/public/vo/
 !packages/render/public/vo/*.mp3
 
+# The subsetted typeface is committed as `src/font-data.ts`, inlined — the
+# .woff2 files under public/ are an intermediate that `pnpm fonts` rebuilds.
+
 # ── OS / editor ────────────────────────────────────────────────
 .DS_Store
 Thumbs.db

@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "fonts": "node scripts/build-fonts.mjs",
     "plan": "node scripts/build-plan.mjs",
     "render": "node scripts/render.mjs",
     "studio": "remotion studio src/index.ts",
@@ -11,6 +12,7 @@
   },
   "dependencies": {
     "@laris/schema": "workspace:*",
+    "@remotion/fonts": "^4.0.0",
     "@remotion/google-fonts": "^4.0.0",
     "@remotion/media": "^4.0.0",
     "react": "^18.3.1",

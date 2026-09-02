@@ -24,16 +24,34 @@ if (!existsSync(join(pkg, "public/photos"))) {
 const STILL_FRAME = 45;
 
 const chrome = ["/usr/bin/google-chrome", "/usr/bin/chromium"].find(existsSync) ?? null;
-const options = { browserExecutable: chrome, chromiumOptions: { gl: "angle" } };
+const gl = process.env.REMOTION_GL ?? "angle";
+const options = { browserExecutable: chrome, chromiumOptions: { gl } };
 
 console.log("bundling…");
 const serveUrl = await bundle({ entryPoint: join(pkg, "src/index.ts") });
+
+/** `node scripts/render.mjs ListingReel` renders one composition. */
+const only = process.argv[2];
+
+/**
+ * Debug knobs. `REMOTION_FRAMES=120-200 REMOTION_CONCURRENCY=1` renders a slice
+ * on a single tab, which is how you tell a rendering artefact apart from an
+ * animation bug: anything that repeats with the period of the tab count is the
+ * renderer, not the composition.
+ */
+const concurrency = process.env.REMOTION_CONCURRENCY
+  ? Number(process.env.REMOTION_CONCURRENCY)
+  : null;
+const frameRange = process.env.REMOTION_FRAMES
+  ? process.env.REMOTION_FRAMES.split("-").map(Number)
+  : null;
 
 for (const [id, file] of [
   ["ListingReel", "listing-reel.mp4"],
   ["ListingWide", "listing-wide.mp4"],
   ["ListingCard", "listing-card.jpeg"],
 ]) {
+  if (only && id !== only) continue;
   const composition = await selectComposition({ serveUrl, id, ...options });
   const target = join(out, file);
   console.log(
@@ -47,6 +65,8 @@ for (const [id, file] of [
       codec: "h264",
       crf: 22,
       audioCodec: "aac",
+      ...(concurrency ? { concurrency } : {}),
+      ...(frameRange ? { frameRange } : {}),
       outputLocation: target,
       ...options,
       onProgress: ({ progress }) => process.stdout.write(`\r  ${Math.round(progress * 100)}%   `),
