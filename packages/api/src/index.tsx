@@ -1,5 +1,6 @@
 import { BusinessContext } from "@laris/schema";
 import { Hono } from "hono";
+import { Home, Privacy, Terms } from "./app/pages.js";
 import { type Env, getBusinessContext } from "./repo/merchant.js";
 import { StaySite } from "./site/render.js";
 
@@ -17,6 +18,24 @@ app.get("/health", (c) =>
     source: isDev(c.env) ? "fixture" : "supabase",
   }),
 );
+
+/**
+ * Laris's own pages.
+ *
+ * They exist for platform review rather than for marketing. TikTok restricts
+ * every post by an unaudited client to private viewing and lifting that needs
+ * an audit; Meta's App Review asks the same kind of questions. Both want to see
+ * what the application is and what it does with people's data, and neither will
+ * read a repository.
+ *
+ * MERGE NOTE: #11 adds host-based Merchant routing and its own `/` handler.
+ * Hono matches in registration order, so the Merchant host lookup must come
+ * first — otherwise a merchant's own domain would serve this page instead of
+ * their listing. Resolve that deliberately when the two branches meet.
+ */
+app.get("/", (c) => c.html(<Home />));
+app.get("/privacy", (c) => c.html(<Privacy />));
+app.get("/terms", (c) => c.html(<Terms />));
 
 /**
  * A Merchant Site, rendered from the Business Profile on every request.
