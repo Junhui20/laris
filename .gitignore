@@ -40,3 +40,10 @@ Thumbs.db
 .idea/
 .vscode/*
 !.vscode/extensions.json
+
+# ── Vendored agent skills ──────────────────────────────────────
+# Regenerate with `npx skills add remotion-dev/skills`; skills-lock.json
+# pins the versions and is committed. 3.4 MB of someone else's markdown
+# does not belong in this history.
+.agents/
+.claude/
