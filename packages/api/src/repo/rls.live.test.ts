@@ -53,6 +53,7 @@ function profile(merchantId: string, accountId: string) {
     identity: {
       name: "RLS check",
       addressLines: ["1 Jalan Test"],
+      area: "Test Area",
       postcode: "10000",
       state: "perak",
       phone: "+60100000000",
