@@ -1,6 +1,7 @@
 import { BusinessContext } from "@laris/schema";
 import type { Context } from "hono";
 import { Hono } from "hono";
+import { driftRoutes } from "./drift/route.js";
 import { type Env, getBusinessContext } from "./repo/merchant.js";
 import { StaySite } from "./site/render.js";
 
@@ -38,6 +39,8 @@ function tokenMatches(given: string, expected: string): boolean {
   }
   return diff === 0;
 }
+
+app.route("/v1", driftRoutes);
 
 app.get("/health", (c) =>
   c.json({
