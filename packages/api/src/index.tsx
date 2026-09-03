@@ -1,5 +1,6 @@
 import { BusinessContext } from "@laris/schema";
 import { Hono } from "hono";
+import { driftRoutes } from "./drift/route.js";
 import { type Env, getBusinessContext } from "./repo/merchant.js";
 import { StaySite } from "./site/render.js";
 
@@ -8,6 +9,8 @@ type Bindings = Env & { ENVIRONMENT?: string };
 const app = new Hono<{ Bindings: Bindings }>();
 
 const isDev = (env: Bindings) => !env.SUPABASE_URL;
+
+app.route("/v1", driftRoutes);
 
 app.get("/health", (c) =>
   c.json({
