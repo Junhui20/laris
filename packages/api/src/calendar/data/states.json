@@ -1,0 +1,302 @@
+[
+  {
+    "code": "johor",
+    "aliases": ["jhr", "JHR", "jb", "JB", "johor-bahru"],
+    "name": {
+      "ms": "Johor",
+      "en": "Johor"
+    },
+    "type": "state",
+    "weekendHistory": [
+      {
+        "from": "2025-01-01",
+        "to": null,
+        "weekendDays": [0, 6],
+        "group": "B"
+      },
+      {
+        "from": "2014-01-01",
+        "to": "2024-12-31",
+        "weekendDays": [5, 6],
+        "group": "A"
+      },
+      {
+        "from": "1900-01-01",
+        "to": "2013-12-31",
+        "weekendDays": [0, 6],
+        "group": "B"
+      }
+    ],
+    "group": "B"
+  },
+  {
+    "code": "kedah",
+    "aliases": ["kd", "KDH", "kdh", "alor-setar"],
+    "name": {
+      "ms": "Kedah",
+      "en": "Kedah"
+    },
+    "type": "state",
+    "weekendHistory": [
+      {
+        "from": "1900-01-01",
+        "to": null,
+        "weekendDays": [5, 6],
+        "group": "A"
+      }
+    ],
+    "group": "A"
+  },
+  {
+    "code": "kelantan",
+    "aliases": ["kel", "KEL", "kb", "KB", "kota-bharu"],
+    "name": {
+      "ms": "Kelantan",
+      "en": "Kelantan"
+    },
+    "type": "state",
+    "weekendHistory": [
+      {
+        "from": "1900-01-01",
+        "to": null,
+        "weekendDays": [5, 6],
+        "group": "A"
+      }
+    ],
+    "group": "A"
+  },
+  {
+    "code": "terengganu",
+    "aliases": ["trg", "TRG", "kt", "KT", "kuala-terengganu"],
+    "name": {
+      "ms": "Terengganu",
+      "en": "Terengganu"
+    },
+    "type": "state",
+    "weekendHistory": [
+      {
+        "from": "1900-01-01",
+        "to": null,
+        "weekendDays": [5, 6],
+        "group": "A"
+      }
+    ],
+    "group": "A"
+  },
+  {
+    "code": "perak",
+    "aliases": ["prk", "PRK", "ipoh"],
+    "name": {
+      "ms": "Perak",
+      "en": "Perak"
+    },
+    "type": "state",
+    "weekendHistory": [
+      {
+        "from": "1900-01-01",
+        "to": null,
+        "weekendDays": [0, 6],
+        "group": "B"
+      }
+    ],
+    "group": "B"
+  },
+  {
+    "code": "pulau-pinang",
+    "aliases": ["penang", "pg", "PG", "png", "pinang", "georgetown"],
+    "name": {
+      "ms": "Pulau Pinang",
+      "en": "Penang"
+    },
+    "type": "state",
+    "weekendHistory": [
+      {
+        "from": "1900-01-01",
+        "to": null,
+        "weekendDays": [0, 6],
+        "group": "B"
+      }
+    ],
+    "group": "B"
+  },
+  {
+    "code": "selangor",
+    "aliases": ["sel", "SEL", "sgr", "SGR"],
+    "name": {
+      "ms": "Selangor",
+      "en": "Selangor"
+    },
+    "type": "state",
+    "weekendHistory": [
+      {
+        "from": "1900-01-01",
+        "to": null,
+        "weekendDays": [0, 6],
+        "group": "B"
+      }
+    ],
+    "group": "B"
+  },
+  {
+    "code": "negeri-sembilan",
+    "aliases": ["ns", "NS", "n9", "N9", "n.sembilan", "seremban"],
+    "name": {
+      "ms": "Negeri Sembilan",
+      "en": "Negeri Sembilan"
+    },
+    "type": "state",
+    "weekendHistory": [
+      {
+        "from": "1900-01-01",
+        "to": null,
+        "weekendDays": [0, 6],
+        "group": "B"
+      }
+    ],
+    "group": "B"
+  },
+  {
+    "code": "melaka",
+    "aliases": ["mlk", "MLK", "malacca", "melacca"],
+    "name": {
+      "ms": "Melaka",
+      "en": "Malacca"
+    },
+    "type": "state",
+    "weekendHistory": [
+      {
+        "from": "1900-01-01",
+        "to": null,
+        "weekendDays": [0, 6],
+        "group": "B"
+      }
+    ],
+    "group": "B"
+  },
+  {
+    "code": "pahang",
+    "aliases": ["phg", "PHG", "kuantan"],
+    "name": {
+      "ms": "Pahang",
+      "en": "Pahang"
+    },
+    "type": "state",
+    "weekendHistory": [
+      {
+        "from": "1900-01-01",
+        "to": null,
+        "weekendDays": [0, 6],
+        "group": "B"
+      }
+    ],
+    "group": "B"
+  },
+  {
+    "code": "perlis",
+    "aliases": ["pls", "PLS", "kangar"],
+    "name": {
+      "ms": "Perlis",
+      "en": "Perlis"
+    },
+    "type": "state",
+    "weekendHistory": [
+      {
+        "from": "1900-01-01",
+        "to": null,
+        "weekendDays": [0, 6],
+        "group": "B"
+      }
+    ],
+    "group": "B"
+  },
+  {
+    "code": "sabah",
+    "aliases": ["sbh", "SBH", "kk", "KK", "kota-kinabalu"],
+    "name": {
+      "ms": "Sabah",
+      "en": "Sabah"
+    },
+    "type": "state",
+    "weekendHistory": [
+      {
+        "from": "1900-01-01",
+        "to": null,
+        "weekendDays": [0, 6],
+        "group": "B"
+      }
+    ],
+    "group": "B"
+  },
+  {
+    "code": "sarawak",
+    "aliases": ["swk", "SWK", "kuching"],
+    "name": {
+      "ms": "Sarawak",
+      "en": "Sarawak"
+    },
+    "type": "state",
+    "weekendHistory": [
+      {
+        "from": "1900-01-01",
+        "to": null,
+        "weekendDays": [0, 6],
+        "group": "B"
+      }
+    ],
+    "group": "B"
+  },
+  {
+    "code": "kuala-lumpur",
+    "aliases": ["kl", "KL", "kualalumpur", "wp-kl", "wpkl"],
+    "name": {
+      "ms": "Wilayah Persekutuan Kuala Lumpur",
+      "en": "Federal Territory of Kuala Lumpur"
+    },
+    "type": "federal_territory",
+    "weekendHistory": [
+      {
+        "from": "1900-01-01",
+        "to": null,
+        "weekendDays": [0, 6],
+        "group": "B"
+      }
+    ],
+    "group": "B"
+  },
+  {
+    "code": "wp-putrajaya",
+    "aliases": ["putrajaya", "pjy", "PJY"],
+    "name": {
+      "ms": "Wilayah Persekutuan Putrajaya",
+      "en": "Federal Territory of Putrajaya"
+    },
+    "type": "federal_territory",
+    "weekendHistory": [
+      {
+        "from": "1900-01-01",
+        "to": null,
+        "weekendDays": [0, 6],
+        "group": "B"
+      }
+    ],
+    "group": "B"
+  },
+  {
+    "code": "wp-labuan",
+    "aliases": ["labuan", "lbn", "LBN"],
+    "name": {
+      "ms": "Wilayah Persekutuan Labuan",
+      "en": "Federal Territory of Labuan"
+    },
+    "type": "federal_territory",
+    "weekendHistory": [
+      {
+        "from": "1900-01-01",
+        "to": null,
+        "weekendDays": [0, 6],
+        "group": "B"
+      }
+    ],
+    "group": "B"
+  }
+]
