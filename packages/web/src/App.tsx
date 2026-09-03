@@ -75,7 +75,13 @@ export function App() {
             <Row
               key={r.id}
               k={r.name}
-              v={`RM ${(r.baseRateCents / 100).toFixed(0)} · ${r.capacityPax} pax · min ${r.minNights}`}
+              v={[
+                r.baseRateCents === undefined
+                  ? "quote on enquiry"
+                  : `RM ${(r.baseRateCents / 100).toFixed(0)}`,
+                `${r.capacityPax} pax`,
+                `min ${r.minNights}`,
+              ].join(" · ")}
             />
           ) : null,
         )}

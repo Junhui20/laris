@@ -1,7 +1,8 @@
-import type { BusinessContext } from "@laris/schema";
+import type { BusinessContext, Photo } from "@laris/schema";
 import type { stay } from "@laris/schema";
 import { jsonLdScript } from "./json-ld.js";
 import { amenityZh, stateZh } from "./labels.js";
+import { photoSrcSet, photoUrl } from "./photos.js";
 import { faqPageJsonLd, lodgingBusinessJsonLd } from "./schema-org.js";
 import { stayGalleryFirstCss } from "./styles.js";
 
@@ -21,7 +22,10 @@ const money = (cents: number) => `RM ${(cents / 100).toFixed(0)}`;
 
 /** Cheapest room, which is what "from" pricing and the sticky bar quote. */
 function fromRate(ctx: BusinessContext): number | null {
-  const rates = ctx.offerings.filter((o) => o.kind === "room_type").map((o) => o.baseRateCents);
+  const rates = ctx.offerings
+    .filter((o) => o.kind === "room_type")
+    .map((o) => o.baseRateCents)
+    .filter((rate): rate is number => rate !== undefined);
   return rates.length > 0 ? Math.min(...rates) : null;
 }
 
@@ -43,6 +47,7 @@ function directSaving(ctx: BusinessContext) {
   const listing = ctx.verticalProfile.stay?.otaListings?.[0];
   if (!room || room.kind !== "room_type" || !room.otaRateCents) return null;
   const direct = room.baseRateCents;
+  if (direct === undefined) return null;
   const saving = room.otaRateCents - direct;
   if (saving <= 0) return null;
   return { ota: room.otaRateCents, direct, saving, platform: listing?.platform };
@@ -55,6 +60,47 @@ function waLink(whatsapp: string, name: string): string {
 }
 
 /**
+ * A photo slot. The layout was designed against briefs — "客厅 · 自然光，广角" —
+ * and those stay as the fallback rather than a grey box, so a Profile with no
+ * photographs yet still reads as a finished page and says what is missing.
+ */
+function Shot({
+  photo,
+  brief,
+  tone,
+  priority,
+  origin,
+}: { photo?: Photo; brief: string; tone?: string; priority?: boolean; origin: string }) {
+  return (
+    <div class={tone ? `shot ${tone}` : "shot"}>
+      {photo ? (
+        <img
+          src={photoUrl(origin, photo, Math.max(...photo.widths))}
+          srcset={photoSrcSet(origin, photo)}
+          width={photo.width}
+          height={photo.height}
+          alt={photo.alt ?? brief}
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
+        />
+      ) : (
+        <span class="brief">{brief}</span>
+      )}
+    </div>
+  );
+}
+
+/** Tones cycle so a strip of real photographs keeps the designed rhythm. */
+const STRIP_TONES = ["warm", "", "warm", "dusk"];
+
+const STRIP_BRIEFS = [
+  "客厅 · 自然光，广角",
+  "露台 · 有人坐着看海",
+  "厨房 · 干净的台面细节",
+  "屋外街景 · 傍晚",
+];
+
+/**
  * The single point where structured data crosses into markup. Routing both
  * JSON-LD blocks through here means the escaping in jsonLdScript cannot be
  * forgotten at one of two call sites.
@@ -65,14 +111,41 @@ function JsonLd({ data }: { data: unknown }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html }} />;
 }
 
+/**
+ * What fills the gallery strip.
+ *
+ * Every photograph the merchant has, then the briefs they have not covered yet.
+ * The briefs are a checklist, not a placeholder to be swept away by the first
+ * upload — a merchant with two photographs should still be told which shots are
+ * missing. Offering photographs past the one on each room card go here too,
+ * rather than being stored and never shown.
+ */
+function stripSlots(ctx: BusinessContext): { photo?: Photo; brief: string }[] {
+  const spare = ctx.offerings.flatMap((o) => (o.kind === "room_type" ? o.photos.slice(1) : []));
+  const photos = [...ctx.photos.slice(1), ...spare];
+  return [
+    ...photos.map((photo) => ({ photo, brief: photo.alt ?? "" })),
+    ...STRIP_BRIEFS.slice(photos.length).map((brief) => ({ brief })),
+  ];
+}
+
 export function StaySite({ ctx, siteUrl }: { ctx: BusinessContext; siteUrl: string }) {
   const { identity, theme } = ctx;
+  const origin = new URL(siteUrl).origin;
   const rooms = ctx.offerings.filter((o) => o.kind === "room_type");
   const from = fromRate(ctx);
   const saving = directSaving(ctx);
   const landmarks = ctx.verticalProfile.stay?.landmarks ?? [];
   const wa = identity.whatsapp ?? identity.phone;
   const faqLd = faqPageJsonLd(ctx);
+  // The hero takes the first photograph; everything after it fills the strip.
+  const strip = stripSlots(ctx);
+  const wholePlace =
+    rooms.length === 1 && rooms[0]?.kind === "room_type" && rooms[0].isWholePlace ? rooms[0] : null;
+  const bedrooms = rooms.reduce(
+    (total, room) => total + (room.kind === "room_type" ? (room.bedrooms ?? 1) : 0),
+    0,
+  );
 
   return (
     // biome-ignore lint/a11y/useValidLang: zh-Hans-MY is valid BCP-47 — Simplified Chinese as written in Malaysia
@@ -104,9 +177,12 @@ export function StaySite({ ctx, siteUrl }: { ctx: BusinessContext; siteUrl: stri
       </head>
       <body>
         <header class="hero">
-          <div class="shot">
-            <span class="brief">主图 · 黄昏时从露台望向海面，横幅</span>
-          </div>
+          <Shot
+            origin={origin}
+            photo={ctx.photos[0]}
+            brief="主图 · 黄昏时从露台望向海面，横幅"
+            priority
+          />
           <div class="hero-in">
             <div class="eyebrow">
               {identity.area} · {stateZh(identity.state)}
@@ -117,7 +193,7 @@ export function StaySite({ ctx, siteUrl }: { ctx: BusinessContext; siteUrl: stri
                 {landmarks[0]?.walkMin
                   ? `走路 ${landmarks[0].walkMin} 分钟到${landmarks[0].name} · `
                   : ""}
-                {rooms.length} 间房
+                {wholePlace ? `整栋 · 睡 ${wholePlace.capacityPax} 人` : `${rooms.length} 间房`}
               </p>
               {from !== null && (
                 <div class="from">
@@ -135,23 +211,24 @@ export function StaySite({ ctx, siteUrl }: { ctx: BusinessContext; siteUrl: stri
         </header>
 
         <div class="strip">
-          <div class="shot warm">
-            <span class="brief">客厅 · 自然光，广角</span>
-          </div>
-          <div class="shot">
-            <span class="brief">露台 · 有人坐着看海</span>
-          </div>
-          <div class="shot warm">
-            <span class="brief">厨房 · 干净的台面细节</span>
-          </div>
-          <div class="shot dusk">
-            <span class="brief">屋外街景 · 傍晚</span>
-          </div>
+          {strip.map((slot, i) => (
+            <Shot
+              key={slot.photo?.key ?? slot.brief}
+              origin={origin}
+              photo={slot.photo}
+              brief={slot.brief}
+              tone={STRIP_TONES[i % STRIP_TONES.length]}
+            />
+          ))}
         </div>
 
         <section class="wrap">
           <p class="lab">房型</p>
-          <h2>{rooms.length} 间房，都可以整栋包下</h2>
+          <h2>
+            {wholePlace
+              ? `整栋出租 · ${bedrooms} 间房，睡 ${wholePlace.capacityPax} 人`
+              : `${rooms.length} 间房，都可以整栋包下`}
+          </h2>
 
           <div class="rooms">
             {rooms.map((room) => {
@@ -159,18 +236,23 @@ export function StaySite({ ctx, siteUrl }: { ctx: BusinessContext; siteUrl: stri
               const peak = peakRate(room);
               return (
                 <article class="room" key={room.id}>
-                  <div class={room.isSignature ? "shot" : "shot warm"}>
-                    <span class="brief">{room.name} · 床 + 窗外</span>
-                  </div>
+                  <Shot
+                    origin={origin}
+                    photo={room.photos[0]}
+                    brief={`${room.name} · 床 + 窗外`}
+                    tone={room.isSignature ? undefined : "warm"}
+                  />
                   <div class="room-body">
                     <h3>{room.name}</h3>
                     <p class="pax">
                       {room.description ?? ""} · {room.capacityPax} 人
                     </p>
-                    <div class="rate">
-                      <b>{money(room.baseRateCents)}</b>
-                      <span>/ 晚</span>
-                    </div>
+                    {room.baseRateCents !== undefined && (
+                      <div class="rate">
+                        <b>{money(room.baseRateCents)}</b>
+                        <span>/ 晚</span>
+                      </div>
+                    )}
                     {peak && (
                       <div class="peak">
                         <span>{peak.label}</span>
@@ -185,7 +267,13 @@ export function StaySite({ ctx, siteUrl }: { ctx: BusinessContext; siteUrl: stri
                       </ul>
                     )}
                     <p class="mins">
-                      入住 {room.checkin} · 退房 {room.checkout} · 最少 {room.minNights} 晚
+                      {[
+                        room.checkin && `入住 ${room.checkin}`,
+                        room.checkout && `退房 ${room.checkout}`,
+                        `最少 ${room.minNights} 晚`,
+                      ]
+                        .filter(Boolean)
+                        .join(" · ")}
                     </p>
                   </div>
                 </article>
@@ -226,7 +314,11 @@ export function StaySite({ ctx, siteUrl }: { ctx: BusinessContext; siteUrl: stri
                 <li key={l.name}>
                   <span class="p">{l.name}</span>
                   <span class="t">
-                    {l.walkMin ? `走路 ${l.walkMin} 分钟` : `开车 ${l.driveMin} 分钟`}
+                    {l.walkMin
+                      ? `走路 ${l.walkMin} 分钟`
+                      : l.driveMin
+                        ? `开车 ${l.driveMin} 分钟`
+                        : ""}
                   </span>
                 </li>
               ))}

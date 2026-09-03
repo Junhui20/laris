@@ -1,6 +1,12 @@
 import { BusinessContext } from "@laris/schema";
 import { createClient } from "@supabase/supabase-js";
+import { pangkorMyHomestay } from "../fixtures/pangkor-my-homestay.js";
 import { rumahOmbak } from "../fixtures/rumah-ombak.js";
+
+const FIXTURES: Readonly<Record<string, BusinessContext>> = {
+  "rumah-ombak": rumahOmbak,
+  "pangkor-my-homestay": pangkorMyHomestay,
+};
 
 export type Env = {
   SUPABASE_URL?: string;
@@ -28,7 +34,7 @@ export async function getBusinessContext(
           "or run in development where the fixture merchant is allowed.",
       );
     }
-    return slug === "rumah-ombak" ? rumahOmbak : null;
+    return FIXTURES[slug] ?? null;
   }
 
   const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY);
