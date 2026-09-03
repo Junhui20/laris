@@ -3,6 +3,14 @@ import app from "../index.js";
 
 const endpoint = "http://localhost/v1/merchants/rumah-ombak/drift-check";
 
+/**
+ * The fixture Merchant is a development affordance, so these tests have to say
+ * so. They used to pass an empty env and rely on `!SUPABASE_URL` meaning
+ * "laptop"; that inference is gone — see `src/env.ts` — and only the exact
+ * string opens the fixture now.
+ */
+const dev = { ENVIRONMENT: "development" };
+
 afterEach(() => {
   vi.unstubAllGlobals();
 });
@@ -32,7 +40,7 @@ describe("POST /v1/merchants/:slug/drift-check", () => {
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ url: "https://example.my" }),
       },
-      {},
+      dev,
     );
 
     expect(response.status).toBe(200);
@@ -66,7 +74,7 @@ describe("POST /v1/merchants/:slug/drift-check", () => {
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ url: "http://localhost/admin" }),
       },
-      {},
+      dev,
     );
 
     expect(response.status).toBe(400);
@@ -84,7 +92,7 @@ describe("POST /v1/merchants/:slug/drift-check", () => {
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ url: "https://example.my" }),
       },
-      {},
+      dev,
     );
 
     expect(response.status).toBe(404);
