@@ -12,6 +12,6 @@
     "rules": { "recommended": true }
   },
   "files": {
-    "ignore": ["dist", ".wrangler", ".astro", "node_modules"]
+    "ignore": ["dist", ".wrangler", ".astro", "node_modules", ".agents", ".claude"]
   }
 }

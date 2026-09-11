@@ -40,3 +40,9 @@ Thumbs.db
 .idea/
 .vscode/*
 !.vscode/extensions.json
+
+# ── Local agent scaffolding — never published ──────────────────
+# Not just untidy: biome lints whatever is on disk, and .agents/ alone
+# contributed 418 errors to `pnpm check` on a tree that is otherwise clean.
+.claude/
+.agents/
