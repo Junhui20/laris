@@ -32,8 +32,10 @@ const THEIR_SLUG = "media-check-theirs";
 const EMAIL = "media-check@example.test";
 const PASSWORD = "media-check-not-a-real-password";
 
-const admin: SupabaseClient | null = configured ? createClient(url!, serviceKey!) : null;
-const anon: SupabaseClient | null = configured ? createClient(url!, anonKey!) : null;
+const admin: SupabaseClient | null =
+  configured && url && serviceKey ? createClient(url, serviceKey) : null;
+const anon: SupabaseClient | null =
+  configured && url && anonKey ? createClient(url, anonKey) : null;
 let member: SupabaseClient;
 let userId: string | null = null;
 
@@ -75,7 +77,7 @@ async function teardown() {
 }
 
 beforeAll(async () => {
-  if (!admin) return;
+  if (!admin || !url || !anonKey) return;
   await teardown();
   await admin.from("accounts").insert([
     { id: MINE, brand_name: "Mine", whatsapp: "+60100000000", languages: ["en"] },
@@ -104,7 +106,7 @@ beforeAll(async () => {
   userId = created.data.user?.id ?? null;
   await admin.from("account_members").insert({ account_id: MINE, user_id: userId });
 
-  member = createClient(url!, anonKey!);
+  member = createClient(url, anonKey);
   const { error } = await member.auth.signInWithPassword({ email: EMAIL, password: PASSWORD });
   if (error) throw new Error(`sign-in failed: ${error.message}`);
 }, 30_000);
