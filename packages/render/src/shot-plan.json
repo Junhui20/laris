@@ -1,0 +1,152 @@
+{
+  "merchantSlug": "pangkor-my-homestay",
+  "contact": "WhatsApp +60125358226",
+  "card": {
+    "headline": "15 个人，住一整栋",
+    "sub": "邦咯岛 · 4 间房，每间自带卫浴 · 加床到 20 人\nWhatsApp +60125358226"
+  },
+  "scenes": [
+    {
+      "audio": "vo/line-0.mp3",
+      "speechMs": 2047,
+      "durationMs": 2347,
+      "spoken": "一团人出游，最怕分开住。",
+      "headline": "最怕分开住",
+      "frames": [
+        {
+          "photo": "frontage-sky-1080.jpg",
+          "motion": "punch",
+          "reverse": false
+        }
+      ],
+      "color": "#0f2840"
+    },
+    {
+      "audio": "vo/line-1.mp3",
+      "speechMs": 1899,
+      "durationMs": 2199,
+      "spoken": "这里整栋租给你，十五个人。",
+      "headline": "整栋租给你",
+      "sub": "12–15 人 · 加床到 20",
+      "frames": [
+        {
+          "photo": "frontage-960.jpg",
+          "motion": "pan-x",
+          "reverse": false
+        },
+        {
+          "photo": "room-twin-960.jpg",
+          "motion": "pan-x",
+          "reverse": true
+        }
+      ],
+      "color": "#1a2a35"
+    },
+    {
+      "audio": "vo/line-2.mp3",
+      "speechMs": 2766,
+      "durationMs": 3066,
+      "spoken": "四间房，每间房里都有厕所。",
+      "headline": "4 间房，4 个厕所",
+      "sub": "早上不用排队",
+      "frames": [
+        {
+          "photo": "room-ensuite-720.jpg",
+          "motion": "pan-y",
+          "reverse": false
+        },
+        {
+          "photo": "room-balcony-960.jpg",
+          "motion": "pan-x",
+          "reverse": true
+        }
+      ],
+      "color": "#1a2535"
+    },
+    {
+      "audio": "vo/line-3.mp3",
+      "speechMs": 3575,
+      "durationMs": 3875,
+      "spoken": "楼上楼下两个客厅，吵的和睡的分得开。",
+      "headline": "楼上楼下两个客厅",
+      "sub": "全屋冷气 · 7 架冷气 7 架风扇",
+      "frames": [
+        {
+          "photo": "living-room-1080.jpg",
+          "motion": "pan-x",
+          "reverse": false
+        }
+      ],
+      "color": "#14223b"
+    },
+    {
+      "audio": "vo/line-4.mp3",
+      "speechMs": 2567,
+      "durationMs": 2867,
+      "spoken": "小格楼上面，还有三个床位。",
+      "headline": "小格楼再加 3 个床位",
+      "frames": [
+        {
+          "photo": "loft-stairs-720.jpg",
+          "motion": "pan-y",
+          "reverse": false
+        },
+        {
+          "photo": "loft-beds-960.jpg",
+          "motion": "pan-x",
+          "reverse": false
+        }
+      ],
+      "color": "#10273f"
+    },
+    {
+      "audio": "vo/line-5.mp3",
+      "speechMs": 4041,
+      "durationMs": 4341,
+      "spoken": "麻将、K歌、脚踏车，全部不另外收钱。",
+      "headline": "麻将 · K 歌 · 脚踏车",
+      "sub": "全部不另外收钱",
+      "frames": [
+        {
+          "photo": "mahjong-1040.jpg",
+          "motion": "punch",
+          "reverse": false
+        }
+      ],
+      "color": "#10400f"
+    },
+    {
+      "audio": "vo/line-7.mp3",
+      "speechMs": 2261,
+      "durationMs": 2561,
+      "spoken": "脚踏车免费借，想去哪里自己骑。",
+      "headline": "海滩走路 13 分钟",
+      "sub": "脚踏车免费借 · 7-Eleven 2 分钟",
+      "frames": [
+        {
+          "photo": "frontage-960.jpg",
+          "motion": "pan-x",
+          "reverse": true
+        }
+      ],
+      "color": "#1a2a35"
+    },
+    {
+      "audio": "vo/line-8.mp3",
+      "speechMs": 1989,
+      "durationMs": 2289,
+      "spoken": "日期先问，价钱 WhatsApp 报给你。",
+      "headline": "邦咯岛渡假屋 No.23",
+      "sub": "WhatsApp +60125358226",
+      "tag": "问日期 · 问价钱",
+      "frames": [
+        {
+          "photo": "frontage-sky-1080.jpg",
+          "motion": "punch",
+          "reverse": false
+        }
+      ],
+      "color": "#0f2840"
+    }
+  ]
+}

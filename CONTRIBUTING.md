@@ -87,6 +87,20 @@ pnpm --filter @laris/web dev     # Web
 cd perception && uv sync         # Python 3.11+
 ```
 
+Video work also needs the compositions' assets and Remotion's own agent skills:
+
+```bash
+pnpm --filter @laris/render plan     # compile the shot plan, copy photographs
+pnpm --filter @laris/render render   # out/listing-reel.mp4, out/listing-card.jpeg
+pnpm --filter @laris/render studio   # Remotion Studio
+
+npx skills add remotion-dev/skills   # agent guidance; versions pinned in skills-lock.json
+```
+
+`.agents/` and `.claude/` are gitignored — they are 3.4 MB of vendored markdown
+that `skills-lock.json` can reproduce. Rendering uses the system Chrome rather
+than downloading Remotion's own Headless Shell.
+
 Before pushing:
 
 ```bash
