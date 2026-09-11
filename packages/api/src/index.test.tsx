@@ -28,6 +28,21 @@ describe("what an unrecognised ENVIRONMENT is treated as", () => {
       expect(res.status).toBe(500);
       expect(await res.json()).toMatchObject({ error: /Supabase is not configured/ });
     });
+
+    // Drift Check reached the same fixture through its own gate. Merging #7
+    // into this branch left `allowFixture: !c.env.SUPABASE_URL` in
+    // drift/route.ts while index.tsx had already moved to ENVIRONMENT, so a
+    // misspelled binding closed the front door and left this one open.
+    it(`refuses the fixture through drift-check with ${label}`, async () => {
+      const res = await app.request(
+        "/v1/merchants/rumah-ombak/drift-check",
+        { method: "POST", body: JSON.stringify({ url: "https://example.com" }) },
+        env,
+      );
+      // The same loud 500 /site/ gives, not a 404: a misconfigured deployment
+      // should be distinguishable from a Merchant that does not exist.
+      expect(res.status).toBe(500);
+    });
   }
 });
 

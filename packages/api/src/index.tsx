@@ -1,32 +1,12 @@
 import { BusinessContext } from "@laris/schema";
 import type { Context } from "hono";
 import { Hono } from "hono";
-import { type Env, getBusinessContext } from "./repo/merchant.js";
+import { driftRoutes } from "./drift/route.js";
+import { type Bindings, allowFixture, isDev } from "./env.js";
+import { getBusinessContext } from "./repo/merchant.js";
 import { StaySite } from "./site/render.js";
 
-type Bindings = Env & { ENVIRONMENT?: string; ALLOW_FIXTURE?: string; API_TOKEN?: string };
-
 const app = new Hono<{ Bindings: Bindings }>();
-
-/**
- * Development is declared, never inferred, and it is the value that has to be
- * spelled correctly — not the safe one.
- *
- * This was `!env.SUPABASE_URL`, which made every database-less deployment look
- * like a laptop. Replacing it with `!== "production"` fixed that case and kept
- * the shape of the bug: an absent binding, a typo, or any value someone adds
- * later still read as development, so a Worker whose `ENVIRONMENT` was
- * misspelled would serve the fixture and expose `/v1/*`. Only the exact string
- * `"development"` opens anything; everything else, including nothing at all,
- * is production.
- */
-const isDev = (env: Bindings) => env.ENVIRONMENT === "development";
-
-/**
- * Whether the built-in fixture Merchant may be served. Deliberate in
- * production: one real merchant, hand-maintained, until #3 lands.
- */
-const allowFixture = (env: Bindings) => isDev(env) || env.ALLOW_FIXTURE === "true";
 
 /** Length-independent comparison, so a token cannot be guessed byte by byte. */
 function tokenMatches(given: string, expected: string): boolean {
@@ -38,6 +18,8 @@ function tokenMatches(given: string, expected: string): boolean {
   }
   return diff === 0;
 }
+
+app.route("/v1", driftRoutes);
 
 app.get("/health", (c) =>
   c.json({
@@ -98,6 +80,14 @@ function canonicalUrl(slug: string, requestUrl: URL): string {
  * Rendered rather than built ahead of time on purpose: a static build stays
  * wrong until the next one, and "change it once and everywhere follows" is the
  * first thing this product promises.
+ *
+ * Reachable at /site/:slug during development, and in production for a Merchant
+ * who has no domain yet. Otherwise a Merchant is served on their own hostname,
+ * which resolves to this same handler — see SLUG_BY_HOST.
+ *
+ * There is deliberately no `<slug>.laris.my` here. That domain is registered to
+ * somebody else; a merchant's own domain is the better shape anyway, since it
+ * is what goes on their Google Business Profile.
  */
 async function renderSite(c: Context<{ Bindings: Bindings }>, slug: string, siteUrl: string) {
   const ctx = await getBusinessContext(c.env, slug, { allowFixture: allowFixture(c.env) });

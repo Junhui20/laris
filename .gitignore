@@ -56,9 +56,11 @@ Thumbs.db
 .vscode/*
 !.vscode/extensions.json
 
-# ── Vendored agent skills ──────────────────────────────────────
+# ── Local agent scaffolding — never published ──────────────────
 # Regenerate with `npx skills add remotion-dev/skills`; skills-lock.json
 # pins the versions and is committed. 3.4 MB of someone else's markdown
-# does not belong in this history.
+# does not belong in this history. Not just untidy, either: biome lints
+# whatever is on disk, and .agents/ alone contributed 418 errors to
+# `pnpm check` on a tree that is otherwise clean.
 .agents/
 .claude/

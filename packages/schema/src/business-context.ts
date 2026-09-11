@@ -130,7 +130,12 @@ export const Merchant = z.object({
   id: z.string().uuid(),
   accountId: z.string().uuid(),
   vertical: Vertical,
-  /** Subdomain label for the Merchant Site: `<slug>.laris.my`. */
+  /**
+   * How the Merchant Site is addressed internally, and the key the Worker looks
+   * up by. Not a hostname: `laris.my` is registered to somebody else, and a
+   * Merchant is served on their own domain — which is also what goes on their
+   * Google Business Profile.
+   */
   slug: z.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/, "lowercase words joined by hyphens"),
   /** Custom domain, once the Merchant points a CNAME at us. */
   customDomain: z.string().optional(),
