@@ -1,0 +1,206 @@
+[
+  {
+    "id": "2026-cuti-penggal-1-kumpulan-a",
+    "year": 2026,
+    "group": "A",
+    "type": "cuti_penggal_1",
+    "name": {
+      "ms": "Cuti Penggal 1",
+      "en": "Term 1 Break"
+    },
+    "startDate": "2026-03-20",
+    "endDate": "2026-03-28",
+    "days": 9
+  },
+  {
+    "id": "2026-cuti-penggal-1-kumpulan-b",
+    "year": 2026,
+    "group": "B",
+    "type": "cuti_penggal_1",
+    "name": {
+      "ms": "Cuti Penggal 1",
+      "en": "Term 1 Break"
+    },
+    "startDate": "2026-03-21",
+    "endDate": "2026-03-29",
+    "days": 9
+  },
+  {
+    "id": "2026-cuti-pertengahan-kumpulan-a",
+    "year": 2026,
+    "group": "A",
+    "type": "cuti_pertengahan",
+    "name": {
+      "ms": "Cuti Pertengahan Tahun",
+      "en": "Mid-Year Holiday"
+    },
+    "startDate": "2026-05-22",
+    "endDate": "2026-06-06",
+    "days": 16
+  },
+  {
+    "id": "2026-cuti-pertengahan-kumpulan-b",
+    "year": 2026,
+    "group": "B",
+    "type": "cuti_pertengahan",
+    "name": {
+      "ms": "Cuti Pertengahan Tahun",
+      "en": "Mid-Year Holiday"
+    },
+    "startDate": "2026-05-23",
+    "endDate": "2026-06-07",
+    "days": 16
+  },
+  {
+    "id": "2026-cuti-penggal-2-kumpulan-a",
+    "year": 2026,
+    "group": "A",
+    "type": "cuti_penggal_2",
+    "name": {
+      "ms": "Cuti Penggal 2",
+      "en": "Term 2 Break"
+    },
+    "startDate": "2026-08-28",
+    "endDate": "2026-09-05",
+    "days": 9
+  },
+  {
+    "id": "2026-cuti-penggal-2-kumpulan-b",
+    "year": 2026,
+    "group": "B",
+    "type": "cuti_penggal_2",
+    "name": {
+      "ms": "Cuti Penggal 2",
+      "en": "Term 2 Break"
+    },
+    "startDate": "2026-08-29",
+    "endDate": "2026-09-06",
+    "days": 9
+  },
+  {
+    "id": "2026-cuti-akhir-kumpulan-a",
+    "year": 2026,
+    "group": "A",
+    "type": "cuti_akhir",
+    "name": {
+      "ms": "Cuti Akhir Persekolahan",
+      "en": "Year-End Holiday"
+    },
+    "startDate": "2026-12-04",
+    "endDate": "2026-12-31",
+    "days": 28
+  },
+  {
+    "id": "2026-cuti-akhir-kumpulan-b",
+    "year": 2026,
+    "group": "B",
+    "type": "cuti_akhir",
+    "name": {
+      "ms": "Cuti Akhir Persekolahan",
+      "en": "Year-End Holiday"
+    },
+    "startDate": "2026-12-05",
+    "endDate": "2026-12-31",
+    "days": 27
+  },
+  {
+    "id": "2026-cuti-cny-kumpulan-a",
+    "year": 2026,
+    "group": "A",
+    "type": "cuti_perayaan_kpm",
+    "name": {
+      "ms": "Cuti Perayaan Tahun Baharu Cina (KPM)",
+      "en": "Chinese New Year KPM Bonus Holiday"
+    },
+    "startDate": "2026-02-15",
+    "endDate": "2026-02-19",
+    "days": 3,
+    "remarks": "Tambahan KPM: 15, 16, 19 Feb"
+  },
+  {
+    "id": "2026-cuti-cny-kumpulan-b",
+    "year": 2026,
+    "group": "B",
+    "type": "cuti_perayaan_kpm",
+    "name": {
+      "ms": "Cuti Perayaan Tahun Baharu Cina (KPM)",
+      "en": "Chinese New Year KPM Bonus Holiday"
+    },
+    "startDate": "2026-02-16",
+    "endDate": "2026-02-20",
+    "days": 3,
+    "remarks": "Tambahan KPM: 16, 19, 20 Feb"
+  },
+  {
+    "id": "2026-cuti-raya-kumpulan-a",
+    "year": 2026,
+    "group": "A",
+    "type": "cuti_perayaan_kpm",
+    "name": {
+      "ms": "Cuti Perayaan Hari Raya Aidilfitri (KPM)",
+      "en": "Hari Raya KPM Bonus Holiday"
+    },
+    "startDate": "2026-03-19",
+    "endDate": "2026-03-19",
+    "days": 1,
+    "remarks": "Tambahan KPM: 19 Mac"
+  },
+  {
+    "id": "2026-cuti-raya-kumpulan-b",
+    "year": 2026,
+    "group": "B",
+    "type": "cuti_perayaan_kpm",
+    "name": {
+      "ms": "Cuti Perayaan Hari Raya Aidilfitri (KPM)",
+      "en": "Hari Raya KPM Bonus Holiday"
+    },
+    "startDate": "2026-03-19",
+    "endDate": "2026-03-20",
+    "days": 2,
+    "remarks": "Tambahan KPM: 19, 20 Mac"
+  },
+  {
+    "id": "2026-cuti-deepavali-kumpulan-a",
+    "year": 2026,
+    "group": "A",
+    "type": "cuti_perayaan_kpm",
+    "name": {
+      "ms": "Cuti Perayaan Deepavali (KPM)",
+      "en": "Deepavali KPM Bonus Holiday"
+    },
+    "startDate": "2026-11-09",
+    "endDate": "2026-11-09",
+    "days": 1,
+    "remarks": "Tambahan KPM: 9 Nov"
+  },
+  {
+    "id": "2026-cuti-deepavali-kumpulan-b",
+    "year": 2026,
+    "group": "B",
+    "type": "cuti_perayaan_kpm",
+    "name": {
+      "ms": "Cuti Perayaan Deepavali (KPM)",
+      "en": "Deepavali KPM Bonus Holiday"
+    },
+    "startDate": "2026-11-10",
+    "endDate": "2026-11-10",
+    "days": 1,
+    "excludeStates": ["sarawak"],
+    "remarks": "Tambahan KPM: 10 Nov (semua negeri Kumpulan B kecuali Sarawak)"
+  },
+  {
+    "id": "2026-cuti-deepavali-sarawak",
+    "year": 2026,
+    "group": "B",
+    "type": "cuti_perayaan_kpm",
+    "name": {
+      "ms": "Cuti Perayaan Deepavali (KPM) - Sarawak",
+      "en": "Deepavali KPM Bonus Holiday - Sarawak"
+    },
+    "startDate": "2026-11-09",
+    "endDate": "2026-11-09",
+    "days": 1,
+    "states": ["sarawak"],
+    "remarks": "Sarawak sahaja: 9 Nov"
+  }
+]

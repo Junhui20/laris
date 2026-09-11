@@ -1,6 +1,7 @@
 name = "laris-api"
 main = "src/index.tsx"
 compatibility_date = "2026-08-01"
+compatibility_flags = ["global_fetch_strictly_public"]
 
 # Secrets are set with `wrangler secret put`, never written here.
 #   SUPABASE_URL
