@@ -1,17 +1,18 @@
 import { Mismatch } from "@laris/schema";
 import { Hono } from "hono";
-import { type Env, getBusinessContext } from "../repo/merchant.js";
+import { type Bindings, allowFixture } from "../env.js";
+import { getBusinessContext } from "../repo/merchant.js";
 import { driftCheck } from "./drift-check.js";
 import { DriftFetchError, fetchPage } from "./fetch.js";
 
-export const driftRoutes = new Hono<{ Bindings: Env }>();
+export const driftRoutes = new Hono<{ Bindings: Bindings }>();
 
 driftRoutes.post("/merchants/:slug/drift-check", async (c) => {
   const body = await readRequestBody(c.req.raw);
   if (!body) return c.json({ error: "body must be JSON with a string url" }, 400);
 
   const ctx = await getBusinessContext(c.env, c.req.param("slug"), {
-    allowFixture: !c.env.SUPABASE_URL,
+    allowFixture: allowFixture(c.env),
   });
   if (!ctx) return c.json({ error: "not found" }, 404);
 

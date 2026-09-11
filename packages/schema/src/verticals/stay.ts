@@ -83,11 +83,26 @@ export const RoomType = z.object({
   name: z.string(),
   description: z.string().optional(),
   capacityPax: z.number().int().positive(),
-  baseRateCents: Cents,
+  /**
+   * True when the offering is the whole property rather than one room of it.
+   * A homestay let as an entire house is one offering with several bedrooms,
+   * and a site that counts offerings would otherwise tell a guest "1 间房".
+   */
+  isWholePlace: z.boolean().default(false),
+  /** Bedrooms inside this offering. The number a whole-place listing quotes. */
+  bedrooms: z.number().int().positive().optional(),
+  /**
+   * Absent means the merchant quotes on enquiry — a real and common state, not
+   * a missing field. Anything downstream that needs a number (the rate
+   * calendar, the OTA comparison) has to handle its absence rather than read a
+   * placeholder as fact.
+   */
+  baseRateCents: Cents.optional(),
   rateCalendar: z.array(RateOverride).default([]),
   minNights: z.number().int().positive().default(1),
-  checkin: LocalTime.default("15:00"),
-  checkout: LocalTime.default("12:00"),
+  /** Optional rather than defaulted: an unasked question is not 15:00. */
+  checkin: LocalTime.optional(),
+  checkout: LocalTime.optional(),
   amenities: z.array(Amenity).default([]),
   photos: z.array(Photo).default([]),
   /** What the OTAs show. Compared against base rate to prove the direct saving. */
@@ -102,8 +117,11 @@ export type RoomType = z.infer<typeof RoomType>;
  * Commission saved by taking a booking direct rather than through an OTA.
  * This is the number the owner actually feels, so it is computed, never estimated.
  */
-export function directBookingSavingCents(room: RoomType, listing: OtaListing): number {
+export function directBookingSavingCents(room: RoomType, listing: OtaListing): number | null {
   const otaRate = room.otaRateCents ?? room.baseRateCents;
+  // No published rate, no computable saving. Estimating one here is how a
+  // "proven" number turns out to have been invented two layers down.
+  if (otaRate === undefined || room.baseRateCents === undefined) return null;
   const commission = Math.round((otaRate * listing.commissionPct) / 100);
   const discount = Math.round((room.baseRateCents * (room.directDiscountPct ?? 0)) / 100);
   return commission - discount;

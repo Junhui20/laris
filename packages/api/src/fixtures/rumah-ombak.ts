@@ -58,6 +58,7 @@ export const rumahOmbak: BusinessContext = {
       name: "Bilik Laut",
       description: "海景房 · 一张大床 + 一张单人床",
       capacityPax: 4,
+      isWholePlace: false,
       baseRateCents: 25000,
       rateCalendar: [
         {
@@ -83,6 +84,7 @@ export const rumahOmbak: BusinessContext = {
       name: "Bilik Kebun",
       description: "园景房 · 一张大床",
       capacityPax: 2,
+      isWholePlace: false,
       baseRateCents: 18000,
       rateCalendar: [
         {
