@@ -80,6 +80,14 @@ function canonicalUrl(slug: string, requestUrl: URL): string {
  * Rendered rather than built ahead of time on purpose: a static build stays
  * wrong until the next one, and "change it once and everywhere follows" is the
  * first thing this product promises.
+ *
+ * Reachable at /site/:slug during development, and in production for a Merchant
+ * who has no domain yet. Otherwise a Merchant is served on their own hostname,
+ * which resolves to this same handler — see SLUG_BY_HOST.
+ *
+ * There is deliberately no `<slug>.laris.my` here. That domain is registered to
+ * somebody else; a merchant's own domain is the better shape anyway, since it
+ * is what goes on their Google Business Profile.
  */
 async function renderSite(c: Context<{ Bindings: Bindings }>, slug: string, siteUrl: string) {
   const ctx = await getBusinessContext(c.env, slug, { allowFixture: allowFixture(c.env) });
