@@ -1,162 +1,130 @@
 import type { BusinessContext } from "@laris/schema";
+import type { Session } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
+import { ProfileEditor } from "./ProfileEditor.js";
+import { SignIn } from "./SignIn.js";
+import { type MerchantRow, listMerchants } from "./lib/profile.js";
+import { configured, supabase } from "./lib/supabase.js";
 
 /**
  * The merchant dashboard.
  *
- * Deliberately application-shaped and behind a login — none of the static-site
- * strengths that make the Merchant Site what it is apply here. Its whole job is
- * editing the Business Profile, because the Profile is the single source of
- * truth and every Channel is a projection of it.
+ * Application-shaped and behind a login, which is why it is a SPA rather than
+ * an edge-rendered page — see docs/STACK.md. Its whole job is editing the
+ * Business Profile, because the Profile is the single source of truth and every
+ * Channel is a projection of it.
  *
- * Phase 00 scope: read the Profile, show the Channels it feeds, and link out to
- * the live site. Editing lands next; this is the shell the forms hang in.
+ * It talks to Supabase directly as the signed-in user rather than through the
+ * Worker, so the row-level security policies *are* the authorisation. The
+ * Worker holds the service role, which bypasses them; routing edits through it
+ * would mean writing the Account-scoping rules a second time and getting them
+ * right twice.
  */
-
-const SLUG = "rumah-ombak";
-
-type Load =
-  | { state: "loading" }
-  | { state: "error"; message: string }
-  | { state: "ready"; ctx: BusinessContext };
-
 export function App() {
-  const [load, setLoad] = useState<Load>({ state: "loading" });
+  const [session, setSession] = useState<Session | null>(null);
+  const [ready, setReady] = useState(false);
+  const [merchants, setMerchants] = useState<MerchantRow[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [open, setOpen] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch(`/v1/merchants/${SLUG}`)
-      .then(async (r) => {
-        if (!r.ok) throw new Error(`${r.status} — is \`pnpm dev:api\` running?`);
-        return r.json();
-      })
-      .then((ctx: BusinessContext) => setLoad({ state: "ready", ctx }))
-      .catch((e: Error) => setLoad({ state: "error", message: e.message }));
+    if (!configured) {
+      setReady(true);
+      return;
+    }
+    supabase.auth.getSession().then(({ data }) => {
+      setSession(data.session);
+      setReady(true);
+    });
+    const { data } = supabase.auth.onAuthStateChange((_event, next) => setSession(next));
+    return () => data.subscription.unsubscribe();
   }, []);
 
-  if (load.state === "loading") return <Shell>Loading…</Shell>;
-  if (load.state === "error") {
+  useEffect(() => {
+    if (!session) {
+      setMerchants(null);
+      return;
+    }
+    listMerchants()
+      .then(setMerchants)
+      .catch((cause: Error) => setError(cause.message));
+  }, [session]);
+
+  if (!configured) {
     return (
-      <Shell>
-        <p style={{ color: "#9A2F24" }}>Could not load the profile: {load.message}</p>
-        <p style={{ color: "#6D7C77" }}>
-          Start the API with <code>pnpm dev:api</code>, then reload. With no Supabase credentials it
-          serves the fixture merchant.
-        </p>
-      </Shell>
+      <main>
+        <div className="panel">
+          <h1>Not configured</h1>
+          <p>
+            Copy <code>packages/web/.env.example</code> to <code>.env.local</code> and fill in the
+            Supabase project URL and anon key. Both are public values.
+          </p>
+        </div>
+      </main>
     );
   }
 
-  const { ctx } = load;
-  const rooms = ctx.offerings.filter((o) => o.kind === "room_type");
+  if (!ready) return <main />;
+  if (!session) {
+    return (
+      <main>
+        <SignIn />
+      </main>
+    );
+  }
+
+  const current = merchants?.find((m) => m.slug === open);
 
   return (
-    <Shell>
-      <header style={{ marginBottom: 28 }}>
-        <div style={label}>{ctx.vertical}</div>
-        <h1 style={{ margin: "6px 0 4px", fontSize: 30 }}>{ctx.identity.name}</h1>
-        <div style={{ color: "#6D7C77" }}>
-          {ctx.identity.area} · {ctx.identity.state}
-        </div>
+    <main>
+      <header className="bar">
+        <span className="brand">Laris</span>
+        <span className="who">{session.user.email}</span>
+        <button type="button" className="link" onClick={() => supabase.auth.signOut()}>
+          Sign out
+        </button>
       </header>
 
-      <Card title="Identity">
-        <Row k="Phone" v={ctx.identity.phone} />
-        <Row k="WhatsApp" v={ctx.identity.whatsapp ?? "—"} />
-        <Row k="Address" v={`${ctx.identity.addressLines.join(", ")}, ${ctx.identity.postcode}`} />
-        <p style={note}>
-          These are the fields Drift Check compares every Channel against, so they are edited here
-          and nowhere else.
-        </p>
-      </Card>
+      {error ? <p className="error">{error}</p> : null}
 
-      <Card title={`Offerings · ${rooms.length}`}>
-        {rooms.map((r) =>
-          r.kind === "room_type" ? (
-            <Row
-              key={r.id}
-              k={r.name}
-              v={`RM ${(r.baseRateCents / 100).toFixed(0)} · ${r.capacityPax} pax · min ${r.minNights}`}
-            />
-          ) : null,
-        )}
-      </Card>
-
-      <Card title="Channels">
-        <Row k="Merchant Site" v={<a href={`/site/${SLUG}`}>open ↗</a>} />
-        <Row k="Google Business Profile" v="not connected" />
-        <Row k="Social" v="not connected" />
-        <p style={note}>
-          A Channel supports Publish, Profile Write, both or neither — see CONTEXT.md. Where Profile
-          Write is unavailable it gets Drift Check.
-        </p>
-      </Card>
-    </Shell>
-  );
-}
-
-const label: React.CSSProperties = {
-  fontSize: 11,
-  letterSpacing: ".14em",
-  textTransform: "uppercase",
-  color: "#10665A",
-  fontWeight: 700,
-};
-
-const note: React.CSSProperties = {
-  fontSize: 13,
-  color: "#6D7C77",
-  margin: "14px 0 0",
-  lineHeight: 1.6,
-};
-
-function Shell({ children }: { children: React.ReactNode }) {
-  return (
-    <main
-      style={{
-        maxWidth: 720,
-        margin: "0 auto",
-        padding: "48px 20px 80px",
-        fontFamily: "Karla, -apple-system, 'Noto Sans SC', 'PingFang SC', sans-serif",
-        color: "#16211E",
-        lineHeight: 1.6,
-      }}
-    >
-      {children}
+      {current ? (
+        <ProfileEditor
+          slug={current.slug}
+          profile={current.business_context}
+          onBack={() => setOpen(null)}
+          onSaved={(saved: BusinessContext) =>
+            setMerchants(
+              (list) =>
+                list?.map((m) =>
+                  m.slug === current.slug ? { ...m, business_context: saved } : m,
+                ) ?? null,
+            )
+          }
+        />
+      ) : (
+        <div className="panel">
+          <h1>Your businesses</h1>
+          {merchants === null ? <p className="muted">Loading…</p> : null}
+          {merchants?.length === 0 ? (
+            <p className="muted">
+              Nothing here yet. A business is added for you during setup — if you expected one, the
+              account you signed in with may not be the one it belongs to.
+            </p>
+          ) : null}
+          <ul className="merchants">
+            {merchants?.map((m) => (
+              <li key={m.slug}>
+                <button type="button" onClick={() => setOpen(m.slug)}>
+                  <strong>{m.business_context.identity.name}</strong>
+                  <span className="muted">
+                    {m.business_context.identity.area ?? m.business_context.identity.postcode}
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </main>
-  );
-}
-
-function Card({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <section
-      style={{
-        background: "#fff",
-        border: "1px solid #DDE3DF",
-        borderRadius: 8,
-        padding: "20px 22px",
-        marginBottom: 16,
-      }}
-    >
-      <h2 style={{ fontSize: 15, margin: "0 0 14px", letterSpacing: ".01em" }}>{title}</h2>
-      {children}
-    </section>
-  );
-}
-
-function Row({ k, v }: { k: string; v: React.ReactNode }) {
-  return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        gap: 20,
-        padding: "9px 0",
-        borderBottom: "1px solid #F0F3F1",
-        fontSize: 14.5,
-      }}
-    >
-      <span style={{ color: "#6D7C77" }}>{k}</span>
-      <span style={{ textAlign: "right" }}>{v}</span>
-    </div>
   );
 }
