@@ -12,18 +12,21 @@
         "from": "2025-01-01",
         "to": null,
         "weekendDays": [0, 6],
+        "replacedWeekday": 0,
         "group": "B"
       },
       {
         "from": "2014-01-01",
         "to": "2024-12-31",
         "weekendDays": [5, 6],
+        "replacedWeekday": 5,
         "group": "A"
       },
       {
         "from": "1900-01-01",
         "to": "2013-12-31",
         "weekendDays": [0, 6],
+        "replacedWeekday": 0,
         "group": "B"
       }
     ],
@@ -42,6 +45,7 @@
         "from": "1900-01-01",
         "to": null,
         "weekendDays": [5, 6],
+        "replacedWeekday": 5,
         "group": "A"
       }
     ],
@@ -60,6 +64,7 @@
         "from": "1900-01-01",
         "to": null,
         "weekendDays": [5, 6],
+        "replacedWeekday": 6,
         "group": "A"
       }
     ],
@@ -78,6 +83,7 @@
         "from": "1900-01-01",
         "to": null,
         "weekendDays": [5, 6],
+        "replacedWeekday": 6,
         "group": "A"
       }
     ],
@@ -96,6 +102,7 @@
         "from": "1900-01-01",
         "to": null,
         "weekendDays": [0, 6],
+        "replacedWeekday": 0,
         "group": "B"
       }
     ],
@@ -114,6 +121,7 @@
         "from": "1900-01-01",
         "to": null,
         "weekendDays": [0, 6],
+        "replacedWeekday": 0,
         "group": "B"
       }
     ],
@@ -132,6 +140,7 @@
         "from": "1900-01-01",
         "to": null,
         "weekendDays": [0, 6],
+        "replacedWeekday": 0,
         "group": "B"
       }
     ],
@@ -150,6 +159,7 @@
         "from": "1900-01-01",
         "to": null,
         "weekendDays": [0, 6],
+        "replacedWeekday": 0,
         "group": "B"
       }
     ],
@@ -168,6 +178,7 @@
         "from": "1900-01-01",
         "to": null,
         "weekendDays": [0, 6],
+        "replacedWeekday": 0,
         "group": "B"
       }
     ],
@@ -186,6 +197,7 @@
         "from": "1900-01-01",
         "to": null,
         "weekendDays": [0, 6],
+        "replacedWeekday": 0,
         "group": "B"
       }
     ],
@@ -204,6 +216,7 @@
         "from": "1900-01-01",
         "to": null,
         "weekendDays": [0, 6],
+        "replacedWeekday": 0,
         "group": "B"
       }
     ],
@@ -222,6 +235,7 @@
         "from": "1900-01-01",
         "to": null,
         "weekendDays": [0, 6],
+        "replacedWeekday": 0,
         "group": "B"
       }
     ],
@@ -240,6 +254,7 @@
         "from": "1900-01-01",
         "to": null,
         "weekendDays": [0, 6],
+        "replacedWeekday": 0,
         "group": "B"
       }
     ],
@@ -258,6 +273,7 @@
         "from": "1900-01-01",
         "to": null,
         "weekendDays": [0, 6],
+        "replacedWeekday": 0,
         "group": "B"
       }
     ],
@@ -276,6 +292,7 @@
         "from": "1900-01-01",
         "to": null,
         "weekendDays": [0, 6],
+        "replacedWeekday": 0,
         "group": "B"
       }
     ],
@@ -294,6 +311,7 @@
         "from": "1900-01-01",
         "to": null,
         "weekendDays": [0, 6],
+        "replacedWeekday": 0,
         "group": "B"
       }
     ],
