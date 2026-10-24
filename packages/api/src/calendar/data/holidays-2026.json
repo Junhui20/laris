@@ -10,25 +10,24 @@
     "type": "state",
     "status": "confirmed",
     "states": [
+      "kuala-lumpur",
+      "wp-labuan",
+      "wp-putrajaya",
+      "melaka",
+      "negeri-sembilan",
+      "pahang",
       "perak",
       "pulau-pinang",
-      "selangor",
-      "negeri-sembilan",
-      "melaka",
-      "pahang",
       "sabah",
       "sarawak",
-      "kuala-lumpur",
-      "wp-putrajaya",
-      "wp-labuan",
-      "perlis"
+      "selangor"
     ],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
     "gazetteRef": "GN-33500",
     "source": "jpm",
     "createdAt": "2025-08-28T00:00:00+08:00",
-    "updatedAt": "2025-08-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2026-keputeraan-ydb-ns",
@@ -57,14 +56,14 @@
     },
     "type": "islamic_state",
     "status": "confirmed",
-    "states": ["kedah", "kelantan", "terengganu", "perlis", "negeri-sembilan", "pahang"],
+    "states": ["kedah", "negeri-sembilan", "perlis", "terengganu"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
     "hijriDate": "27 Rejab 1447",
     "gazetteRef": "GN-33500",
     "source": "jpm",
     "createdAt": "2025-08-28T00:00:00+08:00",
-    "updatedAt": "2025-08-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2026-hari-wilayah",
@@ -95,24 +94,20 @@
     "type": "state",
     "status": "confirmed",
     "states": [
-      "perak",
-      "pulau-pinang",
-      "selangor",
-      "negeri-sembilan",
       "kuala-lumpur",
       "wp-putrajaya",
-      "wp-labuan",
       "johor",
-      "melaka",
-      "pahang",
-      "perlis"
+      "negeri-sembilan",
+      "perak",
+      "pulau-pinang",
+      "selangor"
     ],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
     "gazetteRef": "GN-33501",
     "source": "jpm",
     "createdAt": "2025-08-28T00:00:00+08:00",
-    "updatedAt": "2025-08-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2026-tahun-baharu-cina-1",
@@ -160,14 +155,14 @@
     },
     "type": "islamic_state",
     "status": "confirmed",
-    "states": ["johor", "kedah", "kelantan", "terengganu", "melaka", "perlis"],
+    "states": ["johor", "kedah"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
     "hijriDate": "1 Ramadan 1447",
     "gazetteRef": "GN-33500",
     "source": "jpm",
     "createdAt": "2025-08-28T00:00:00+08:00",
-    "updatedAt": "2026-07-06T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2026-pengisytiharan-kemerdekaan",
@@ -213,14 +208,25 @@
     },
     "type": "islamic",
     "status": "confirmed",
-    "states": ["*"],
+    "states": [
+      "kuala-lumpur",
+      "wp-labuan",
+      "wp-putrajaya",
+      "kelantan",
+      "pahang",
+      "perak",
+      "perlis",
+      "pulau-pinang",
+      "selangor",
+      "terengganu"
+    ],
     "isPublicHoliday": true,
-    "gazetteLevel": "P",
+    "gazetteLevel": "N",
     "hijriDate": "17 Ramadan 1447",
     "gazetteRef": "GN-33499",
     "source": "jpm",
     "createdAt": "2025-08-28T00:00:00+08:00",
-    "updatedAt": "2026-07-06T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2026-hari-raya-aidilfitri-tambahan",
@@ -303,14 +309,14 @@
     },
     "type": "islamic_state",
     "status": "confirmed",
-    "states": ["kelantan", "terengganu", "kedah", "johor", "perlis"],
+    "states": ["melaka"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
     "hijriDate": "3 Syawal 1447",
     "gazetteRef": "GN-33500",
     "source": "jpm",
     "createdAt": "2025-08-28T00:00:00+08:00",
-    "updatedAt": "2026-07-06T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2026-hari-jadi-tyt-sabah",
@@ -425,14 +431,14 @@
     },
     "type": "islamic_state",
     "status": "confirmed",
-    "states": ["kelantan", "terengganu", "kedah", "perlis"],
+    "states": ["kelantan", "terengganu"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
     "hijriDate": "9 Zulhijjah 1447",
     "gazetteRef": "GN-33500",
     "source": "jpm",
     "createdAt": "2025-08-28T00:00:00+08:00",
-    "updatedAt": "2026-07-06T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2026-hari-raya-haji-1",
@@ -461,16 +467,16 @@
       "en": "Eid al-Adha (2nd Day)",
       "zh": "哈芝节（第二天）"
     },
-    "type": "islamic",
+    "type": "islamic_state",
     "status": "confirmed",
-    "states": ["*"],
+    "states": ["kedah", "kelantan", "perlis", "terengganu"],
     "isPublicHoliday": true,
-    "gazetteLevel": "P",
+    "gazetteLevel": "N",
     "hijriDate": "11 Zulhijjah 1447",
     "gazetteRef": "GN-33499",
     "source": "jpm",
     "createdAt": "2025-08-28T00:00:00+08:00",
-    "updatedAt": "2026-07-06T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2026-pesta-kaamatan-1",
@@ -621,13 +627,13 @@
     },
     "type": "state",
     "status": "confirmed",
-    "states": ["melaka"],
+    "states": ["pulau-pinang"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
     "gazetteRef": "GN-33500",
     "source": "jpm",
     "createdAt": "2025-08-28T00:00:00+08:00",
-    "updatedAt": "2025-08-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2026-hari-jadi-tyt-penang",
@@ -847,13 +853,29 @@
     },
     "type": "federal",
     "status": "confirmed",
-    "states": ["*"],
+    "states": [
+      "kuala-lumpur",
+      "wp-labuan",
+      "wp-putrajaya",
+      "johor",
+      "kedah",
+      "kelantan",
+      "melaka",
+      "negeri-sembilan",
+      "pahang",
+      "perak",
+      "perlis",
+      "pulau-pinang",
+      "sabah",
+      "selangor",
+      "terengganu"
+    ],
     "isPublicHoliday": true,
     "gazetteLevel": "P",
     "gazetteRef": "GN-33499",
     "source": "jpm",
     "createdAt": "2025-08-28T00:00:00+08:00",
-    "updatedAt": "2025-08-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2026-keputeraan-sultan-selangor",

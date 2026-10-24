@@ -24,9 +24,9 @@
     ],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-israk-mikraj",
@@ -38,14 +38,13 @@
     },
     "type": "islamic_state",
     "status": "tentative",
-    "states": ["kedah", "kelantan", "terengganu", "perlis", "negeri-sembilan", "pahang"],
+    "states": ["kedah", "terengganu", "perlis", "negeri-sembilan"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
     "hijriDate": "27 Rejab 1448",
-    "source": "jakim",
-    "isEstimated": true,
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-keputeraan-ydb-ns",
@@ -59,9 +58,9 @@
     "states": ["negeri-sembilan"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-thaipusam",
@@ -75,7 +74,6 @@
     "status": "confirmed",
     "states": [
       "johor",
-      "kedah",
       "selangor",
       "perak",
       "pulau-pinang",
@@ -85,9 +83,9 @@
     ],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-hari-wilayah",
@@ -102,9 +100,9 @@
     "states": ["kuala-lumpur", "wp-putrajaya", "wp-labuan"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-tahun-baharu-cina-1",
@@ -119,9 +117,9 @@
     "states": ["*"],
     "isPublicHoliday": true,
     "gazetteLevel": "P",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-tahun-baharu-cina-2",
@@ -136,9 +134,9 @@
     "states": ["*"],
     "isPublicHoliday": true,
     "gazetteLevel": "P",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-awal-ramadan",
@@ -153,26 +151,25 @@
     "isPublicHoliday": true,
     "gazetteLevel": "N",
     "hijriDate": "1 Ramadan 1448",
-    "source": "jakim",
-    "isEstimated": true,
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
-    "id": "2027-pengisytiharan-melaka",
+    "id": "2027-pengisytiharan-kemerdekaan",
     "date": "2027-02-20",
     "name": {
-      "ms": "Hari Pengisytiharan Melaka Bandaraya Bersejarah",
-      "en": "Declaration of Melaka as Historical City"
+      "ms": "Hari Pengisytiharan Tarikh Kemerdekaan",
+      "en": "Declaration of Independence Day"
     },
     "type": "state",
     "status": "confirmed",
     "states": ["melaka"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-nuzul-al-quran",
@@ -199,10 +196,9 @@
     "isPublicHoliday": true,
     "gazetteLevel": "N",
     "hijriDate": "17 Ramadan 1448",
-    "source": "jakim",
-    "isEstimated": true,
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-installation-sultan-terengganu",
@@ -216,9 +212,9 @@
     "states": ["terengganu"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-hari-raya-aidilfitri-1",
@@ -234,10 +230,9 @@
     "isPublicHoliday": true,
     "gazetteLevel": "P",
     "hijriDate": "1 Syawal 1448",
-    "source": "jakim",
-    "isEstimated": true,
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-hari-raya-aidilfitri-2",
@@ -253,10 +248,26 @@
     "isPublicHoliday": true,
     "gazetteLevel": "P",
     "hijriDate": "2 Syawal 1448",
-    "source": "jakim",
-    "isEstimated": true,
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
+  },
+  {
+    "id": "2027-hari-raya-aidilfitri-3",
+    "date": "2027-03-12",
+    "name": {
+      "ms": "Hari Raya Puasa (Hari Ketiga)",
+      "en": "Eid al-Fitr (3rd Day)"
+    },
+    "type": "islamic_state",
+    "status": "tentative",
+    "states": ["melaka"],
+    "isPublicHoliday": true,
+    "gazetteLevel": "N",
+    "hijriDate": "3 Syawal 1448",
+    "source": "jpm",
+    "createdAt": "2026-10-23T00:00:00+08:00",
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-keputeraan-sultan-johor",
@@ -270,9 +281,9 @@
     "states": ["johor"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-good-friday",
@@ -287,9 +298,9 @@
     "states": ["sabah", "sarawak"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-keputeraan-tyt-sabah",
@@ -303,9 +314,9 @@
     "states": ["sabah"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-keputeraan-sultan-terengganu",
@@ -319,9 +330,9 @@
     "states": ["terengganu"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-hari-pekerja",
@@ -338,7 +349,7 @@
     "gazetteLevel": "P",
     "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-hari-arafah",
@@ -353,10 +364,9 @@
     "isPublicHoliday": true,
     "gazetteLevel": "N",
     "hijriDate": "9 Zulhijjah 1448",
-    "source": "jakim",
-    "isEstimated": true,
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-hari-raya-haji-1",
@@ -372,10 +382,9 @@
     "isPublicHoliday": true,
     "gazetteLevel": "P",
     "hijriDate": "10 Zulhijjah 1448",
-    "source": "jakim",
-    "isEstimated": true,
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-keputeraan-raja-perlis",
@@ -389,9 +398,9 @@
     "states": ["perlis"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-hari-raya-haji-2",
@@ -406,10 +415,9 @@
     "isPublicHoliday": true,
     "gazetteLevel": "N",
     "hijriDate": "11 Zulhijjah 1448",
-    "source": "jakim",
-    "isEstimated": true,
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-wesak",
@@ -424,9 +432,9 @@
     "states": ["*"],
     "isPublicHoliday": true,
     "gazetteLevel": "P",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-hari-hol-pahang",
@@ -440,9 +448,9 @@
     "states": ["pahang"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-pesta-kaamatan-1",
@@ -456,9 +464,9 @@
     "states": ["sabah", "wp-labuan"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-pesta-kaamatan-2",
@@ -472,9 +480,9 @@
     "states": ["sabah", "wp-labuan"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-hari-gawai-1",
@@ -488,9 +496,9 @@
     "states": ["sarawak"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-hari-gawai-2",
@@ -504,9 +512,9 @@
     "states": ["sarawak"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-awal-muharram",
@@ -522,10 +530,9 @@
     "isPublicHoliday": true,
     "gazetteLevel": "P",
     "hijriDate": "1 Muharram 1449",
-    "source": "jakim",
-    "isEstimated": true,
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-keputeraan-agong",
@@ -541,7 +548,7 @@
     "gazetteLevel": "P",
     "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-keputeraan-sultan-kedah",
@@ -555,9 +562,9 @@
     "states": ["kedah"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-georgetown-heritage-day",
@@ -571,9 +578,9 @@
     "states": ["pulau-pinang"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-keputeraan-tyt-pulau-pinang",
@@ -587,13 +594,13 @@
     "states": ["pulau-pinang"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-hari-hol-johor",
-    "date": "2027-07-10",
+    "date": "2027-07-11",
     "name": {
       "ms": "Hari Hol Almarhum Sultan Iskandar",
       "en": "Hari Hol of Almarhum Sultan Iskandar of Johor"
@@ -603,9 +610,9 @@
     "states": ["johor"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-hari-sarawak",
@@ -619,9 +626,9 @@
     "states": ["sarawak"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-keputeraan-sultan-pahang",
@@ -635,9 +642,9 @@
     "states": ["pahang"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-maulidur-rasul",
@@ -653,10 +660,9 @@
     "isPublicHoliday": true,
     "gazetteLevel": "P",
     "hijriDate": "12 Rabiulawal 1449",
-    "source": "jakim",
-    "isEstimated": true,
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-keputeraan-tyt-melaka",
@@ -670,9 +676,9 @@
     "states": ["melaka"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-hari-kebangsaan",
@@ -689,7 +695,7 @@
     "gazetteLevel": "P",
     "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-keputeraan-sultan-kelantan-1",
@@ -703,9 +709,9 @@
     "states": ["kelantan"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-keputeraan-sultan-kelantan-2",
@@ -719,9 +725,9 @@
     "states": ["kelantan"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-hari-malaysia",
@@ -738,7 +744,7 @@
     "gazetteLevel": "P",
     "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-keputeraan-tyt-sarawak",
@@ -752,9 +758,9 @@
     "states": ["sarawak"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-deepavali",
@@ -785,9 +791,9 @@
     ],
     "isPublicHoliday": true,
     "gazetteLevel": "P",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-keputeraan-sultan-perak",
@@ -801,9 +807,9 @@
     "states": ["perak"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-keputeraan-sultan-selangor",
@@ -817,9 +823,9 @@
     "states": ["selangor"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-christmas-eve",
@@ -833,9 +839,9 @@
     "states": ["sabah"],
     "isPublicHoliday": true,
     "gazetteLevel": "N",
-    "source": "community",
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-hari-krismas",
@@ -852,7 +858,7 @@
     "gazetteLevel": "P",
     "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   },
   {
     "id": "2027-israk-mikraj-2",
@@ -868,9 +874,8 @@
     "isPublicHoliday": true,
     "gazetteLevel": "N",
     "hijriDate": "27 Rejab 1449",
-    "source": "jakim",
-    "isEstimated": true,
+    "source": "jpm",
     "createdAt": "2026-06-28T00:00:00+08:00",
-    "updatedAt": "2026-06-28T00:00:00+08:00"
+    "updatedAt": "2026-10-23T00:00:00+08:00"
   }
 ]

@@ -12,22 +12,27 @@ describe("publicHolidays", () => {
     expect(replacements.map((h) => h.date)).toContain("2026-02-02");
   });
 
-  it("derives them from the state's own weekend, not KL's", () => {
-    // Kelantan rests Friday–Saturday, so Labour Day 2026 on a Friday earns a
-    // replacement there and nowhere in Kumpulan B.
-    const kelantan = publicHolidays("kelantan", 2026).filter((h) => h.type === "replacement");
-    const perak = publicHolidays("perak", 2026).filter((h) => h.type === "replacement");
+  it("derives them from the state's own replaced weekday, not KL's", () => {
+    // Only one weekday rolls: Friday in Kedah, Saturday in Kelantan, Sunday in
+    // Kumpulan B. Labour Day 2026 is a Friday, Nuzul Al-Quran a Saturday.
+    const dates = (state: StateCode) =>
+      publicHolidays(state, 2026)
+        .filter((h) => h.type === "replacement")
+        .map((h) => h.date);
 
-    expect(kelantan.map((h) => h.date)).toContain("2026-05-03");
-    expect(perak.map((h) => h.date)).not.toContain("2026-05-03");
+    expect(dates("kedah")).toContain("2026-05-03");
+    expect(dates("kelantan")).not.toContain("2026-05-03");
+    expect(dates("kelantan")).toContain("2026-03-08");
+    expect(dates("perak")).not.toContain("2026-05-03");
+    expect(dates("perak")).not.toContain("2026-03-08");
   });
 
-  it("gives two holidays sharing one Sunday two separate replacements", () => {
+  it("lets two holidays sharing one Sunday share one replacement day", () => {
     // Federal Territory Day and Thaipusam both land on 2026-02-01 in KL.
     const kl = publicHolidays("kuala-lumpur", 2026);
     const dates = kl.filter((h) => h.type === "replacement").map((h) => h.date);
-    expect(dates).toContain("2026-02-02");
-    expect(dates).toContain("2026-02-03");
+    expect(dates.filter((d) => d === "2026-02-02")).toHaveLength(2);
+    expect(dates).not.toContain("2026-02-03");
   });
 
   it("never returns the same holiday twice", () => {
